@@ -70,9 +70,8 @@ export function TenantReviews({ trust, city, businessName }: TenantReviewsProps)
                       </span>
                     ))}
                   </div>
-                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-text-muted">
-                    <GoogleIcon className="h-3 w-3" />
-                    <span>Verified on Google</span>
+                  <div className="flex items-center" title="Google Review">
+                    <GoogleIcon className="h-4 w-4" />
                   </div>
                 </div>
                 <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">

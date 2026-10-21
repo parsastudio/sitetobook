@@ -10,18 +10,18 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border-default bg-surface/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-3.5 sm:px-6 gap-2">
-        <Link href={`/${brand.slug}`} className="flex items-center gap-2.5 min-w-0 shrink group">
-          <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-emerald-600 to-teal-800 text-text-inverse shadow-sm border border-white/20 transition-transform group-hover:scale-105">
-            <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 sm:h-5 sm:w-5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" fill="currentColor" fillOpacity="0.3" />
-            </svg>
-          </div>
+        <Link href={`/${brand.slug}`} className="flex items-center gap-2 min-w-0 shrink group">
           <div className="flex flex-col text-left min-w-0">
-            <span className="text-xs sm:text-sm md:text-base font-black tracking-tight text-text-primary truncate group-hover:text-primary transition-colors">
-              {brand.name}
-            </span>
-            <span className="text-[10px] sm:text-[11px] font-semibold text-text-muted truncate hidden sm:inline">
-              Residential Cleaning · {brand.location.city}, {brand.location.state}
+            <div className="flex items-center gap-1.5 leading-none">
+              <span className="text-sm sm:text-base md:text-lg font-black tracking-tight text-text-primary uppercase group-hover:text-primary transition-colors">
+                Sparkle
+              </span>
+              <span className="rounded-md bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-black tracking-wider text-white shadow-xs">
+                PRO
+              </span>
+            </div>
+            <span className="text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.16em] text-text-muted pt-1 truncate hidden xs:inline">
+              Residential · {brand.location.city}, {brand.location.state}
             </span>
           </div>
         </Link>

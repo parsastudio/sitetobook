@@ -3,27 +3,17 @@ import { PublicBrandConfig, TrustAndProof } from "@/entities/tenant/schema";
 
 interface TenantHeroProps {
   brand: PublicBrandConfig;
-  trust: TrustAndProof;
+  trust?: TrustAndProof;
 }
 
-export function TenantHero({ brand, trust }: TenantHeroProps) {
+export function TenantHero({ brand }: TenantHeroProps) {
   return (
-    <section className="relative w-full overflow-hidden px-4 pt-8 pb-14 sm:px-6 sm:pt-14 sm:pb-20">
+    <section className="relative w-full overflow-hidden px-4 pt-6 pb-14 sm:px-6 sm:pt-12 sm:pb-20">
       <div className="absolute top-0 right-1/4 -z-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
       <div className="absolute bottom-0 left-10 -z-10 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
 
       <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         <div className="lg:col-span-7 flex flex-col items-start text-left gap-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border-default bg-surface/80 backdrop-blur-xs px-3.5 py-1 text-xs font-semibold text-text-primary shadow-xs">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-success" />
-            </span>
-            <span className="text-rating font-bold">★ {trust.googleRating}</span>
-            <span className="text-text-muted">·</span>
-            <span>{trust.googleReviewCount}+ Five-Star Ratings in {brand.location.city}</span>
-          </div>
-
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-text-primary leading-[1.12]">
             Hotel-Standard House Cleaning,{" "}
             <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-800 bg-clip-text text-transparent">
@@ -102,23 +92,20 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
               sizes="(max-width: 768px) 100vw, 480px"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-text-primary/75 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent pointer-events-none" />
 
-            <div className="absolute bottom-4 inset-x-4 rounded-2xl border border-white/20 bg-slate-900/90 backdrop-blur-md p-4 shadow-2xl flex items-center justify-between text-white">
-              <div className="flex flex-col text-left">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">
-                  {brand.location.city} Certified
+            <div className="absolute bottom-3 inset-x-3 sm:right-auto sm:bottom-4 sm:left-4 rounded-xl sm:rounded-2xl border border-white/25 bg-slate-950/80 backdrop-blur-md px-3.5 py-2 sm:px-4 sm:py-2.5 shadow-xl flex items-center gap-3 text-white">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-400/30 text-xs">
+                🛡️
+              </div>
+              <div className="flex flex-col text-left min-w-0">
+                <span className="text-xs sm:text-sm font-black text-white flex items-center gap-1.5 truncate">
+                  <span>{brand.location.city} Verified Standard</span>
+                  <span className="text-[10px] font-bold text-emerald-400 bg-emerald-400/15 px-1 py-0.2 rounded">✓</span>
                 </span>
-                <span className="text-sm font-extrabold text-white">
-                  Residential Cleaning Standard
-                </span>
-                <span className="text-[11px] text-slate-300">
+                <span className="text-[10px] sm:text-[11px] text-slate-300 font-medium truncate">
                   Hospital-grade eco supplies included
                 </span>
-              </div>
-              <div className="flex flex-col items-end">
-                <span className="text-xs font-black text-white">Dallas, TX</span>
-                <span className="text-[10px] font-bold text-emerald-400">Verified Local</span>
               </div>
             </div>
           </div>

@@ -1,0 +1,196 @@
+{
+  "sparkle-pro": {
+    "brand": {
+      "name": "SparklePro Residential Cleaners",
+      "tagline": "Dallas's Premier Hotel-Standard Home Cleaning Crew",
+      "slug": "sparkle-pro",
+      "phone": "+12145550189",
+      "formattedPhone": "+1 (214) 555-0189",
+      "whatsappNumber": "12145550189",
+      "email": "hello@sparkleproclean.com",
+      "ownerPinHash": "4fa8892f25a98bf686c1be7fa72bb193:2a417646fa1275ca74a589cf879faef89c3132f84c593847aa3b72aa64f2ad7c88b90ad31238ebcf27d11f8e79872501d51a66e4a2824cf481774d75d799042c",
+      "location": {
+        "city": "Dallas",
+        "state": "TX",
+        "serviceAreas": ["Uptown", "Highland Park", "Lakewood", "Plano", "Frisco", "University Park", "Lower Greenville"]
+      },
+      "themeOverrides": {
+        "primaryColor": "#047857",
+        "accentColor": "#10B981"
+      },
+      "operatingHours": "Mon - Sat: 8:00 AM - 6:30 PM"
+    },
+    "pricing": {
+      "currencySymbol": "$",
+      "baseDispatchFee": 49,
+      "ratePerBedroom": 35,
+      "ratePerBathroom": 40,
+      "services": [
+        {
+          "id": "standard",
+          "name": "Standard Maintenance",
+          "tagline": "Ideal for regular bi-weekly or monthly upkeep",
+          "description": "Surface dusting, HEPA vacuuming, mopping, kitchen counters, and complete bathroom sanitization.",
+          "multiplier": 1.0,
+          "isPopular": false
+        },
+        {
+          "id": "deep",
+          "name": "Deep Sanitization Clean",
+          "tagline": "Recommended for homes not professionally cleaned in 30+ days",
+          "description": "Includes standard plus hand-washing baseboards, door frames, tile grout scrubbing, and air vent detailing.",
+          "multiplier": 1.45,
+          "isPopular": true
+        },
+        {
+          "id": "move-in-out",
+          "name": "Move-In / Move-Out Clean",
+          "tagline": "Guaranteed 100% deposit return standard for empty homes",
+          "description": "Top-to-bottom restoration including inside empty drawers, closets, heavy grease removal, and wall spot cleaning.",
+          "multiplier": 1.8,
+          "isPopular": false
+        }
+      ],
+      "addOns": [
+        {
+          "id": "oven",
+          "name": "Inside Oven Restoration",
+          "description": "Heavy-duty grease removal and baked-on carbon cleaning",
+          "price": 45,
+          "icon": "flame",
+          "enabled": true
+        },
+        {
+          "id": "fridge",
+          "name": "Inside Refrigerator Detail",
+          "description": "Shelves removed, washed, sanitized, and odor neutralization",
+          "price": 39,
+          "icon": "snowflake",
+          "enabled": true
+        },
+        {
+          "id": "windows",
+          "name": "Interior Window Panes & Tracks",
+          "description": "Streak-free crystal clear glass and detailed track vacuuming",
+          "price": 55,
+          "icon": "sun",
+          "enabled": true
+        },
+        {
+          "id": "cabinets",
+          "name": "Inside Kitchen Cabinets",
+          "description": "Wipe down interior shelving and deodorize pantry spaces",
+          "price": 49,
+          "icon": "archive",
+          "enabled": true
+        },
+        {
+          "id": "pet-hair",
+          "name": "Pet Dander & Hair Extraction",
+          "description": "High-filtration HEPA vacuuming for upholstery and carpets",
+          "price": 35,
+          "icon": "sparkles",
+          "enabled": true
+        }
+      ]
+    },
+    "trust": {
+      "bondedAndInsured": true,
+      "insurancePolicyDetails": "$2,000,000 General Commercial Liability Policy with Hiscox",
+      "backgroundCheckGuarantee": "100% Nationwide Criminal Background Checked & Vetted Staff",
+      "satisfactionGuarantee": "24-Hour Sparkle Guarantee: If anything is missed, we return and reclean at zero cost to you.",
+      "googleRating": 4.9,
+      "googleReviewCount": 194,
+      "reviews": [
+        {
+          "id": "rev-1",
+          "author": "Sarah M.",
+          "neighborhood": "Highland Park",
+          "rating": 5,
+          "text": "I was hesitant having people in my home while working, but the SparklePro crew was respectful, bonded, and left my kitchen sparkling like a five-star hotel suite. Worth every penny!",
+          "serviceUsed": "Deep Sanitization Clean",
+          "date": "3 days ago",
+          "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80"
+        },
+        {
+          "id": "rev-2",
+          "author": "David K.",
+          "neighborhood": "Uptown Dallas",
+          "rating": 5,
+          "text": "Booking took under 2 minutes through their instant quote. They arrived exactly on time with their own eco-friendly supplies. The oven and tile grout look brand new.",
+          "serviceUsed": "Standard Maintenance + Oven Detail",
+          "date": "1 week ago",
+          "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
+        },
+        {
+          "id": "rev-3",
+          "author": "Elena R.",
+          "neighborhood": "Lakewood",
+          "rating": 5,
+          "text": "Got my full security deposit back on my apartment move-out. The landlord literally said it was the cleanest unit he has inspected this year.",
+          "serviceUsed": "Move-In / Move-Out Clean",
+          "date": "2 weeks ago",
+          "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150&q=80"
+        }
+      ]
+    },
+    "checklist": [
+      {
+        "category": "Kitchen & Dining",
+        "items": [
+          { "task": "Sanitize countertops & backsplash", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Clean exterior of large appliances", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Scrub & polish sink & chrome fixtures", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Clean microwave inside & out", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Hand-wipe cabinet exteriors & handles", "standard": false, "deep": true, "moveInOut": true },
+          { "task": "Scrub heavy stovetop grease buildup", "standard": false, "deep": true, "moveInOut": true },
+          { "task": "Wipe inside empty pantry & drawers", "standard": false, "deep": false, "moveInOut": true }
+        ]
+      },
+      {
+        "category": "Bathrooms & Sanitation",
+        "items": [
+          { "task": "Scrub & disinfect toilet bowl & base", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Clean & polish mirrors & glass", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Deep scrub tub, shower walls & grout", "standard": false, "deep": true, "moveInOut": true },
+          { "task": "Remove soap scum & hard water deposits", "standard": false, "deep": true, "moveInOut": true },
+          { "task": "Disinfect vanity drawers & cabinets inside", "standard": false, "deep": false, "moveInOut": true }
+        ]
+      },
+      {
+        "category": "Living Rooms & Bedrooms",
+        "items": [
+          { "task": "Dust all reachable furniture surfaces", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Vacuum carpets, rugs & mop hard floors", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Empty wastebaskets & replace liners", "standard": true, "deep": true, "moveInOut": true },
+          { "task": "Hand-wipe baseboards, door frames & trim", "standard": false, "deep": true, "moveInOut": true },
+          { "task": "Dust ceiling fans & reachable air vents", "standard": false, "deep": true, "moveInOut": true },
+          { "task": "Vacuum inside empty bedroom closets", "standard": false, "deep": false, "moveInOut": true }
+        ]
+      }
+    ],
+    "gallery": [
+      {
+        "id": "gal-1",
+        "title": "Chef's Gas Range & Backsplash Restoration",
+        "area": "Kitchen Deep Detail",
+        "beforeImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+        "afterImage": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "gal-2",
+        "title": "Master Ensuite Tile & Glass Enclosure",
+        "area": "Bathroom Sanitization",
+        "beforeImage": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=1200&q=80",
+        "afterImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "gal-3",
+        "title": "Hardwood Floor Polishing & Window Glow",
+        "area": "Living Room Restoration",
+        "beforeImage": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=80",
+        "afterImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+      }
+    ]
+  }
+}

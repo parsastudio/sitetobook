@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --bg-canvas: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --bg-overlay: rgba(15, 23, 42, 0.65);
+
+  --text-primary: #091e2b;
+  --text-secondary: #334e68;
+  --text-muted: #627d98;
+  --text-inverse: #ffffff;
+
+  --primary: #047857;
+  --primary-hover: #065f46;
+  --primary-subtle: #ecfdf5;
+  --primary-active: #064e3b;
+
+  --accent: #10b981;
+  --accent-hover: #059669;
+  --accent-subtle: #d1fae5;
+
+  --rating: #d97706;
+  --rating-subtle: #fef3c7;
+  --guarantee-blue: #0284c7;
+  --guarantee-subtle: #e0f2fe;
+
+  --border-default: #e2e8f0;
+  --border-subtle: #edf2f7;
+  --border-focus: var(--primary);
+
+  --success: #16a34a;
+  --success-subtle: #dcfce7;
+  --destructive: #dc2626;
+  --destructive-subtle: #fee2e2;
+  --whatsapp: #16a34a;
+}
+
+@theme inline {
+  --color-bg-canvas: var(--bg-canvas);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-overlay: var(--bg-overlay);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-active: var(--primary-active);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+
+  --color-rating: var(--rating);
+  --color-rating-subtle: var(--rating-subtle);
+  --color-guarantee: var(--guarantee-blue);
+  --color-guarantee-subtle: var(--guarantee-subtle);
+
+  --color-border-default: var(--border-default);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-focus: var(--border-focus);
+
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
+  --color-destructive: var(--destructive);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-whatsapp: var(--whatsapp);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}

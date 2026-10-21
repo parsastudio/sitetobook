@@ -32,7 +32,16 @@ export function TenantReviews({ trust, city }: TenantReviewsProps) {
             >
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-rating font-black tracking-wider">★★★★★</span>
+                  <div className="flex items-center gap-0.5 text-xs">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className={i < rev.rating ? "text-rating font-black" : "text-border-default font-black"}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
                   <span className="text-[11px] text-text-muted font-medium">{rev.date}</span>
                 </div>
                 <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
@@ -56,9 +65,8 @@ export function TenantReviews({ trust, city }: TenantReviewsProps) {
                   </div>
                 )}
                 <div className="flex flex-col">
-                  <span className="text-xs font-black text-text-primary flex items-center gap-1.5">
+                  <span className="text-xs font-black text-text-primary">
                     {rev.author}
-                    <span className="text-[9px] font-bold text-success bg-success-subtle px-1.5 py-0.2 rounded-full">✓ Verified</span>
                   </span>
                   <span className="text-[11px] text-text-muted">
                     {rev.neighborhood} · {rev.serviceUsed}

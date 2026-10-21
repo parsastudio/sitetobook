@@ -51,41 +51,45 @@ export function OwnerPortalView({
   const [lastSyncTime, setLastSyncTime] = useState<string | null>(null);
   const [isSaving, startSaveTransition] = useTransition();
 
-  const submitPin = useCallback((pinToTest: string) => {
-    startVerifyTransition(async () => {
-      const res = await verifyOwnerPinAction(brand.slug, pinToTest);
-      if (res.success) {
-        setIsAuthenticated(true);
-      } else {
-        setPinError(res.error);
-        setPin("");
-      }
-    });
-  }, [brand.slug]);
-
-  const handleKeyClick = useCallback((digit: string) => {
-    setPin((prev) => {
-      if (prev.length < 4) {
-        const nextPin = prev + digit;
-        setPinError(null);
-        if (nextPin.length === 4) {
-          submitPin(nextPin);
+  const submitPin = useCallback(
+    (pinToTest: string) => {
+      startVerifyTransition(async () => {
+        const res = await verifyOwnerPinAction(brand.slug, pinToTest);
+        if (res.success) {
+          setIsAuthenticated(true);
+        } else {
+          setPinError(res.error);
+          setPin("");
         }
-        return nextPin;
+      });
+    },
+    [brand.slug]
+  );
+
+  const handleKeyClick = useCallback(
+    (digit: string) => {
+      if (isVerifying || pin.length >= 4) return;
+      setPinError(null);
+      const nextPin = pin + digit;
+      setPin(nextPin);
+      if (nextPin.length === 4) {
+        submitPin(nextPin);
       }
-      return prev;
-    });
-  }, [submitPin]);
+    },
+    [pin, isVerifying, submitPin]
+  );
 
   const handleBackspace = useCallback(() => {
-    setPin((prev) => prev.slice(0, -1));
+    if (isVerifying) return;
     setPinError(null);
-  }, []);
+    setPin((prev) => prev.slice(0, -1));
+  }, [isVerifying]);
 
   const handleClear = useCallback(() => {
-    setPin("");
+    if (isVerifying) return;
     setPinError(null);
-  }, []);
+    setPin("");
+  }, [isVerifying]);
 
   useEffect(() => {
     if (isAuthenticated) return;
@@ -369,7 +373,7 @@ export function OwnerPortalView({
       {saveStatus === "success" && (
         <div className="rounded-xl border border-success/30 bg-success-subtle p-3 text-xs font-semibold text-success flex items-center justify-between shadow-xs">
           <span>✓ Changes synced live across edge caches {lastSyncTime && `(${lastSyncTime})`}</span>
-          <Link href={`/${brand.slug}#quote-calculator`} className="underline font-bold">
+          <Link href={`/${brand.slug}`} className="underline font-bold">
             Preview →
           </Link>
         </div>

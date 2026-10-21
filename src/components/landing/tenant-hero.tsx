@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PublicBrandConfig, TrustAndProof } from "@/entities/tenant/schema";
+import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
 
 interface TenantHeroProps {
   brand: PublicBrandConfig;
@@ -26,12 +27,9 @@ export function TenantHero({ brand }: TenantHeroProps) {
           </p>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2 w-full sm:w-auto">
-            <a
-              href="#quote-calculator"
-              className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-8 py-4 text-sm sm:text-base font-black text-white shadow-[0_10px_30px_-5px_rgba(5,150,105,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-all hover:scale-[1.02] hover:shadow-[0_14px_35px_-5px_rgba(5,150,105,0.5)] active:scale-[0.98] whitespace-nowrap"
-            >
+            <ScrollToCalculatorButton className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-8 py-4 text-sm sm:text-base font-black text-white shadow-[0_10px_30px_-5px_rgba(5,150,105,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-all hover:scale-[1.02] hover:shadow-[0_14px_35px_-5px_rgba(5,150,105,0.5)] active:scale-[0.98] whitespace-nowrap cursor-pointer">
               Calculate Flat Price in 60s ↓
-            </a>
+            </ScrollToCalculatorButton>
             <a
               href={`https://wa.me/${brand.whatsappNumber}?text=${encodeURIComponent("Hi! I would like to check available cleaning slots this week.")}`}
               target="_blank"

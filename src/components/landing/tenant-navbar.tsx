@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PublicBrandConfig, TrustAndProof } from "@/entities/tenant/schema";
+import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
 
 interface TenantNavbarProps {
   brand: PublicBrandConfig;
@@ -45,13 +46,10 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
             <span>WhatsApp</span>
           </a>
 
-          <a
-            href="#quote-calculator"
-            className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-3 sm:px-4 py-2 text-xs font-black text-white shadow-[0_4px_14px_rgba(5,150,105,0.35),inset_0_1px_0_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-transform active:scale-95 whitespace-nowrap"
-          >
+          <ScrollToCalculatorButton className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-3 sm:px-4 py-2 text-xs font-black text-white shadow-[0_4px_14px_rgba(5,150,105,0.35),inset_0_1px_0_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-transform active:scale-95 whitespace-nowrap cursor-pointer">
             <span>Instant Quote</span>
             <span className="ml-1 text-[11px]">→</span>
-          </a>
+          </ScrollToCalculatorButton>
         </div>
       </div>
     </header>

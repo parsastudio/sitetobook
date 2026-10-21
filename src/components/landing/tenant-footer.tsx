@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PublicTenant } from "@/entities/tenant/schema";
+import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
 
 interface TenantFooterProps {
   tenant: PublicTenant;
@@ -40,9 +41,9 @@ export function TenantFooter({ tenant }: TenantFooterProps) {
             <ul className="flex flex-col gap-2 text-xs font-semibold text-text-secondary">
               {pricing.services.map((service) => (
                 <li key={service.id}>
-                  <a href="#quote-calculator" className="hover:text-primary transition-colors">
+                  <ScrollToCalculatorButton className="hover:text-primary transition-colors cursor-pointer text-left">
                     {service.name}
-                  </a>
+                  </ScrollToCalculatorButton>
                 </li>
               ))}
               <li>

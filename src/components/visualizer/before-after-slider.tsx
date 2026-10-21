@@ -38,16 +38,29 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
     setSliderPosition(percent);
   }, []);
 
-  const handlePointerDown = (e: React.PointerEvent) => {
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
     setIsDragging(true);
     handleMove(e.clientX);
   };
 
-  const handlePointerUp = () => setIsDragging(false);
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+    setIsDragging(false);
+  };
 
-  const handlePointerMove = (e: React.PointerEvent) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging) return;
     handleMove(e.clientX);
+  };
+
+  const handlePointerCancel = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+    setIsDragging(false);
   };
 
   if (!activeItem) return null;
@@ -86,7 +99,7 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
           onPointerMove={handlePointerMove}
-          onPointerLeave={handlePointerUp}
+          onPointerCancel={handlePointerCancel}
           className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden rounded-3xl border border-border-default bg-surface shadow-xl select-none touch-none cursor-ew-resize"
         >
           <div className="absolute inset-0">

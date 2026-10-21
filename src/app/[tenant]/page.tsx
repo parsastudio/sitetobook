@@ -108,7 +108,7 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
       </section>
 
       <div id="reviews" className="w-full scroll-mt-20">
-        <TenantReviews trust={trust} city={brand.location.city} />
+        <TenantReviews trust={trust} city={brand.location.city} businessName={brand.name} />
       </div>
     </div>
   );

@@ -5,14 +5,22 @@
       "tagline": "Dallas's Premier Hotel-Standard Home Cleaning Crew",
       "slug": "sparkle-pro",
       "phone": "+12145550189",
-      "formattedPhone": "+1 (214) 555-0189",
+      "formattedPhone": "+12145550189",
       "whatsappNumber": "12145550189",
       "email": "hello@sparkleproclean.com",
       "ownerPinHash": "4fa8892f25a98bf686c1be7fa72bb193:2a417646fa1275ca74a589cf879faef89c3132f84c593847aa3b72aa64f2ad7c88b90ad31238ebcf27d11f8e79872501d51a66e4a2824cf481774d75d799042c",
       "location": {
         "city": "Dallas",
         "state": "TX",
-        "serviceAreas": ["Uptown", "Highland Park", "Lakewood", "Plano", "Frisco", "University Park", "Lower Greenville"]
+        "serviceAreas": [
+          "Uptown",
+          "Highland Park",
+          "Lakewood",
+          "Plano",
+          "Frisco",
+          "University Park",
+          "Lower Greenville"
+        ]
       },
       "themeOverrides": {
         "primaryColor": "#047857",
@@ -31,7 +39,7 @@
           "name": "Standard Maintenance",
           "tagline": "Ideal for regular bi-weekly or monthly upkeep",
           "description": "Surface dusting, HEPA vacuuming, mopping, kitchen counters, and complete bathroom sanitization.",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "isPopular": false
         },
         {
@@ -90,7 +98,7 @@
           "description": "High-filtration HEPA vacuuming for upholstery and carpets",
           "price": 35,
           "icon": "sparkles",
-          "enabled": true
+          "enabled": false
         }
       ]
     },
@@ -138,34 +146,124 @@
       {
         "category": "Kitchen & Dining",
         "items": [
-          { "task": "Sanitize countertops & backsplash", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Clean exterior of large appliances", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Scrub & polish sink & chrome fixtures", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Clean microwave inside & out", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Hand-wipe cabinet exteriors & handles", "standard": false, "deep": true, "moveInOut": true },
-          { "task": "Scrub heavy stovetop grease buildup", "standard": false, "deep": true, "moveInOut": true },
-          { "task": "Wipe inside empty pantry & drawers", "standard": false, "deep": false, "moveInOut": true }
+          {
+            "task": "Sanitize countertops & backsplash",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Clean exterior of large appliances",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Scrub & polish sink & chrome fixtures",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Clean microwave inside & out",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Hand-wipe cabinet exteriors & handles",
+            "standard": false,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Scrub heavy stovetop grease buildup",
+            "standard": false,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Wipe inside empty pantry & drawers",
+            "standard": false,
+            "deep": false,
+            "moveInOut": true
+          }
         ]
       },
       {
         "category": "Bathrooms & Sanitation",
         "items": [
-          { "task": "Scrub & disinfect toilet bowl & base", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Clean & polish mirrors & glass", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Deep scrub tub, shower walls & grout", "standard": false, "deep": true, "moveInOut": true },
-          { "task": "Remove soap scum & hard water deposits", "standard": false, "deep": true, "moveInOut": true },
-          { "task": "Disinfect vanity drawers & cabinets inside", "standard": false, "deep": false, "moveInOut": true }
+          {
+            "task": "Scrub & disinfect toilet bowl & base",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Clean & polish mirrors & glass",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Deep scrub tub, shower walls & grout",
+            "standard": false,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Remove soap scum & hard water deposits",
+            "standard": false,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Disinfect vanity drawers & cabinets inside",
+            "standard": false,
+            "deep": false,
+            "moveInOut": true
+          }
         ]
       },
       {
         "category": "Living Rooms & Bedrooms",
         "items": [
-          { "task": "Dust all reachable furniture surfaces", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Vacuum carpets, rugs & mop hard floors", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Empty wastebaskets & replace liners", "standard": true, "deep": true, "moveInOut": true },
-          { "task": "Hand-wipe baseboards, door frames & trim", "standard": false, "deep": true, "moveInOut": true },
-          { "task": "Dust ceiling fans & reachable air vents", "standard": false, "deep": true, "moveInOut": true },
-          { "task": "Vacuum inside empty bedroom closets", "standard": false, "deep": false, "moveInOut": true }
+          {
+            "task": "Dust all reachable furniture surfaces",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Vacuum carpets, rugs & mop hard floors",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Empty wastebaskets & replace liners",
+            "standard": true,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Hand-wipe baseboards, door frames & trim",
+            "standard": false,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Dust ceiling fans & reachable air vents",
+            "standard": false,
+            "deep": true,
+            "moveInOut": true
+          },
+          {
+            "task": "Vacuum inside empty bedroom closets",
+            "standard": false,
+            "deep": false,
+            "moveInOut": true
+          }
         ]
       }
     ],

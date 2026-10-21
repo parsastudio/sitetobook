@@ -26,6 +26,31 @@ export function OwnerPortalView({
   const [pinError, setPinError] = useState<string | null>(null);
   const [isVerifying, startVerifyTransition] = useTransition();
 
+  const [baseFee, setBaseFee] = useState(pricing.baseDispatchFee);
+  const [bedRate, setBedRate] = useState(pricing.ratePerBedroom);
+  const [bathRate, setBathRate] = useState(pricing.ratePerBathroom);
+  const [addOnsState, setAddOnsState] = useState(
+    pricing.addOns.map((a) => ({
+      id: a.id,
+      name: a.name,
+      price: a.price,
+      enabled: a.enabled !== false,
+    }))
+  );
+
+  const [phone, setPhone] = useState(brand.phone);
+  const [whatsappNumber, setWhatsappNumber] = useState(brand.whatsappNumber);
+
+  const [serviceAreas, setServiceAreas] = useState<string[]>(
+    brand.location.serviceAreas
+  );
+  const [newAreaInput, setNewAreaInput] = useState("");
+
+  const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">("idle");
+  const [saveErrorMsg, setSaveErrorMsg] = useState<string | null>(null);
+  const [lastSyncTime, setLastSyncTime] = useState<string | null>(null);
+  const [isSaving, startSaveTransition] = useTransition();
+
   const submitPin = useCallback((pinToTest: string) => {
     startVerifyTransition(async () => {
       const res = await verifyOwnerPinAction(brand.slug, pinToTest);
@@ -66,7 +91,10 @@ export function OwnerPortalView({
     if (isAuthenticated) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
         return;
       }
       if (isVerifying) return;
@@ -87,31 +115,6 @@ export function OwnerPortalView({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAuthenticated, isVerifying, handleKeyClick, handleBackspace, handleClear]);
 
-  const [baseFee, setBaseFee] = useState(pricing.baseDispatchFee);
-  const [bedRate, setBedRate] = useState(pricing.ratePerBedroom);
-  const [bathRate, setBathRate] = useState(pricing.ratePerBathroom);
-  const [addOnsState, setAddOnsState] = useState(
-    pricing.addOns.map((a) => ({
-      id: a.id,
-      name: a.name,
-      price: a.price,
-      enabled: a.enabled !== false,
-    }))
-  );
-
-  const [phone, setPhone] = useState(brand.phone);
-  const [whatsappNumber, setWhatsappNumber] = useState(brand.whatsappNumber);
-
-  const [serviceAreas, setServiceAreas] = useState<string[]>(
-    brand.location.serviceAreas
-  );
-  const [newAreaInput, setNewAreaInput] = useState("");
-
-  const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">("idle");
-  const [saveErrorMsg, setSaveErrorMsg] = useState<string | null>(null);
-  const [lastSyncTime, setLastSyncTime] = useState<string | null>(null);
-  const [isSaving, startSaveTransition] = useTransition();
-
   const isDirty = useMemo(() => {
     if (baseFee !== pricing.baseDispatchFee) return true;
     if (bedRate !== pricing.ratePerBedroom) return true;
@@ -129,188 +132,6 @@ export function OwnerPortalView({
       );
     });
   }, [baseFee, bedRate, bathRate, phone, whatsappNumber, serviceAreas, addOnsState, pricing, brand]);
-
->>>>>>>
-<<<<<<< SEARCH
-  if (!isAuthenticated) {
-    return (
-      <div className="flex min-h-[80vh] flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-xs rounded-2xl border border-border-default bg-surface p-6 shadow-lg flex flex-col items-center gap-5">
-          <div className="flex flex-col items-center gap-1.5 text-center">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-text-inverse font-black text-lg shadow-xs">
-              {brand.name.charAt(0)}
-            </div>
-            <h1 className="text-base font-extrabold text-text-primary">
-              {brand.name}
-            </h1>
-            <span className="text-[11px] font-semibold text-primary uppercase tracking-wider">
-              Owner Access
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 my-1">
-            {[0, 1, 2, 3].map((idx) => (
-              <div
-                key={idx}
-                className={`h-3 w-3 rounded-full border transition-all ${
-                  pin.length > idx
-                    ? "border-primary bg-primary scale-110"
-                    : "border-border-default bg-subtle"
-                }`}
-              />
-            ))}
-          </div>
-
-          {pinError && (
-            <div className="rounded-lg border border-destructive/30 bg-destructive-subtle px-3 py-1 text-xs font-semibold text-destructive text-center">
-              {pinError}
-            </div>
-          )}
-
-          <div className="grid grid-cols-3 gap-2 w-full max-w-[220px]">
-            {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((digit) => (
-              <button
-                key={digit}
-                type="button"
-                disabled={isVerifying}
-                onClick={() => handleKeyClick(digit)}
-                className="flex h-12 items-center justify-center rounded-xl border border-border-default bg-subtle text-lg font-bold text-text-primary transition-all hover:bg-border-default active:scale-95 disabled:opacity-50"
-              >
-                {digit}
-              </button>
-            ))}
-            <button
-              type="button"
-              onClick={handleClear}
-              className="flex h-12 items-center justify-center rounded-xl bg-surface text-xs font-semibold text-text-muted hover:text-text-primary"
-            >
-              Clear
-            </button>
-            <button
-              type="button"
-              disabled={isVerifying}
-              onClick={() => handleKeyClick("0")}
-              className="flex h-12 items-center justify-center rounded-xl border border-border-default bg-subtle text-lg font-bold text-text-primary transition-all hover:bg-border-default active:scale-95 disabled:opacity-50"
-            >
-              0
-            </button>
-            <button
-              type="button"
-              onClick={handleBackspace}
-              className="flex h-12 items-center justify-center rounded-xl bg-surface text-sm font-semibold text-text-muted hover:text-text-primary"
-            >
-              ⌫
-            </button>
-          </div>
-
-          <div className="text-center text-[11px] text-text-muted border-t border-border-subtle pt-2.5 w-full">
-            Default demo PIN: <strong className="font-mono text-text-primary">1234</strong>
-          </div>
-        </div>
-      </div>
-    );
-  }
-=======
-  if (!isAuthenticated) {
-    return (
-      <div className="relative flex min-h-[85vh] flex-col items-center justify-center px-4 py-12 overflow-hidden">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
-
-        <div className="w-full max-w-sm rounded-3xl border border-emerald-500/25 bg-surface/90 p-7 sm:p-9 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-6">
-          <input
-            type="text"
-            name="security_honeypot_token"
-            tabIndex={-1}
-            autoComplete="off"
-            className="hidden"
-          />
-
-          <div className="flex flex-col items-center gap-3 text-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-800 text-text-inverse shadow-lg shadow-emerald-700/25 border border-white/25">
-              <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" fill="currentColor" fillOpacity="0.3" />
-              </svg>
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-lg font-black tracking-tight text-text-primary">
-                {brand.name}
-              </h1>
-              <span className="text-xs font-bold text-primary uppercase tracking-widest mt-0.5">
-                Owner Command Deck 🔒
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 my-1">
-            {[0, 1, 2, 3].map((idx) => {
-              const isFilled = pin.length > idx;
-              return (
-                <div
-                  key={idx}
-                  className={`h-4 w-4 rounded-full border-2 transition-all duration-200 ${
-                    isFilled
-                      ? "border-emerald-500 bg-gradient-to-br from-emerald-500 to-teal-600 scale-125 shadow-[0_0_12px_rgba(16,185,129,0.7)]"
-                      : "border-border-default bg-canvas/80"
-                  }`}
-                />
-              );
-            })}
-          </div>
-
-          {pinError && (
-            <div className="w-full rounded-xl border border-destructive/30 bg-destructive-subtle px-3.5 py-2 text-xs font-bold text-destructive text-center animate-shake">
-              ✕ {pinError}
-            </div>
-          )}
-
-          <div className="grid grid-cols-3 gap-2.5 w-full max-w-[250px]">
-            {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((digit) => (
-              <button
-                key={digit}
-                type="button"
-                disabled={isVerifying}
-                onClick={() => handleKeyClick(digit)}
-                className="flex h-13 items-center justify-center rounded-2xl border border-border-default/90 bg-canvas/70 text-lg font-black text-text-primary shadow-xs transition-all hover:border-emerald-500/50 hover:bg-surface hover:scale-[1.03] active:scale-95 disabled:opacity-50"
-              >
-                {digit}
-              </button>
-            ))}
-            <button
-              type="button"
-              onClick={handleClear}
-              className="flex h-13 items-center justify-center rounded-2xl border border-transparent bg-transparent text-xs font-extrabold text-text-muted hover:text-text-primary transition-colors"
-            >
-              Clear
-            </button>
-            <button
-              type="button"
-              disabled={isVerifying}
-              onClick={() => handleKeyClick("0")}
-              className="flex h-13 items-center justify-center rounded-2xl border border-border-default/90 bg-canvas/70 text-lg font-black text-text-primary shadow-xs transition-all hover:border-emerald-500/50 hover:bg-surface hover:scale-[1.03] active:scale-95 disabled:opacity-50"
-            >
-              0
-            </button>
-            <button
-              type="button"
-              onClick={handleBackspace}
-              className="flex h-13 items-center justify-center rounded-2xl border border-transparent bg-transparent text-sm font-extrabold text-text-muted hover:text-text-primary transition-colors"
-            >
-              ⌫
-            </button>
-          </div>
-
-          <div className="flex flex-col items-center gap-1.5 border-t border-border-default/80 pt-4 w-full text-center">
-            <span className="text-[11px] text-text-muted font-medium">
-              ⌨️ Supports physical keyboard typing
-            </span>
-            <span className="text-[11px] text-text-secondary font-bold">
-              Default demo PIN: <strong className="font-mono text-primary">1234</strong>
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const handleLogout = () => {
     startVerifyTransition(async () => {
@@ -404,47 +225,64 @@ export function OwnerPortalView({
 
   if (!isAuthenticated) {
     return (
-      <div className="flex min-h-[80vh] flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-xs rounded-2xl border border-border-default bg-surface p-6 shadow-lg flex flex-col items-center gap-5">
-          <div className="flex flex-col items-center gap-1.5 text-center">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-text-inverse font-black text-lg shadow-xs">
-              {brand.name.charAt(0)}
+      <div className="relative flex min-h-[85vh] flex-col items-center justify-center px-4 py-12 overflow-hidden">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+
+        <div className="w-full max-w-sm rounded-3xl border border-emerald-500/25 bg-surface/90 p-7 sm:p-9 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-6">
+          <input
+            type="text"
+            name="security_honeypot_token"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+          />
+
+          <div className="flex flex-col items-center gap-3 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-800 text-text-inverse shadow-lg shadow-emerald-700/25 border border-white/25">
+              <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" fill="currentColor" fillOpacity="0.3" />
+              </svg>
             </div>
-            <h1 className="text-base font-extrabold text-text-primary">
-              {brand.name}
-            </h1>
-            <span className="text-[11px] font-semibold text-primary uppercase tracking-wider">
-              Owner Access
-            </span>
+            <div className="flex flex-col">
+              <h1 className="text-lg font-black tracking-tight text-text-primary">
+                {brand.name}
+              </h1>
+              <span className="text-xs font-bold text-primary uppercase tracking-widest mt-0.5">
+                Owner Command Deck 🔒
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3 my-1">
-            {[0, 1, 2, 3].map((idx) => (
-              <div
-                key={idx}
-                className={`h-3 w-3 rounded-full border transition-all ${
-                  pin.length > idx
-                    ? "border-primary bg-primary scale-110"
-                    : "border-border-default bg-subtle"
-                }`}
-              />
-            ))}
+          <div className="flex items-center gap-4 my-1">
+            {[0, 1, 2, 3].map((idx) => {
+              const isFilled = pin.length > idx;
+              return (
+                <div
+                  key={idx}
+                  className={`h-4 w-4 rounded-full border-2 transition-all duration-200 ${
+                    isFilled
+                      ? "border-emerald-500 bg-gradient-to-br from-emerald-500 to-teal-600 scale-125 shadow-[0_0_12px_rgba(16,185,129,0.7)]"
+                      : "border-border-default bg-canvas/80"
+                  }`}
+                />
+              );
+            })}
           </div>
 
           {pinError && (
-            <div className="rounded-lg border border-destructive/30 bg-destructive-subtle px-3 py-1 text-xs font-semibold text-destructive text-center">
-              {pinError}
+            <div className="w-full rounded-xl border border-destructive/30 bg-destructive-subtle px-3.5 py-2 text-xs font-bold text-destructive text-center">
+              ✕ {pinError}
             </div>
           )}
 
-          <div className="grid grid-cols-3 gap-2 w-full max-w-[220px]">
+          <div className="grid grid-cols-3 gap-2.5 w-full max-w-[250px]">
             {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((digit) => (
               <button
                 key={digit}
                 type="button"
                 disabled={isVerifying}
                 onClick={() => handleKeyClick(digit)}
-                className="flex h-12 items-center justify-center rounded-xl border border-border-default bg-subtle text-lg font-bold text-text-primary transition-all hover:bg-border-default active:scale-95 disabled:opacity-50"
+                className="flex h-13 items-center justify-center rounded-2xl border border-border-default/90 bg-canvas/70 text-lg font-black text-text-primary shadow-xs transition-all hover:border-emerald-500/50 hover:bg-surface hover:scale-[1.03] active:scale-95 disabled:opacity-50"
               >
                 {digit}
               </button>
@@ -452,7 +290,7 @@ export function OwnerPortalView({
             <button
               type="button"
               onClick={handleClear}
-              className="flex h-12 items-center justify-center rounded-xl bg-surface text-xs font-semibold text-text-muted hover:text-text-primary"
+              className="flex h-13 items-center justify-center rounded-2xl border border-transparent bg-transparent text-xs font-extrabold text-text-muted hover:text-text-primary transition-colors"
             >
               Clear
             </button>
@@ -460,21 +298,26 @@ export function OwnerPortalView({
               type="button"
               disabled={isVerifying}
               onClick={() => handleKeyClick("0")}
-              className="flex h-12 items-center justify-center rounded-xl border border-border-default bg-subtle text-lg font-bold text-text-primary transition-all hover:bg-border-default active:scale-95 disabled:opacity-50"
+              className="flex h-13 items-center justify-center rounded-2xl border border-border-default/90 bg-canvas/70 text-lg font-black text-text-primary shadow-xs transition-all hover:border-emerald-500/50 hover:bg-surface hover:scale-[1.03] active:scale-95 disabled:opacity-50"
             >
               0
             </button>
             <button
               type="button"
               onClick={handleBackspace}
-              className="flex h-12 items-center justify-center rounded-xl bg-surface text-sm font-semibold text-text-muted hover:text-text-primary"
+              className="flex h-13 items-center justify-center rounded-2xl border border-transparent bg-transparent text-sm font-extrabold text-text-muted hover:text-text-primary transition-colors"
             >
               ⌫
             </button>
           </div>
 
-          <div className="text-center text-[11px] text-text-muted border-t border-border-subtle pt-2.5 w-full">
-            Default demo PIN: <strong className="font-mono text-text-primary">1234</strong>
+          <div className="flex flex-col items-center gap-1.5 border-t border-border-default/80 pt-4 w-full text-center">
+            <span className="text-[11px] text-text-muted font-medium">
+              ⌨️ Supports physical keyboard typing
+            </span>
+            <span className="text-[11px] text-text-secondary font-bold">
+              Default demo PIN: <strong className="font-mono text-primary">1234</strong>
+            </span>
           </div>
         </div>
       </div>

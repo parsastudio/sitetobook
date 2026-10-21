@@ -142,8 +142,11 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
             className="absolute top-0 bottom-0 z-20 w-1 bg-white shadow-2xl"
             style={{ left: `${sliderPosition}%` }}
           >
-            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-primary text-text-inverse shadow-xl">
-              <span className="text-xs font-black">↔</span>
+            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-700 text-white shadow-[0_4px_20px_rgba(0,0,0,0.35),0_0_15px_rgba(5,150,105,0.4)] transition-transform hover:scale-105 active:scale-95">
+              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 sm:h-5.5 sm:w-5.5 text-white" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m8 16-4-4 4-4" />
+                <path d="m16 8 4 4-4 4" />
+              </svg>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { sanitizeTenantForPublic } from "@/entities/tenant/schema";
 import { ClaimSiteBanner } from "@/components/pitch/claim-site-banner";
 import { TenantNavbar } from "@/components/landing/tenant-navbar";
 import { TenantFooter } from "@/components/landing/tenant-footer";
+import { TenantMobileBar } from "@/components/landing/tenant-mobile-bar";
 
 export const instant = false;
 
@@ -84,6 +85,8 @@ export default async function TenantLayout({
       <main className="flex-1">{children}</main>
 
       <ClaimSiteBanner tenant={publicTenant} />
+
+      <TenantMobileBar brand={publicTenant.brand} trust={publicTenant.trust} />
 
       <TenantFooter tenant={publicTenant} />
     </div>

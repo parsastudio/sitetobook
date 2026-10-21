@@ -80,6 +80,14 @@ export const BeforeAfterItemSchema = z.object({
 });
 export type BeforeAfterItem = z.infer<typeof BeforeAfterItemSchema>;
 
+export const FAQItemSchema = z.object({
+  id: z.string(),
+  question: z.string().min(5),
+  answer: z.string().min(10),
+  category: z.string().optional(),
+});
+export type FAQItem = z.infer<typeof FAQItemSchema>;
+
 export const BrandConfigSchema = z.object({
   name: z.string(),
   tagline: z.string(),
@@ -130,6 +138,7 @@ export const TenantSchema = z.object({
   trust: TrustAndProofSchema,
   checklist: z.array(ChecklistCategorySchema),
   gallery: z.array(BeforeAfterItemSchema),
+  faqs: z.array(FAQItemSchema).default([]),
 });
 export type Tenant = z.infer<typeof TenantSchema>;
 

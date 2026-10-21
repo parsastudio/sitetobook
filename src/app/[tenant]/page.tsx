@@ -10,6 +10,7 @@ import { TenantHero } from "@/components/landing/tenant-hero";
 import { TenantHowItWorks } from "@/components/landing/tenant-how-it-works";
 import { TenantTrustStrip } from "@/components/landing/tenant-trust-strip";
 import { TenantChecklist } from "@/components/landing/tenant-checklist";
+import { TenantFaq } from "@/components/landing/tenant-faq";
 import { TenantReviews } from "@/components/landing/tenant-reviews";
 
 export const instant = false;
@@ -37,7 +38,7 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
   }
 
   const publicTenant = sanitizeTenantForPublic(tenant);
-  const { brand, trust, checklist, gallery } = publicTenant;
+  const { brand, trust, checklist, gallery, faqs } = publicTenant;
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -79,6 +80,10 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
 
       <div id="checklist" className="w-full scroll-mt-20">
         <TenantChecklist checklist={checklist} />
+      </div>
+
+      <div id="faq" className="w-full scroll-mt-20">
+        <TenantFaq faqs={faqs} />
       </div>
 
       <section className="w-full bg-canvas py-12 px-4 sm:px-6 border-t border-border-default">

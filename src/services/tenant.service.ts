@@ -51,6 +51,7 @@ function mapRecordToEntity(record: TenantRecord): Tenant {
     trust: record.trust,
     checklist: record.checklist,
     gallery: record.gallery,
+    faqs: record.faqs || [],
   });
 }
 
@@ -210,6 +211,7 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
           trust: validated.trust,
           checklist: validated.checklist,
           gallery: validated.gallery,
+          faqs: validated.faqs,
         })
         .onConflictDoUpdate({
           target: tenantsTable.slug,
@@ -237,6 +239,7 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
             trust: validated.trust,
             checklist: validated.checklist,
             gallery: validated.gallery,
+            faqs: validated.faqs,
             updatedAt: new Date(),
           },
         });

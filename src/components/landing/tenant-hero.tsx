@@ -53,18 +53,41 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
             </a>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border-subtle w-full max-w-lg">
-            <div className="flex flex-col">
-              <span className="text-lg font-black text-text-primary">$2M</span>
-              <span className="text-[11px] text-text-muted font-medium">Policy Protected</span>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-3 border-t border-border-default/60 w-full max-w-lg">
+            <div className="flex flex-col gap-0.5 sm:gap-1 rounded-xl sm:rounded-2xl border border-border-default/80 bg-surface/80 backdrop-blur-xs p-2.5 sm:p-3.5 shadow-xs transition-all hover:border-emerald-500/40 hover:shadow-sm min-w-0">
+              <span className="font-mono text-base sm:text-2xl font-black text-text-primary tracking-tight">
+                $2M
+              </span>
+              <span className="text-[10px] sm:text-[11px] font-extrabold text-primary uppercase tracking-wider truncate">
+                Hiscox Policy
+              </span>
+              <span className="text-[9px] sm:text-[10px] text-text-muted font-medium truncate">
+                Full Coverage
+              </span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-black text-text-primary">100%</span>
-              <span className="text-[11px] text-text-muted font-medium">Vetted Cleaners</span>
+
+            <div className="flex flex-col gap-0.5 sm:gap-1 rounded-xl sm:rounded-2xl border border-border-default/80 bg-surface/80 backdrop-blur-xs p-2.5 sm:p-3.5 shadow-xs transition-all hover:border-emerald-500/40 hover:shadow-sm min-w-0">
+              <span className="font-mono text-base sm:text-2xl font-black text-text-primary tracking-tight">
+                100%
+              </span>
+              <span className="text-[10px] sm:text-[11px] font-extrabold text-primary uppercase tracking-wider truncate">
+                Vetted Staff
+              </span>
+              <span className="text-[9px] sm:text-[10px] text-text-muted font-medium truncate">
+                Nationwide Clearance
+              </span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-black text-text-primary">24h</span>
-              <span className="text-[11px] text-text-muted font-medium">Free Reclean Guarantee</span>
+
+            <div className="flex flex-col gap-0.5 sm:gap-1 rounded-xl sm:rounded-2xl border border-border-default/80 bg-surface/80 backdrop-blur-xs p-2.5 sm:p-3.5 shadow-xs transition-all hover:border-emerald-500/40 hover:shadow-sm min-w-0">
+              <span className="font-mono text-base sm:text-2xl font-black text-text-primary tracking-tight">
+                24h
+              </span>
+              <span className="text-[10px] sm:text-[11px] font-extrabold text-primary uppercase tracking-wider truncate">
+                Sparkle Pledge
+              </span>
+              <span className="text-[9px] sm:text-[10px] text-text-muted font-medium truncate">
+                Free Reclean
+              </span>
             </div>
           </div>
         </div>

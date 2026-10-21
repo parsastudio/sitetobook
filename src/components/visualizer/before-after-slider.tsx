@@ -55,24 +55,28 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
   return (
     <div className="w-full flex flex-col items-center gap-6">
       {items.length > 1 && (
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1 rounded-2xl bg-canvas border border-border-default">
-          {items.map((item, idx) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                setSelectedIndex(idx);
-                setSliderPosition(50);
-              }}
-              type="button"
-              className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
-                selectedIndex === idx
-                  ? "bg-primary text-text-inverse shadow-xs"
-                  : "bg-transparent text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              {item.area}
-            </button>
-          ))}
+        <div className="inline-flex items-center gap-1.5 p-1.5 rounded-2xl bg-surface/90 border border-border-default shadow-xs backdrop-blur-md max-w-full overflow-x-auto">
+          {items.map((item, idx) => {
+            const isActive = selectedIndex === idx;
+            return (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setSelectedIndex(idx);
+                  setSliderPosition(50);
+                }}
+                type="button"
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all whitespace-nowrap ${
+                  isActive
+                    ? "bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white shadow-[0_4px_14px_rgba(5,150,105,0.3),inset_0_1px_0_rgba(255,255,255,0.35)] border border-emerald-400/30 scale-[1.02]"
+                    : "bg-canvas/70 text-text-secondary hover:bg-surface hover:text-text-primary border border-transparent"
+                }`}
+              >
+                <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-white" : "bg-emerald-600"}`} />
+                <span>{item.area}</span>
+              </button>
+            );
+          })}
         </div>
       )}
 

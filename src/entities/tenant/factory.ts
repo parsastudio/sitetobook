@@ -224,5 +224,27 @@ export function createDefaultTenant(
           "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
       },
     ],
+    faqs: [
+      {
+        id: "faq-1",
+        question: "Do I need to be home during the cleaning appointment?",
+        answer: "No, you do not need to be home. Over 75% of our residential clients provide access instructions via smart lock, lockbox, or concierge. Our bonded, insured team secures your home upon completion.",
+      },
+      {
+        id: "faq-2",
+        question: "How does your 24-Hour Sparkle Guarantee work?",
+        answer: "If you are not 100% delighted with any part of your clean, notify us within 24 hours. A supervisor will return to inspect and reclean the specific area free of charge.",
+      },
+      {
+        id: "faq-3",
+        question: "Do you supply all cleaning products and equipment?",
+        answer: "Yes, our crew arrives fully equipped with commercial-grade HEPA filtration vacuums, clean microfiber sets, and eco-friendly, non-toxic sanitizing solutions safe for pets and children.",
+      },
+      {
+        id: "faq-4",
+        question: "Are your cleaning professionals insured and background-checked?",
+        answer: "Every team member undergoes comprehensive nationwide criminal background checks, identity verification, in-person interviews, and continuous quality audits. We are backed by a $2,000,000 Hiscox policy.",
+      },
+    ],
   });
 }

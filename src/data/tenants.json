@@ -191,6 +191,28 @@
         "beforeImage": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=80",
         "afterImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
       }
+    ],
+    "faqs": [
+      {
+        "id": "faq-1",
+        "question": "Do I need to be home during the cleaning appointment?",
+        "answer": "No, you do not need to be home. Over 75% of our Dallas clients provide entry via smart keypad, lockbox, or apartment concierge. Our bonded staff locks up securely after completing the 40-point checklist."
+      },
+      {
+        "id": "faq-2",
+        "question": "How does your 24-Hour Sparkle Guarantee work?",
+        "answer": "If any detail does not meet five-star hotel standards, simply message us within 24 hours with a photo. A crew member returns and recleans the missed area at zero cost to you."
+      },
+      {
+        "id": "faq-3",
+        "question": "Do your crews bring their own equipment and supplies?",
+        "answer": "Yes, our crew arrives fully equipped with commercial HEPA vacuums, fresh color-coded microfiber sets, step ladders, and hospital-grade eco-friendly sanitizing solutions."
+      },
+      {
+        "id": "faq-4",
+        "question": "How are your cleaning professionals vetted and insured?",
+        "answer": "Every cleaner passes strict 7-year nationwide criminal background clearances and identity verification. All work is covered by our $2,000,000 commercial liability policy with Hiscox."
+      }
     ]
   }
 }

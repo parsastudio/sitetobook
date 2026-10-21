@@ -4,6 +4,7 @@ import {
   BeforeAfterItem,
   ChecklistCategory,
   CleaningServiceType,
+  FAQItem,
   ReviewItem,
 } from "@/entities/tenant/schema";
 
@@ -44,6 +45,7 @@ export const tenantsTable = pgTable("tenants", {
   }>().notNull(),
   checklist: jsonb("checklist").$type<ChecklistCategory[]>().notNull().default([]),
   gallery: jsonb("gallery").$type<BeforeAfterItem[]>().notNull().default([]),
+  faqs: jsonb("faqs").$type<FAQItem[]>().notNull().default([]),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

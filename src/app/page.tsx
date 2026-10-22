@@ -17,34 +17,34 @@ export default async function HomePage() {
     <div className="flex flex-col flex-1 items-center justify-center bg-canvas px-4 py-12 sm:px-8 sm:py-20">
       <main className="w-full max-w-3xl flex flex-col items-center gap-8 text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-border-default bg-surface px-4 py-1 text-xs font-bold text-text-primary shadow-xs">
-          <span className="h-2 w-2 rounded-full bg-success" />
+          <span className="h-2 w-2 rounded-full bg-primary" />
           High-Converting Residential Cleaning Platform
         </div>
 
         <div className="flex flex-col gap-3 max-w-xl">
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-text-primary leading-tight">
-            Flagship Client Site Demo
+          <h1 className="text-3xl sm:text-5xl font-normal tracking-tight text-text-primary leading-tight">
+            Flagship Client Site <span className="font-serif italic text-primary">Demo</span>
           </h1>
           <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
-            Engineered for residential cleaning founders. Instant room calculators, WhatsApp dispatch pipeline, and $2M liability proof.
+            Engineered for residential cleaning founders. Instant room calculators, direct SMS dispatch pipeline, and $2M liability proof.
           </p>
         </div>
 
         {flagship && (
-          <div className="w-full rounded-3xl border border-primary/30 bg-surface p-6 sm:p-8 shadow-xl flex flex-col gap-6 text-left">
+          <div className="w-full rounded-3xl border border-primary/20 bg-surface p-6 sm:p-8 shadow-xl flex flex-col gap-6 text-left">
             <div className="flex items-start justify-between gap-4">
               <div className="flex flex-col">
-                <span className="text-xs font-black uppercase tracking-wider text-primary">
+                <span className="text-xs font-bold uppercase tracking-wider text-primary">
                   Flagship Demo
                 </span>
-                <h2 className="text-2xl font-black text-text-primary">
+                <h2 className="text-2xl font-serif font-bold text-text-primary">
                   {flagship.brand.name}
                 </h2>
-                <span className="text-xs font-bold text-text-secondary">
+                <span className="text-xs font-medium text-text-secondary">
                   {flagship.brand.location.city}, {flagship.brand.location.state}
                 </span>
               </div>
-              <span className="rounded-xl bg-rating-subtle px-3 py-1 text-xs font-black text-rating">
+              <span className="rounded-xl bg-subtle px-3 py-1 text-xs font-bold text-rating">
                 ★ {flagship.trust.googleRating} ({flagship.trust.googleReviewCount})
               </span>
             </div>
@@ -54,7 +54,7 @@ export default async function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-border-default">
-              <span className="text-xs text-text-muted font-mono">
+              <span className="text-xs text-text-muted font-medium">
                 /{flagship.brand.slug}
               </span>
               <div className="flex items-center gap-2.5">
@@ -66,7 +66,7 @@ export default async function HomePage() {
                 </Link>
                 <Link
                   href={`/${flagship.brand.slug}`}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center rounded-xl bg-primary px-6 py-2.5 text-xs font-black text-text-inverse hover:bg-primary-hover shadow-md transition-all active:scale-[0.98] text-center"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center rounded-xl bg-primary px-6 py-2.5 text-xs font-bold text-text-inverse hover:bg-primary-hover shadow-md transition-all active:scale-[0.98] text-center"
                 >
                   Launch Live Demo →
                 </Link>

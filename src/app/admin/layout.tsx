@@ -1,4 +1,11 @@
+import { Geist_Mono } from "next/font/google";
+
 export const instant = false;
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -6,7 +13,7 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
-    <div className="min-h-screen bg-canvas text-text-primary">
+    <div className={`${geistMono.variable} min-h-screen bg-canvas text-text-primary`}>
       {children}
     </div>
   );

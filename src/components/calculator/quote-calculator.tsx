@@ -94,7 +94,7 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
           <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-primary flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-mono font-bold">1</span>
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-bold">1</span>
             <span>Home Specifications</span>
           </span>
           <span className="text-[11px] font-semibold text-text-muted">
@@ -168,7 +168,7 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
           <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-primary flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-mono font-bold">2</span>
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-bold">2</span>
             <span>Service Protocol</span>
           </span>
         </div>
@@ -219,7 +219,7 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
           <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-primary flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-mono font-bold">3</span>
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-bold">3</span>
             <span>Detail Add-Ons</span>
           </span>
           <span className="text-[11px] text-text-muted">Optional</span>
@@ -256,7 +256,7 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="font-mono text-xs font-bold text-text-primary">
+                  <span className="text-xs font-bold text-text-primary">
                     +{pricing.currencySymbol}{addon.price}
                   </span>
                   <div

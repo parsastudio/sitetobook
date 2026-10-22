@@ -29,10 +29,10 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
   }, [isOwnerPage]);
 
   const headerClasses = isOwnerPage
-    ? "sticky top-0 z-50 w-full border-b border-border-default bg-slate-950 text-white"
+    ? "sticky top-0 z-50 w-full border-b border-border-default bg-primary text-text-inverse"
     : `absolute top-0 inset-x-0 z-50 w-full md:fixed transition-all duration-300 ${
         isScrolled
-          ? "md:border-b md:border-slate-200/80 md:bg-white/80 md:backdrop-blur-xl md:shadow-xs"
+          ? "md:border-b md:border-border-default md:bg-surface/85 md:backdrop-blur-xl md:shadow-xs"
           : "border-b border-transparent bg-transparent"
       }`;
 
@@ -43,21 +43,21 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
           <div className="flex flex-col text-left min-w-0">
             <div className="flex items-center gap-1.5 leading-none">
               <span
-                className={`text-sm sm:text-base md:text-lg font-black tracking-tight uppercase transition-colors ${
+                className={`text-base sm:text-lg md:text-xl font-serif font-bold tracking-tight uppercase transition-colors ${
                   isScrolled
-                    ? "text-slate-900 group-hover:text-emerald-700"
-                    : "text-white group-hover:text-emerald-400 drop-shadow-sm"
+                    ? "text-text-primary group-hover:text-primary"
+                    : "text-white group-hover:text-accent drop-shadow-sm"
                 }`}
               >
                 Sparkle
               </span>
-              <span className="rounded-md bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-black tracking-wider text-white shadow-xs">
+              <span className="rounded-md bg-primary px-1.5 py-0.5 text-[9px] sm:text-[10px] font-sans font-black tracking-widest text-text-inverse shadow-xs">
                 PRO
               </span>
             </div>
             <span
               className={`text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.16em] pt-1 truncate hidden xs:inline transition-colors ${
-                isScrolled ? "text-slate-500" : "text-white/70"
+                isScrolled ? "text-text-muted" : "text-white/70"
               }`}
             >
               Residential · {brand.location.city}, {brand.location.state}
@@ -70,7 +70,7 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
             href={`tel:${brand.phone}`}
             className={`hidden md:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl border transition-all whitespace-nowrap shadow-xs ${
               isScrolled
-                ? "border-slate-200/90 bg-slate-100/80 text-slate-700 hover:bg-slate-200/80 hover:text-slate-950"
+                ? "border-border-default bg-subtle text-text-secondary hover:bg-border-default hover:text-text-primary"
                 : "border-white/15 bg-white/10 text-white/90 hover:bg-white/20 hover:text-white backdrop-blur-md"
             }`}
           >
@@ -82,15 +82,15 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
             href={`sms:${brand.phone}?&body=${encodeURIComponent("Hi! I would like to check available cleaning slots this week in " + brand.location.city + ".")}`}
             className={`hidden sm:inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap shadow-xs ${
               isScrolled
-                ? "border-slate-200 bg-white/90 text-slate-800 hover:border-emerald-500 hover:text-emerald-800"
+                ? "border-border-default bg-surface text-text-primary hover:border-primary hover:text-primary"
                 : "border-white/15 bg-white/10 text-white hover:bg-white/20 backdrop-blur-md"
             }`}
           >
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
             <span>Text Dispatch</span>
           </a>
 
-          <ScrollToCalculatorButton className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-3.5 sm:px-4 py-2 text-xs font-black text-white shadow-[0_4px_14px_rgba(5,150,105,0.4),inset_0_1px_0_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-transform active:scale-95 whitespace-nowrap cursor-pointer hover:brightness-105">
+          <ScrollToCalculatorButton className="inline-flex items-center justify-center rounded-xl bg-primary hover:bg-primary-hover px-3.5 sm:px-4 py-2 text-xs font-black text-text-inverse shadow-sm transition-transform active:scale-95 whitespace-nowrap cursor-pointer">
             <span>Instant Quote</span>
             <span className="ml-1 text-[11px]">→</span>
           </ScrollToCalculatorButton>

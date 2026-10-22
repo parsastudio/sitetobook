@@ -196,11 +196,11 @@ export const CreateTenantInputSchema = z.object({
   primaryColor: z
     .string()
     .regex(/^#([0-9a-fA-F]{3}){1,2}$/, "Invalid primary hex color")
-    .default("#0F766E"),
+    .default("#0a3326"),
   accentColor: z
     .string()
     .regex(/^#([0-9a-fA-F]{3}){1,2}$/, "Invalid accent hex color")
-    .default("#0D9488"),
+    .default("#115e45"),
   baseDispatchFee: z.coerce.number().min(0).default(49),
   ratePerBedroom: z.coerce.number().min(1).default(35),
   ratePerBathroom: z.coerce.number().min(1).default(40),

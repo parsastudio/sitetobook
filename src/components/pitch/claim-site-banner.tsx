@@ -4,6 +4,7 @@ import { useState, useTransition, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { PublicTenant } from "@/entities/tenant/schema";
 import { submitClaimLeadAction } from "@/app/actions/lead.actions";
+import { SpeedIcon, MessageTextIcon, ShieldCheckIcon, SparkleIcon } from "@/components/ui/icons";
 
 interface ClaimSiteBannerProps {
   tenant: PublicTenant;
@@ -58,8 +59,8 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
       <div className="fixed bottom-4 inset-x-4 z-50 mx-auto max-w-xl">
         <div className="flex items-center justify-between gap-3 rounded-2xl border border-primary/40 bg-text-primary/95 p-3 sm:p-3.5 shadow-2xl backdrop-blur-lg text-text-inverse">
           <div className="flex items-center gap-3 text-left">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-text-inverse font-black text-sm">
-              ⚡
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-text-inverse font-black">
+              <SparkleIcon className="h-5 w-5" />
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-black">
@@ -75,7 +76,7 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
             <button
               type="button"
               onClick={() => setIsOpen(true)}
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-4 py-2 text-xs font-black text-text-primary shadow-xs transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center justify-center rounded-xl bg-accent px-4 py-2 text-xs font-black text-text-inverse shadow-xs transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
               Transfer Domain →
             </button>
@@ -106,8 +107,8 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
               <span className="text-xs font-bold uppercase tracking-wider text-primary">
                 Exclusive Opportunity
               </span>
-              <h3 className="text-2xl font-black tracking-tight text-text-primary">
-                Own {tenant.brand.name}&apos;s Official Online Portal
+              <h3 className="text-2xl font-normal tracking-tight text-text-primary">
+                Own {tenant.brand.name}&apos;s <span className="font-serif italic text-primary">Official Portal</span>
               </h3>
               <p className="text-xs text-text-secondary leading-relaxed">
                 Stop losing residential cleaning clients to competitors with outdated sites. This custom platform is already configured with your pricing, brand colors, and direct SMS quote dispatch.
@@ -115,37 +116,43 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
             </div>
 
             <div className="flex flex-col gap-3 text-left">
-              <div className="rounded-xl border border-border-default bg-subtle p-3 flex items-start gap-3">
-                <span className="text-base">⚡</span>
+              <div className="rounded-xl border border-border-default bg-subtle p-3.5 flex items-start gap-3.5">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border-default bg-surface text-primary shadow-xs">
+                  <SpeedIcon className="h-4 w-4" />
+                </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-text-primary">
                     Instant 0.8s Loading Speed
                   </span>
-                  <span className="text-[11px] text-text-muted">
+                  <span className="text-[11px] text-text-muted mt-0.5">
                     Engineered with Next.js modern caching. Zero lag, 100% mobile-optimized.
                   </span>
                 </div>
               </div>
 
-              <div className="rounded-xl border border-border-default bg-subtle p-3 flex items-start gap-3">
-                <span className="text-base">💬</span>
+              <div className="rounded-xl border border-border-default bg-subtle p-3.5 flex items-start gap-3.5">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border-default bg-surface text-primary shadow-xs">
+                  <MessageTextIcon className="h-4 w-4" />
+                </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-text-primary">
                     Automated Quote-to-SMS Funnel
                   </span>
-                  <span className="text-[11px] text-text-muted">
+                  <span className="text-[11px] text-text-muted mt-0.5">
                     Homeowners calculate rooms & add-ons and send pre-filled booking requests directly to your phone via SMS.
                   </span>
                 </div>
               </div>
 
-              <div className="rounded-xl border border-border-default bg-subtle p-3 flex items-start gap-3">
-                <span className="text-base">🛡️</span>
+              <div className="rounded-xl border border-border-default bg-subtle p-3.5 flex items-start gap-3.5">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border-default bg-surface text-primary shadow-xs">
+                  <ShieldCheckIcon className="h-4 w-4" />
+                </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-text-primary">
                     High-Trust Conversion Design
                   </span>
-                  <span className="text-[11px] text-text-muted">
+                  <span className="text-[11px] text-text-muted mt-0.5">
                     Includes $2M liability badges, satisfaction guarantees, and before/after proof sliders.
                   </span>
                 </div>
@@ -165,10 +172,10 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
               <div className="flex flex-col gap-3">
                 <a
                   href={claimSmsUrl}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:brightness-105"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary hover:bg-primary-hover px-6 py-3.5 text-sm font-bold text-text-inverse shadow-sm transition-all hover:scale-[1.01]"
                 >
-                  <span className="text-base">💬</span>
-                  Claim Instantly via Direct SMS
+                  <MessageTextIcon className="h-4 w-4" />
+                  <span>Claim Instantly via Direct SMS</span>
                 </a>
 
                 <div className="flex items-center gap-3">

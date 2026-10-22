@@ -7,6 +7,7 @@ import {
   addGalleryPairAction,
   deleteGalleryPairAction,
 } from "@/app/actions/media.actions";
+import { CameraIcon } from "@/components/ui/icons";
 
 interface GalleryManagerProps {
   slug: string;
@@ -129,8 +130,9 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
   return (
     <div className="rounded-2xl border border-border-default bg-surface p-5 shadow-xs flex flex-col gap-4 text-left">
       <div className="flex flex-col gap-0.5 border-b border-border-subtle pb-3">
-        <h2 className="text-sm font-bold text-text-primary flex items-center gap-1.5">
-          <span>📸</span> Before & After Gallery Showcase
+        <h2 className="text-sm font-bold text-text-primary flex items-center gap-2">
+          <CameraIcon className="h-4 w-4 text-primary" />
+          <span>Before & After Gallery Showcase</span>
         </h2>
         <p className="text-xs text-text-muted">
           Add real project comparisons to the interactive slider on your website.

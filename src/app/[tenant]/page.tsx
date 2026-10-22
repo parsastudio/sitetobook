@@ -12,6 +12,7 @@ import { TenantTrustStrip } from "@/components/landing/tenant-trust-strip";
 import { TenantChecklist } from "@/components/landing/tenant-checklist";
 import { TenantFaq } from "@/components/landing/tenant-faq";
 import { TenantReviews } from "@/components/landing/tenant-reviews";
+import { PinLocationIcon } from "@/components/ui/icons";
 
 export const instant = false;
 
@@ -51,8 +52,8 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
             <span className="text-xs font-black uppercase tracking-wider text-primary">
               Real Local Proof
             </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-text-primary tracking-tight">
-              Before & After Transformations
+            <h2 className="text-2xl sm:text-4xl font-normal text-text-primary tracking-tight">
+              Before & After <span className="font-serif italic text-primary">Transformations</span>
             </h2>
             <p className="text-xs sm:text-sm text-text-secondary max-w-md">
               Slide to see the difference our deep sanitization makes in actual {brand.location.city} homes.
@@ -68,8 +69,8 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
 
       <section id="quote-calculator" className="w-full px-4 py-14 sm:px-6 bg-canvas border-b border-border-default scroll-mt-20">
         <div className="mx-auto max-w-4xl flex flex-col items-center gap-3 text-center">
-          <h2 className="text-2xl sm:text-4xl font-black text-text-primary tracking-tight">
-            Calculate Your Flat Rate
+          <h2 className="text-2xl sm:text-4xl font-normal text-text-primary tracking-tight">
+            Calculate Your <span className="font-serif italic text-primary">Flat Rate</span>
           </h2>
           <p className="text-xs sm:text-sm text-text-muted max-w-md mb-3 font-medium">
             Transparent upfront pricing with zero hidden fees or surprises.
@@ -91,16 +92,17 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
           <span className="text-xs font-black uppercase tracking-wider text-primary">
             Coverage Area
           </span>
-          <h3 className="text-xl font-extrabold text-text-primary">
+          <h3 className="text-xl font-bold text-text-primary">
             Serving Premier Neighborhoods in {brand.location.city}
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-2 max-w-2xl">
             {brand.location.serviceAreas.map((area) => (
               <span
                 key={area}
-                className="rounded-xl border border-border-default bg-surface px-4 py-1.5 text-xs font-bold text-text-secondary shadow-xs"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border-default bg-surface px-4 py-1.5 text-xs font-bold text-text-secondary shadow-xs hover:border-primary/50 transition-colors"
               >
-                📍 {area}
+                <PinLocationIcon className="h-3.5 w-3.5 text-primary" />
+                <span>{area}</span>
               </span>
             ))}
           </div>

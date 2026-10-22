@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PublicBrandConfig, TrustAndProof } from "@/entities/tenant/schema";
 import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
+import { PhoneIcon } from "@/components/ui/icons";
 
 interface TenantNavbarProps {
   brand: PublicBrandConfig;
@@ -68,13 +69,13 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <a
             href={`tel:${brand.phone}`}
-            className={`hidden md:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl border transition-all whitespace-nowrap shadow-xs ${
+            className={`hidden md:inline-flex items-center gap-2 text-xs font-bold px-3.5 py-2 rounded-xl border transition-all whitespace-nowrap shadow-xs ${
               isScrolled
                 ? "border-border-default bg-subtle text-text-secondary hover:bg-border-default hover:text-text-primary"
                 : "border-white/15 bg-white/10 text-white/90 hover:bg-white/20 hover:text-white backdrop-blur-md"
             }`}
           >
-            <span>📞</span>
+            <PhoneIcon className="h-3.5 w-3.5 shrink-0" />
             <span>{brand.formattedPhone}</span>
           </a>
 

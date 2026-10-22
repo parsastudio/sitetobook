@@ -66,9 +66,9 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
   if (!activeItem) return null;
 
   return (
-    <div className="w-full flex flex-col items-center gap-6">
+    <div className="w-full flex flex-col items-center gap-5 sm:gap-6">
       {items.length > 1 && (
-        <div className="inline-flex items-center gap-1.5 p-1.5 rounded-2xl bg-surface/90 border border-border-default shadow-xs backdrop-blur-md max-w-full overflow-x-auto">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 p-1 sm:p-1.5 rounded-2xl bg-surface border border-border-default shadow-xs w-full sm:w-auto max-w-full">
           {items.map((item, idx) => {
             const isActive = selectedIndex === idx;
             return (
@@ -79,13 +79,13 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
                   setSliderPosition(50);
                 }}
                 type="button"
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1.5 sm:gap-2 rounded-xl px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-bold transition-all ${
                   isActive
-                    ? "bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white shadow-[0_4px_14px_rgba(5,150,105,0.3),inset_0_1px_0_rgba(255,255,255,0.35)] border border-emerald-400/30 scale-[1.02]"
-                    : "bg-canvas/70 text-text-secondary hover:bg-surface hover:text-text-primary border border-transparent"
+                    ? "bg-primary text-text-inverse shadow-xs"
+                    : "bg-subtle/70 text-text-secondary hover:bg-subtle hover:text-text-primary"
                 }`}
               >
-                <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-white" : "bg-emerald-600"}`} />
+                <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-white" : "bg-primary"}`} />
                 <span>{item.area}</span>
               </button>
             );
@@ -100,7 +100,7 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
           onPointerUp={handlePointerUp}
           onPointerMove={handlePointerMove}
           onPointerCancel={handlePointerCancel}
-          className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden rounded-3xl border border-border-default bg-surface shadow-xl select-none touch-none cursor-ew-resize"
+          className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-border-default bg-surface shadow-xl select-none touch-none cursor-ew-resize"
         >
           <div className="absolute inset-0">
             <Image
@@ -111,8 +111,8 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
               className="object-cover"
               priority
             />
-            <span className="absolute top-4 right-4 rounded-xl border border-white/20 bg-text-primary/80 backdrop-blur-md px-3 py-1.5 text-xs font-black tracking-wider text-text-inverse shadow-md">
-              AFTER (SPARKLEPRO)
+            <span className="absolute top-3 right-3 sm:top-4 sm:right-4 rounded-full border border-white/20 bg-slate-950/70 backdrop-blur-md px-3 py-1 text-[9px] sm:text-[10px] font-bold tracking-widest text-white uppercase shadow-md">
+              AFTER · RESTORED
             </span>
           </div>
 
@@ -133,7 +133,7 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
                 priority
               />
             </div>
-            <span className="absolute top-4 left-4 rounded-xl border border-white/20 bg-text-primary/85 backdrop-blur-md px-3 py-1.5 text-xs font-black tracking-wider text-text-inverse shadow-md">
+            <span className="absolute top-3 left-3 sm:top-4 sm:left-4 rounded-full border border-white/20 bg-slate-950/70 backdrop-blur-md px-3 py-1 text-[9px] sm:text-[10px] font-bold tracking-widest text-white uppercase shadow-md">
               BEFORE
             </span>
           </div>
@@ -142,8 +142,8 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
             className="absolute top-0 bottom-0 z-20 w-1 bg-white shadow-2xl"
             style={{ left: `${sliderPosition}%` }}
           >
-            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-700 text-white shadow-[0_4px_20px_rgba(0,0,0,0.35),0_0_15px_rgba(5,150,105,0.4)] transition-transform hover:scale-105 active:scale-95">
-              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 sm:h-5.5 sm:w-5.5 text-white" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border-2 border-white bg-primary text-text-inverse shadow-xl transition-transform hover:scale-105 active:scale-95">
+              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 sm:h-5 sm:w-5 text-white" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m8 16-4-4 4-4" />
                 <path d="m16 8 4 4-4 4" />
               </svg>
@@ -151,9 +151,9 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
           </div>
         </div>
 
-        <div className="mt-3 flex items-center justify-between w-full px-2 text-xs text-text-muted">
-          <span className="font-bold text-text-primary">{activeItem.title}</span>
-          <span className="font-semibold text-primary">← Drag handle to reveal result →</span>
+        <div className="mt-3 flex items-center justify-between w-full px-2 text-[11px] sm:text-xs">
+          <span className="font-serif font-bold text-text-primary text-sm sm:text-base truncate max-w-[60%]">{activeItem.title}</span>
+          <span className="font-medium text-text-muted text-right">← Slide to reveal →</span>
         </div>
       </div>
     </div>

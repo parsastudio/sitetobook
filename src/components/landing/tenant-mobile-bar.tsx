@@ -2,6 +2,7 @@
 
 import { PublicBrandConfig, TrustAndProof } from "@/entities/tenant/schema";
 import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
+import { PhoneIcon } from "@/components/ui/icons";
 
 interface TenantMobileBarProps {
   brand: PublicBrandConfig;
@@ -12,16 +13,16 @@ export function TenantMobileBar({ brand, trust }: TenantMobileBarProps) {
   return (
     <aside
       aria-label="Mobile quick actions"
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border-default bg-surface/95 backdrop-blur-lg px-4 py-2.5 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] shadow-2xl animate-in slide-in-from-bottom duration-200"
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border-default bg-surface/90 backdrop-blur-xl px-4 py-2.5 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] shadow-2xl animate-in slide-in-from-bottom duration-200"
     >
       <div className="mx-auto flex max-w-md items-center justify-between gap-3">
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="flex flex-col min-w-0 text-left">
             <div className="flex items-center gap-1 leading-none">
-              <span className="text-xs font-black tracking-tight text-text-primary uppercase truncate">
+              <span className="font-serif text-sm font-bold tracking-tight text-text-primary uppercase truncate">
                 Sparkle
               </span>
-              <span className="rounded bg-gradient-to-r from-emerald-600 to-teal-700 px-1 py-0.2 text-[8px] font-black text-white shrink-0">
+              <span className="rounded bg-primary px-1 py-0.2 text-[8px] font-sans font-black text-text-inverse shrink-0">
                 PRO
               </span>
             </div>
@@ -38,10 +39,10 @@ export function TenantMobileBar({ brand, trust }: TenantMobileBarProps) {
             aria-label="Direct Phone Call"
             className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border-default bg-canvas text-text-primary hover:bg-surface active:scale-95 transition-all shadow-xs"
           >
-            <span className="text-sm">📞</span>
+            <PhoneIcon className="h-4 w-4" />
           </a>
 
-          <ScrollToCalculatorButton className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-4 py-2 text-xs font-black text-white shadow-[0_4px_14px_rgba(5,150,105,0.35),inset_0_1px_0_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-transform active:scale-95 whitespace-nowrap cursor-pointer">
+          <ScrollToCalculatorButton className="inline-flex items-center justify-center rounded-xl bg-primary hover:bg-primary-hover px-4 py-2 text-xs font-bold text-text-inverse shadow-sm transition-transform active:scale-95 whitespace-nowrap cursor-pointer">
             <span>Instant Quote</span>
             <span className="ml-1 text-[10px]">→</span>
           </ScrollToCalculatorButton>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { TrustAndProof } from "@/entities/tenant/schema";
+import { ArrowUpRightIcon } from "@/components/ui/icons";
 
 interface TenantReviewsProps {
   trust: TrustAndProof;
@@ -37,17 +38,17 @@ export function TenantReviews({ trust, city, businessName }: TenantReviewsProps)
   return (
     <section className="w-full border-t border-border-default bg-surface py-16 px-4 sm:px-6">
       <div className="mx-auto max-w-5xl flex flex-col items-center gap-10">
-        <div className="text-center flex flex-col items-center gap-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border-default bg-canvas px-4 py-1.5 text-xs font-semibold text-text-primary shadow-xs">
+        <div className="text-center flex flex-col items-center gap-2.5">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border-default bg-canvas px-4 py-1.5 text-xs font-semibold text-text-primary shadow-2xs">
             <GoogleIcon className="h-3.5 w-3.5" />
             <span className="text-rating font-black">★ {trust.googleRating}</span>
             <span className="text-text-muted">·</span>
-            <span>{trust.googleReviewCount}+ Verified Google Reviews</span>
+            <span>{trust.googleReviewCount}+ Verified Homeowner Reviews</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black text-text-primary tracking-tight">
-            Loved by Homeowners Across {city}
+          <h2 className="text-2xl sm:text-4xl font-normal text-text-primary tracking-tight">
+            Loved by Homeowners Across <span className="font-serif italic text-primary">{city}</span>
           </h2>
-          <p className="text-xs sm:text-sm text-text-secondary">
+          <p className="text-xs sm:text-sm text-text-secondary max-w-md">
             Authentic client feedback curated directly from our official Google profile.
           </p>
         </div>
@@ -56,7 +57,7 @@ export function TenantReviews({ trust, city, businessName }: TenantReviewsProps)
           {trust.reviews.map((rev) => (
             <div
               key={rev.id}
-              className="flex flex-col justify-between rounded-2xl border border-border-default bg-canvas p-6 shadow-xs text-left"
+              className="flex flex-col justify-between rounded-2xl border border-border-default bg-canvas p-6 shadow-2xs text-left"
             >
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between text-xs">
@@ -64,17 +65,17 @@ export function TenantReviews({ trust, city, businessName }: TenantReviewsProps)
                     {Array.from({ length: 5 }).map((_, i) => (
                       <span
                         key={i}
-                        className={i < rev.rating ? "text-rating font-black" : "text-border-default font-black"}
+                        className={i < rev.rating ? "text-rating font-bold" : "text-border-default"}
                       >
                         ★
                       </span>
                     ))}
                   </div>
                   <div className="flex items-center" title="Google Review">
-                    <GoogleIcon className="h-4 w-4" />
+                    <GoogleIcon className="h-3.5 w-3.5" />
                   </div>
                 </div>
-                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed italic">
                   &ldquo;{rev.text}&rdquo;
                 </p>
               </div>
@@ -90,12 +91,12 @@ export function TenantReviews({ trust, city, businessName }: TenantReviewsProps)
                     />
                   </div>
                 ) : (
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-subtle text-xs font-black text-primary">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-text-inverse font-serif text-sm font-bold">
                     {rev.author.charAt(0)}
                   </div>
                 )}
                 <div className="flex flex-col">
-                  <span className="text-xs font-black text-text-primary">
+                  <span className="font-serif text-sm font-bold text-text-primary">
                     {rev.author}
                   </span>
                   <span className="text-[11px] text-text-muted">
@@ -107,13 +108,13 @@ export function TenantReviews({ trust, city, businessName }: TenantReviewsProps)
           ))}
         </div>
 
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-2xl border border-border-default bg-canvas shadow-xs">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-2xl border border-border-default bg-canvas shadow-2xs">
           <div className="flex items-center gap-3.5 text-left">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface border border-border-default shadow-xs">
               <GoogleIcon className="h-5 w-5" />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 text-xs font-black text-text-primary">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-text-primary">
                 <span>Google Business Verified</span>
                 <span className="text-rating">★★★★★</span>
                 <span className="text-text-muted font-normal">({trust.googleRating}/5.0)</span>
@@ -128,10 +129,10 @@ export function TenantReviews({ trust, city, businessName }: TenantReviewsProps)
             href={googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-border-default bg-surface px-5 py-2.5 text-xs font-bold text-text-primary hover:border-primary hover:text-primary transition-all shadow-xs whitespace-nowrap active:scale-[0.98]"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-border-default bg-surface px-5 py-2.5 text-xs font-bold text-text-primary hover:border-primary hover:text-primary transition-all shadow-xs whitespace-nowrap active:scale-[0.98]"
           >
             <span>Read all reviews on Google Maps</span>
-            <span className="text-[11px]">↗</span>
+            <ArrowUpRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
       </div>

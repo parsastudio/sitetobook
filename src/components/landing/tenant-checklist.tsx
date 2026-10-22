@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChecklistCategory } from "@/entities/tenant/schema";
+import { CheckIcon } from "@/components/ui/icons";
 
 interface TenantChecklistProps {
   checklist: ChecklistCategory[];
@@ -14,24 +15,24 @@ export function TenantChecklist({ checklist }: TenantChecklistProps) {
     <section className="w-full border-t border-border-default bg-canvas py-16 px-4 sm:px-6">
       <div className="mx-auto max-w-5xl flex flex-col gap-10">
         <div className="text-center flex flex-col items-center gap-2">
-          <span className="text-xs font-black uppercase tracking-wider text-primary">
-            Complete Transparency
+          <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-primary">
+            Standard of Excellence
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-text-primary tracking-tight">
-            Our 40-Point Cleaning Standard
+          <h2 className="text-2xl sm:text-4xl font-normal text-text-primary tracking-tight">
+            The 40-Point Hotel-Grade <span className="font-serif italic text-primary">Scope of Work</span>
           </h2>
           <p className="text-xs sm:text-sm text-text-secondary max-w-md">
-            Review exactly what our team delivers in every room before leaving your premises.
+            Review exactly what our team inspects and delivers in every room before leaving your premises.
           </p>
         </div>
 
-        <div className="flex items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-surface border border-border-default w-full max-w-md mx-auto shadow-xs">
+        <div className="flex items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-surface border border-border-default w-full max-w-md mx-auto shadow-2xs">
           <button
             type="button"
             onClick={() => setActiveTier("standard")}
-            className={`flex-1 rounded-xl py-2.5 px-3 text-xs sm:text-sm font-black transition-all whitespace-nowrap text-center ${
+            className={`flex-1 rounded-xl py-2 px-3 text-xs sm:text-sm font-bold transition-all whitespace-nowrap text-center ${
               activeTier === "standard"
-                ? "bg-primary text-text-inverse shadow-sm"
+                ? "bg-primary text-text-inverse shadow-xs"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -40,9 +41,9 @@ export function TenantChecklist({ checklist }: TenantChecklistProps) {
           <button
             type="button"
             onClick={() => setActiveTier("deep")}
-            className={`flex-1 rounded-xl py-2.5 px-3 text-xs sm:text-sm font-black transition-all whitespace-nowrap text-center ${
+            className={`flex-1 rounded-xl py-2 px-3 text-xs sm:text-sm font-bold transition-all whitespace-nowrap text-center ${
               activeTier === "deep"
-                ? "bg-primary text-text-inverse shadow-sm"
+                ? "bg-primary text-text-inverse shadow-xs"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -51,9 +52,9 @@ export function TenantChecklist({ checklist }: TenantChecklistProps) {
           <button
             type="button"
             onClick={() => setActiveTier("moveInOut")}
-            className={`flex-1 rounded-xl py-2.5 px-3 text-xs sm:text-sm font-black transition-all whitespace-nowrap text-center ${
+            className={`flex-1 rounded-xl py-2 px-3 text-xs sm:text-sm font-bold transition-all whitespace-nowrap text-center ${
               activeTier === "moveInOut"
-                ? "bg-primary text-text-inverse shadow-sm"
+                ? "bg-primary text-text-inverse shadow-xs"
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -65,11 +66,11 @@ export function TenantChecklist({ checklist }: TenantChecklistProps) {
           {checklist.map((cat) => (
             <div
               key={cat.category}
-              className="rounded-2xl border border-border-default bg-surface p-5 flex flex-col gap-4 shadow-sm"
+              className="rounded-2xl border border-border-default bg-surface p-5 sm:p-6 flex flex-col gap-4 shadow-2xs"
             >
-              <h3 className="text-xs font-black text-text-primary uppercase tracking-wider flex items-center gap-2 border-b border-border-subtle pb-3">
-                <span className="h-2 w-2 rounded-full bg-primary" />
-                {cat.category}
+              <h3 className="font-serif text-base font-bold text-text-primary tracking-tight flex items-center gap-2 border-b border-border-subtle pb-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                <span>{cat.category}</span>
               </h3>
               <div className="flex flex-col gap-2.5">
                 {cat.items.map((item) => {
@@ -81,9 +82,13 @@ export function TenantChecklist({ checklist }: TenantChecklistProps) {
                         isIncluded ? "text-text-primary font-medium" : "text-text-muted/40 line-through"
                       }`}
                     >
-                      <span className={isIncluded ? "text-success font-black" : "text-text-muted/40"}>
-                        {isIncluded ? "✓" : "–"}
-                      </span>
+                      {isIncluded ? (
+                        <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary-subtle text-primary mt-0.5">
+                          <CheckIcon className="h-2.5 w-2.5" />
+                        </div>
+                      ) : (
+                        <span className="w-4 text-center text-text-muted/40 font-bold shrink-0">–</span>
+                      )}
                       <span>{item.task}</span>
                     </div>
                   );

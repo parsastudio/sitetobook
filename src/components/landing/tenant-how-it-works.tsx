@@ -24,11 +24,11 @@ export function TenantHowItWorks() {
     <section className="w-full bg-surface py-16 px-4 sm:px-6 border-b border-border-default">
       <div className="mx-auto max-w-5xl flex flex-col items-center gap-10">
         <div className="flex flex-col items-center text-center gap-2 max-w-xl">
-          <span className="text-xs font-black uppercase tracking-wider text-primary">
-            Effortless Booking
+          <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-primary">
+            Frictionless Protocol
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-text-primary">
-            How Pristine Service Works
+          <h2 className="text-2xl sm:text-4xl font-normal tracking-tight text-text-primary">
+            How White-Glove Service <span className="font-serif italic text-primary">Operates</span>
           </h2>
           <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
             From instant online calculation to a spotless sanctuary in three stress-free steps.
@@ -39,18 +39,18 @@ export function TenantHowItWorks() {
           {steps.map((step) => (
             <div
               key={step.number}
-              className="relative flex flex-col justify-between rounded-2xl border border-border-default bg-canvas p-6 shadow-xs transition-all hover:border-primary/50 hover:shadow-md"
+              className="relative flex flex-col justify-between rounded-2xl border border-border-default bg-canvas p-6 shadow-2xs transition-all hover:border-primary/40 hover:shadow-xs"
             >
               <div className="flex flex-col gap-3 text-left">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-3xl font-black text-primary/30">
+                  <span className="font-serif text-3xl sm:text-4xl font-normal italic text-primary/30">
                     {step.number}
                   </span>
-                  <span className="rounded-full bg-primary-subtle px-2.5 py-0.5 text-[10px] font-bold text-primary">
+                  <span className="rounded-full bg-primary-subtle px-2.5 py-0.5 text-[10px] font-bold text-primary border border-primary/20">
                     {step.badge}
                   </span>
                 </div>
-                <h3 className="text-base font-extrabold text-text-primary">
+                <h3 className="text-base font-bold text-text-primary">
                   {step.title}
                 </h3>
                 <p className="text-xs text-text-secondary leading-relaxed">

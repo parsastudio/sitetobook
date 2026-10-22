@@ -3,6 +3,18 @@
 import { useState, useMemo } from "react";
 import { CleaningType, PublicTenant } from "@/entities/tenant/schema";
 import { calculateCleaningQuote } from "@/entities/tenant/calculator";
+import {
+  MinusIcon,
+  PlusIcon,
+  CheckIcon,
+  MessageTextIcon,
+  PhoneIcon,
+  OvenIcon,
+  FridgeIcon,
+  WindowIcon,
+  CabinetIcon,
+  SparkleIcon,
+} from "@/components/ui/icons";
 
 interface QuoteCalculatorProps {
   tenant: PublicTenant;
@@ -62,24 +74,39 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
     return `sms:${brand.phone}${separator}body=${encodeURIComponent(text)}`;
   }, [brand, pricing, serviceType, bedrooms, bathrooms, selectedAddOns, quote]);
 
+  const getAddOnIcon = (id: string) => {
+    switch (id) {
+      case "oven":
+        return <OvenIcon className="h-4 w-4" />;
+      case "fridge":
+        return <FridgeIcon className="h-4 w-4" />;
+      case "windows":
+        return <WindowIcon className="h-4 w-4" />;
+      case "cabinets":
+        return <CabinetIcon className="h-4 w-4" />;
+      default:
+        return <SparkleIcon className="h-4 w-4" />;
+    }
+  };
+
   return (
     <div className="w-full max-w-4xl rounded-2xl sm:rounded-3xl border border-border-default bg-surface p-4 sm:p-8 lg:p-10 shadow-xl flex flex-col gap-6 sm:gap-8 text-left overflow-hidden">
       <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-black uppercase tracking-wider text-primary flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[11px]">1</span>
-            Select Home Size
+        <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
+          <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-primary flex items-center gap-2">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-mono font-bold">1</span>
+            <span>Home Specifications</span>
           </span>
-          <span className="rounded-md bg-subtle px-2.5 py-1 text-[11px] sm:text-xs font-semibold text-text-muted">
-            Base fee: {pricing.currencySymbol}{pricing.baseDispatchFee}
+          <span className="text-[11px] font-semibold text-text-muted">
+            Base dispatch: {pricing.currencySymbol}{pricing.baseDispatchFee}
           </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div className="flex items-center justify-between rounded-xl sm:rounded-2xl border border-border-default bg-canvas p-3.5 sm:p-4 shadow-xs">
+          <div className="flex items-center justify-between rounded-xl sm:rounded-2xl border border-border-default bg-subtle/60 p-3.5 sm:p-4 transition-all">
             <div className="flex flex-col">
-              <span className="text-xs sm:text-sm font-black text-text-primary">Bedrooms</span>
-              <span className="text-[11px] sm:text-xs text-text-muted">
+              <span className="text-xs sm:text-sm font-bold text-text-primary">Bedrooms</span>
+              <span className="text-[11px] text-text-muted">
                 +{pricing.currencySymbol}{pricing.ratePerBedroom} per room
               </span>
             </div>
@@ -88,28 +115,28 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
                 type="button"
                 onClick={() => setBedrooms((b) => Math.max(1, b - 1))}
                 aria-label="Decrease bedrooms"
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-surface border border-border-default text-base font-bold text-text-primary hover:border-primary active:scale-95 transition-all shadow-xs"
+                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface border border-border-default text-text-primary hover:border-primary active:scale-95 transition-all shadow-2xs"
               >
-                -
+                <MinusIcon className="h-3.5 w-3.5" />
               </button>
-              <span className="w-6 text-center text-base sm:text-lg font-black text-text-primary">
+              <span className="w-7 text-center font-serif text-2xl sm:text-3xl font-bold text-text-primary leading-none">
                 {bedrooms}
               </span>
               <button
                 type="button"
                 onClick={() => setBedrooms((b) => Math.min(8, b + 1))}
                 aria-label="Increase bedrooms"
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-surface border border-border-default text-base font-bold text-text-primary hover:border-primary active:scale-95 transition-all shadow-xs"
+                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface border border-border-default text-text-primary hover:border-primary active:scale-95 transition-all shadow-2xs"
               >
-                +
+                <PlusIcon className="h-3.5 w-3.5" />
               </button>
             </div>
           </div>
 
-          <div className="flex items-center justify-between rounded-xl sm:rounded-2xl border border-border-default bg-canvas p-3.5 sm:p-4 shadow-xs">
+          <div className="flex items-center justify-between rounded-xl sm:rounded-2xl border border-border-default bg-subtle/60 p-3.5 sm:p-4 transition-all">
             <div className="flex flex-col">
-              <span className="text-xs sm:text-sm font-black text-text-primary">Bathrooms</span>
-              <span className="text-[11px] sm:text-xs text-text-muted">
+              <span className="text-xs sm:text-sm font-bold text-text-primary">Bathrooms</span>
+              <span className="text-[11px] text-text-muted">
                 +{pricing.currencySymbol}{pricing.ratePerBathroom} per room
               </span>
             </div>
@@ -118,20 +145,20 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
                 type="button"
                 onClick={() => setBathrooms((b) => Math.max(1, b - 1))}
                 aria-label="Decrease bathrooms"
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-surface border border-border-default text-base font-bold text-text-primary hover:border-primary active:scale-95 transition-all shadow-xs"
+                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface border border-border-default text-text-primary hover:border-primary active:scale-95 transition-all shadow-2xs"
               >
-                -
+                <MinusIcon className="h-3.5 w-3.5" />
               </button>
-              <span className="w-6 text-center text-base sm:text-lg font-black text-text-primary">
+              <span className="w-7 text-center font-serif text-2xl sm:text-3xl font-bold text-text-primary leading-none">
                 {bathrooms}
               </span>
               <button
                 type="button"
                 onClick={() => setBathrooms((b) => Math.min(6, b + 1))}
                 aria-label="Increase bathrooms"
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-surface border border-border-default text-base font-bold text-text-primary hover:border-primary active:scale-95 transition-all shadow-xs"
+                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface border border-border-default text-text-primary hover:border-primary active:scale-95 transition-all shadow-2xs"
               >
-                +
+                <PlusIcon className="h-3.5 w-3.5" />
               </button>
             </div>
           </div>
@@ -139,10 +166,12 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
       </div>
 
       <div className="flex flex-col gap-3">
-        <span className="text-xs font-black uppercase tracking-wider text-primary flex items-center gap-2">
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[11px]">2</span>
-          Choose Cleaning Tier
-        </span>
+        <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
+          <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-primary flex items-center gap-2">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-mono font-bold">2</span>
+            <span>Service Protocol</span>
+          </span>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {pricing.services.map((srv) => {
@@ -154,18 +183,18 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
                 onClick={() => setServiceType(srv.id)}
                 className={`relative flex flex-col justify-between rounded-xl sm:rounded-2xl border p-4 text-left transition-all ${
                   isSelected
-                    ? "border-primary bg-primary-subtle/70 ring-2 ring-primary shadow-sm"
-                    : "border-border-default bg-canvas hover:border-border-focus hover:bg-surface"
+                    ? "border-primary bg-primary-subtle/80 ring-1 ring-primary shadow-xs"
+                    : "border-border-default bg-surface hover:border-border-focus"
                 }`}
               >
                 {srv.isPopular && (
-                  <span className="absolute -top-2.5 right-3.5 rounded-full bg-primary px-2 py-0.5 text-[9px] font-black uppercase text-text-inverse shadow-xs">
-                    Most Popular
+                  <span className="absolute -top-2.5 right-3.5 rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-text-inverse shadow-2xs">
+                    Popular
                   </span>
                 )}
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between gap-1">
-                    <span className="text-xs sm:text-sm font-black text-text-primary">
+                    <span className="text-xs sm:text-sm font-bold text-text-primary">
                       {srv.name}
                     </span>
                   </div>
@@ -173,11 +202,11 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
                     {srv.tagline}
                   </span>
                 </div>
-                <div className="mt-3 pt-2.5 border-t border-border-default flex items-center justify-between text-[11px] sm:text-xs">
-                  <span className="font-semibold text-text-muted">
+                <div className="mt-3.5 pt-2.5 border-t border-border-default/60 flex items-center justify-between text-[11px] sm:text-xs">
+                  <span className="font-medium text-text-muted">
                     {srv.multiplier === 1 ? "1.0x Base" : `${srv.multiplier}x Multiplier`}
                   </span>
-                  <span className={`font-bold ${isSelected ? "text-primary" : "text-text-muted"}`}>
+                  <span className={`font-semibold ${isSelected ? "text-primary" : "text-text-muted"}`}>
                     {isSelected ? "Selected ✓" : "Select"}
                   </span>
                 </div>
@@ -188,10 +217,13 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
       </div>
 
       <div className="flex flex-col gap-3">
-        <span className="text-xs font-black uppercase tracking-wider text-primary flex items-center gap-2">
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[11px]">3</span>
-          Deep Detail Add-Ons (Optional)
-        </span>
+        <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
+          <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-text-primary flex items-center gap-2">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-text-inverse text-[10px] font-mono font-bold">3</span>
+            <span>Detail Add-Ons</span>
+          </span>
+          <span className="text-[11px] text-text-muted">Optional</span>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
           {pricing.addOns.filter((a) => a.enabled !== false).map((addon) => {
@@ -203,30 +235,38 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
                 onClick={() => toggleAddOn(addon.id)}
                 className={`flex items-center justify-between rounded-xl sm:rounded-2xl border p-3 sm:p-3.5 text-left transition-all ${
                   isChecked
-                    ? "border-primary bg-primary-subtle/50 ring-1 ring-primary shadow-xs"
-                    : "border-border-default bg-canvas hover:border-primary/50"
+                    ? "border-primary bg-primary-subtle/50 ring-1 ring-primary shadow-2xs"
+                    : "border-border-default bg-surface hover:border-primary/50"
                 }`}
               >
-                <div className="flex flex-col pr-2 min-w-0">
-                  <span className="text-xs font-bold text-text-primary truncate">
-                    {addon.name}
-                  </span>
-                  <span className="text-[10px] sm:text-[11px] text-text-muted truncate">
-                    {addon.description}
-                  </span>
+                <div className="flex items-center gap-3 pr-2 min-w-0">
+                  <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-colors ${
+                    isChecked ? "border-primary bg-primary text-text-inverse" : "border-border-default bg-subtle text-text-muted"
+                  }`}>
+                    {getAddOnIcon(addon.id)}
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-xs font-bold text-text-primary truncate">
+                      {addon.name}
+                    </span>
+                    <span className="text-[10px] sm:text-[11px] text-text-muted truncate">
+                      {addon.description}
+                    </span>
+                  </div>
                 </div>
+
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="rounded-lg bg-surface border border-border-default px-2 py-0.5 text-xs font-bold text-text-primary">
+                  <span className="font-mono text-xs font-bold text-text-primary">
                     +{pricing.currencySymbol}{addon.price}
                   </span>
                   <div
-                    className={`flex h-4.5 w-4.5 sm:h-5 sm:w-5 items-center justify-center rounded-lg border text-[10px] sm:text-[11px] font-black transition-colors ${
+                    className={`flex h-5 w-5 items-center justify-center rounded-full border text-[10px] transition-colors ${
                       isChecked
                         ? "border-primary bg-primary text-text-inverse"
                         : "border-border-default bg-surface text-transparent"
                     }`}
                   >
-                    ✓
+                    <CheckIcon className="h-3 w-3" />
                   </div>
                 </div>
               </button>
@@ -235,20 +275,20 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
         </div>
       </div>
 
-      <div className="-mx-4 -mb-4 sm:mx-0 sm:mb-0 rounded-b-2xl sm:rounded-3xl border-t sm:border border-primary/30 bg-gradient-to-br from-primary-subtle/90 via-surface to-primary-subtle/40 p-4 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 sm:shadow-md">
-        <div className="flex flex-col text-center md:text-left gap-1 w-full md:w-auto">
-          <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-primary">
+      <div className="-mx-4 -mb-4 sm:mx-0 sm:mb-0 rounded-b-2xl sm:rounded-3xl border-t sm:border border-border-default bg-subtle/70 p-4 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 sm:shadow-xs">
+        <div className="flex flex-col text-center md:text-left gap-0.5 w-full md:w-auto">
+          <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-text-muted">
             Guaranteed Upfront Quote
           </span>
-          <div className="flex items-baseline justify-center md:justify-start gap-2">
-            <span className="text-3xl sm:text-5xl font-black text-text-primary">
+          <div className="flex items-baseline justify-center md:justify-start gap-2.5">
+            <span className="font-serif text-4xl sm:text-6xl font-bold tracking-tight text-text-primary">
               {quote.currencySymbol}{quote.finalEstimatedTotal}
             </span>
-            <span className="text-[11px] sm:text-xs font-semibold text-text-muted">
-              Flat rate · All supplies included
+            <span className="text-[11px] sm:text-xs font-medium text-text-muted">
+              Flat rate · Tax & eco-supplies included
             </span>
           </div>
-          <p className="text-[11px] sm:text-xs text-text-secondary mt-0.5 sm:mt-1 font-medium">
+          <p className="text-[11px] sm:text-xs text-text-secondary mt-0.5 font-medium">
             {quote.summaryText}
           </p>
         </div>
@@ -256,18 +296,17 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
         <div className="flex flex-col w-full md:w-auto gap-2 shrink-0">
           <a
             href={smsUrl}
-            className="inline-flex items-center justify-center gap-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-6 py-3.5 sm:px-8 sm:py-4 text-xs sm:text-sm font-black text-white shadow-[0_10px_28px_-4px_rgba(5,150,105,0.45),inset_0_1px_1px_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-all hover:scale-[1.02] hover:shadow-[0_14px_32px_-4px_rgba(5,150,105,0.55)] active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 rounded-xl sm:rounded-2xl bg-primary hover:bg-primary-hover px-6 py-3.5 sm:px-8 sm:py-4 text-xs sm:text-sm font-bold text-text-inverse shadow-[0_10px_28px_-4px_rgba(10,51,38,0.4)] transition-all hover:scale-[1.01] active:scale-[0.98]"
           >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 sm:h-5 sm:w-5 shrink-0">
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z" />
-            </svg>
-            <span>Text This Quote to Book Instantly</span>
+            <MessageTextIcon className="h-4 w-4 shrink-0" />
+            <span>Text This Quote to Book</span>
           </a>
           <a
             href={`tel:${brand.phone}`}
-            className="inline-flex items-center justify-center rounded-xl border border-border-default bg-surface/90 px-4 py-2 text-xs font-bold text-text-primary transition-colors hover:border-emerald-600 hover:text-emerald-700 text-center shadow-xs"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-border-default bg-surface px-4 py-2 text-xs font-semibold text-text-primary hover:border-primary hover:text-primary transition-colors text-center shadow-2xs"
           >
-            Or Call: {brand.formattedPhone}
+            <PhoneIcon className="h-3.5 w-3.5 text-text-muted shrink-0" />
+            <span>Or Call: {brand.formattedPhone}</span>
           </a>
         </div>
       </div>

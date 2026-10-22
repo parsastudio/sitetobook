@@ -72,7 +72,7 @@ export function TenantListManager({ tenants }: TenantListManagerProps) {
 
               <div className="flex flex-col gap-0.5 text-xs text-text-secondary">
                 <span>Phone: <strong className="text-text-primary">{t.brand.phone}</strong></span>
-                <span>WhatsApp: <strong className="font-mono text-text-primary">+{t.brand.whatsappNumber}</strong></span>
+                <span>SMS Dispatch: <strong className="font-mono text-text-primary">{t.brand.phone}</strong></span>
                 <span className="text-text-muted text-[11px]">
                   ${t.pricing.baseDispatchFee} base • ${t.pricing.ratePerBedroom}/bed • ${t.pricing.ratePerBathroom}/bath
                 </span>
@@ -100,12 +100,11 @@ export function TenantListManager({ tenants }: TenantListManagerProps) {
 
               <div className="flex items-center gap-1.5">
                 <a
-                  href={`https://wa.me/${t.brand.whatsappNumber}?text=Test%20ping`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded bg-whatsapp/10 px-2 py-1 text-xs font-semibold text-whatsapp hover:bg-whatsapp hover:text-text-inverse transition-colors"
+                  href={`sms:${t.brand.phone}?&body=Test%20ping`}
+                  className="rounded bg-emerald-500/10 px-2 py-1 text-xs font-semibold text-emerald-700 hover:bg-emerald-600 hover:text-white transition-colors"
+                  title="Send Test SMS"
                 >
-                  WA
+                  SMS
                 </a>
 
                 <Link

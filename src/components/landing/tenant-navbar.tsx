@@ -1,4 +1,8 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { PublicBrandConfig, TrustAndProof } from "@/entities/tenant/schema";
 import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
 
@@ -8,20 +12,54 @@ interface TenantNavbarProps {
 }
 
 export function TenantNavbar({ brand }: TenantNavbarProps) {
+  const pathname = usePathname();
+  const isOwnerPage = pathname?.includes("/owner");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    if (isOwnerPage) return;
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isOwnerPage]);
+
+  const headerClasses = isOwnerPage
+    ? "sticky top-0 z-50 w-full border-b border-border-default bg-slate-950 text-white"
+    : `absolute top-0 inset-x-0 z-50 w-full md:fixed transition-all duration-300 ${
+        isScrolled
+          ? "md:border-b md:border-slate-200/80 md:bg-white/80 md:backdrop-blur-xl md:shadow-xs"
+          : "border-b border-transparent bg-transparent"
+      }`;
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border-default bg-surface/90 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-3.5 sm:px-6 gap-2">
+    <header className={headerClasses}>
+      <div className="mx-auto flex h-14 sm:h-16 max-w-6xl items-center justify-between px-4 sm:px-6 gap-2">
         <Link href={`/${brand.slug}`} className="flex items-center gap-2 min-w-0 shrink group">
           <div className="flex flex-col text-left min-w-0">
             <div className="flex items-center gap-1.5 leading-none">
-              <span className="text-sm sm:text-base md:text-lg font-black tracking-tight text-text-primary uppercase group-hover:text-primary transition-colors">
+              <span
+                className={`text-sm sm:text-base md:text-lg font-black tracking-tight uppercase transition-colors ${
+                  isScrolled
+                    ? "text-slate-900 group-hover:text-emerald-700"
+                    : "text-white group-hover:text-emerald-400 drop-shadow-sm"
+                }`}
+              >
                 Sparkle
               </span>
               <span className="rounded-md bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-black tracking-wider text-white shadow-xs">
                 PRO
               </span>
             </div>
-            <span className="text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.16em] text-text-muted pt-1 truncate hidden xs:inline">
+            <span
+              className={`text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.16em] pt-1 truncate hidden xs:inline transition-colors ${
+                isScrolled ? "text-slate-500" : "text-white/70"
+              }`}
+            >
               Residential · {brand.location.city}, {brand.location.state}
             </span>
           </div>
@@ -30,23 +68,29 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <a
             href={`tel:${brand.phone}`}
-            className="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-text-secondary hover:text-text-primary px-3 py-2 rounded-xl hover:bg-subtle transition-colors whitespace-nowrap"
+            className={`hidden md:inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-2 rounded-xl border transition-all whitespace-nowrap shadow-xs ${
+              isScrolled
+                ? "border-slate-200/90 bg-slate-100/80 text-slate-700 hover:bg-slate-200/80 hover:text-slate-950"
+                : "border-white/15 bg-white/10 text-white/90 hover:bg-white/20 hover:text-white backdrop-blur-md"
+            }`}
           >
             <span>📞</span>
             <span>{brand.formattedPhone}</span>
           </a>
 
           <a
-            href={`https://wa.me/${brand.whatsappNumber}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-border-default bg-surface px-3 py-2 text-xs font-bold text-text-primary transition-colors hover:border-whatsapp hover:text-whatsapp whitespace-nowrap shadow-xs"
+            href={`sms:${brand.phone}?&body=${encodeURIComponent("Hi! I would like to check available cleaning slots this week in " + brand.location.city + ".")}`}
+            className={`hidden sm:inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap shadow-xs ${
+              isScrolled
+                ? "border-slate-200 bg-white/90 text-slate-800 hover:border-emerald-500 hover:text-emerald-800"
+                : "border-white/15 bg-white/10 text-white hover:bg-white/20 backdrop-blur-md"
+            }`}
           >
-            <span className="h-2 w-2 rounded-full bg-whatsapp animate-pulse" />
-            <span>WhatsApp</span>
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Text Dispatch</span>
           </a>
 
-          <ScrollToCalculatorButton className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-3 sm:px-4 py-2 text-xs font-black text-white shadow-[0_4px_14px_rgba(5,150,105,0.35),inset_0_1px_0_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-transform active:scale-95 whitespace-nowrap cursor-pointer">
+          <ScrollToCalculatorButton className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-3.5 sm:px-4 py-2 text-xs font-black text-white shadow-[0_4px_14px_rgba(5,150,105,0.4),inset_0_1px_0_rgba(255,255,255,0.4)] border border-emerald-400/30 transition-transform active:scale-95 whitespace-nowrap cursor-pointer hover:brightness-105">
             <span>Instant Quote</span>
             <span className="ml-1 text-[11px]">→</span>
           </ScrollToCalculatorButton>

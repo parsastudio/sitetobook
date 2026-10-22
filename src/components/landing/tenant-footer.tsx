@@ -97,13 +97,11 @@ export function TenantFooter({ tenant }: TenantFooterProps) {
             </div>
 
             <a
-              href={`https://wa.me/${brand.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-4 py-3 text-xs font-black text-text-inverse shadow-xs transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              href={`sms:${brand.phone}?&body=${encodeURIComponent("Hi! I would like to schedule a residential cleaning appointment in " + brand.location.city + ".")}`}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 px-4 py-3 text-xs font-black text-white shadow-xs transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
               <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
-              <span>Book via WhatsApp</span>
+              <span>Text for Instant Dispatch</span>
             </a>
           </div>
         </div>

@@ -25,10 +25,10 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
     return null;
   }
 
-  const agencyWhatsappNumber =
-    process.env.NEXT_PUBLIC_AGENCY_WHATSAPP || tenant.brand.whatsappNumber;
+  const agencyContactNumber =
+    process.env.NEXT_PUBLIC_AGENCY_WHATSAPP || tenant.brand.phone;
 
-  const claimWhatsappUrl = `https://wa.me/${agencyWhatsappNumber}?text=${encodeURIComponent(
+  const claimSmsUrl = `sms:${agencyContactNumber}?&body=${encodeURIComponent(
     `Hi! I am the owner of ${tenant.brand.name} in ${tenant.brand.location.city}. I reviewed the custom website demo you built for us and would like to claim it and connect our custom domain.`
   )}`;
 
@@ -91,11 +91,9 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
         </div>
       </div>
 
-      {/* Claim Modal Overlay */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4 backdrop-blur-xs">
           <div className="relative w-full max-w-lg rounded-3xl border border-border-default bg-surface p-6 sm:p-8 shadow-2xl flex flex-col gap-6">
-            {/* Close Button */}
             <button
               type="button"
               onClick={() => setIsOpen(false)}
@@ -104,7 +102,6 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
               ✕
             </button>
 
-            {/* Modal Header */}
             <div className="flex flex-col gap-1.5 text-left pr-6">
               <span className="text-xs font-bold uppercase tracking-wider text-primary">
                 Exclusive Opportunity
@@ -113,11 +110,10 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
                 Own {tenant.brand.name}&apos;s Official Online Portal
               </h3>
               <p className="text-xs text-text-secondary leading-relaxed">
-                Stop losing residential cleaning clients to competitors with outdated sites. This custom platform is already configured with your pricing, brand colors, and direct WhatsApp quote dispatch.
+                Stop losing residential cleaning clients to competitors with outdated sites. This custom platform is already configured with your pricing, brand colors, and direct SMS quote dispatch.
               </p>
             </div>
 
-            {/* 3 Killer Value Propositions */}
             <div className="flex flex-col gap-3 text-left">
               <div className="rounded-xl border border-border-default bg-subtle p-3 flex items-start gap-3">
                 <span className="text-base">⚡</span>
@@ -126,7 +122,7 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
                     Instant 0.8s Loading Speed
                   </span>
                   <span className="text-[11px] text-text-muted">
-                    Engineered with Next.js 16 modern caching. Zero lag, 100% mobile-optimized.
+                    Engineered with Next.js modern caching. Zero lag, 100% mobile-optimized.
                   </span>
                 </div>
               </div>
@@ -135,10 +131,10 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
                 <span className="text-base">💬</span>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-text-primary">
-                    Automated Quote-to-WhatsApp Funnel
+                    Automated Quote-to-SMS Funnel
                   </span>
                   <span className="text-[11px] text-text-muted">
-                    Homeowners calculate rooms & add-ons and send pre-filled booking requests directly to your phone.
+                    Homeowners calculate rooms & add-ons and send pre-filled booking requests directly to your phone via SMS.
                   </span>
                 </div>
               </div>
@@ -156,7 +152,6 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
               </div>
             </div>
 
-            {/* Direct Action Options */}
             {isSubmitted ? (
               <div className="rounded-2xl border border-success/30 bg-success-subtle p-4 text-center">
                 <span className="text-sm font-bold text-success">
@@ -169,13 +164,11 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
             ) : (
               <div className="flex flex-col gap-3">
                 <a
-                  href={claimWhatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-whatsapp px-6 py-3.5 text-sm font-bold text-text-inverse shadow-sm transition-all hover:brightness-105"
+                  href={claimSmsUrl}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:brightness-105"
                 >
                   <span className="text-base">💬</span>
-                  Claim Instantly via WhatsApp
+                  Claim Instantly via Direct SMS
                 </a>
 
                 <div className="flex items-center gap-3">

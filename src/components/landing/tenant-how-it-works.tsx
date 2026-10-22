@@ -9,7 +9,7 @@ export function TenantHowItWorks() {
     {
       number: "02",
       title: "Confirm in 1 Tap",
-      description: "Your estimate loads instantly into WhatsApp. Lock your preferred arrival slot directly with our dispatcher.",
+      description: "Your estimate loads instantly into your text messages (SMS). Lock your preferred arrival slot directly with our dispatcher.",
       badge: "Zero Deposit Required",
     },
     {

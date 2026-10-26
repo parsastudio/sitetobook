@@ -18,11 +18,8 @@ export function TenantFooter({ tenant }: TenantFooterProps) {
           <div className="lg:col-span-4 flex flex-col gap-3.5">
             <div className="flex flex-col text-left">
               <div className="flex items-center gap-1.5 leading-none">
-                <span className="text-lg sm:text-xl font-serif font-bold tracking-tight text-text-primary uppercase">
-                  Sparkle
-                </span>
-                <span className="rounded-md bg-primary px-1.5 py-0.5 text-[10px] sm:text-[11px] font-sans font-black tracking-wider text-text-inverse shadow-xs">
-                  PRO
+                <span className="text-lg sm:text-xl font-sans font-bold tracking-tight text-text-primary">
+                  {brand.name}
                 </span>
               </div>
               <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.18em] text-text-muted pt-1.5">

@@ -16,9 +16,11 @@ export function TenantCreatorForm() {
   const [createdSlug, setCreatedSlug] = useState<string | null>(null);
 
   const [name, setName] = useState("");
+  const [tagline, setTagline] = useState("");
   const [slug, setSlug] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("TX");
+  const [serviceAreasInput, setServiceAreasInput] = useState("");
   const [phone, setPhone] = useState("");
   const [whatsappNumber, setWhatsappNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -51,8 +53,14 @@ export function TenantCreatorForm() {
     setCreatedSlug(null);
 
     startTransition(async () => {
+      const parsedAreas = serviceAreasInput
+        .split(",")
+        .map((a) => a.trim())
+        .filter(Boolean);
+
       const result = await createTenantAction({
         name,
+        tagline: tagline.trim() || undefined,
         slug,
         city,
         state,
@@ -64,7 +72,7 @@ export function TenantCreatorForm() {
         baseDispatchFee,
         ratePerBedroom,
         ratePerBathroom,
-        serviceAreas: [`Downtown ${city}`, `North ${city}`, `Metro ${city}`],
+        serviceAreas: parsedAreas.length > 0 ? parsedAreas : [`Downtown ${city}`, `Metro ${city}`],
       });
 
       if (!result.success) {
@@ -197,6 +205,32 @@ export function TenantCreatorForm() {
               value={phone}
               onChange={(e) => handlePhoneChange(e.target.value)}
               placeholder="+1 (214) 555-0199"
+              className="rounded-lg border border-border-default bg-subtle px-3 py-2 text-sm font-semibold text-text-primary outline-hidden focus:border-border-focus focus:bg-surface"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1 sm:col-span-2 lg:col-span-3">
+            <label className="text-xs font-bold text-text-secondary">
+              Brand Tagline
+            </label>
+            <input
+              type="text"
+              value={tagline}
+              onChange={(e) => setTagline(e.target.value)}
+              placeholder="e.g. Austin's Premier Hotel-Standard Home Cleaning Crew"
+              className="rounded-lg border border-border-default bg-subtle px-3 py-2 text-sm font-semibold text-text-primary outline-hidden focus:border-border-focus focus:bg-surface"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1 sm:col-span-2 lg:col-span-3">
+            <label className="text-xs font-bold text-text-secondary">
+              Service Neighborhoods (comma-separated)
+            </label>
+            <input
+              type="text"
+              value={serviceAreasInput}
+              onChange={(e) => setServiceAreasInput(e.target.value)}
+              placeholder="e.g. Downtown, South Congress, Zilker, Domain"
               className="rounded-lg border border-border-default bg-subtle px-3 py-2 text-sm font-semibold text-text-primary outline-hidden focus:border-border-focus focus:bg-surface"
             />
           </div>

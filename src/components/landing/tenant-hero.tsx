@@ -58,7 +58,7 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
 
           <div className="grid grid-cols-3 gap-1.5 sm:gap-4 pt-3 sm:pt-4 border-t border-border-default w-full max-w-xl">
             <div className="flex flex-col items-center justify-center gap-0.5 rounded-xl sm:rounded-2xl border border-border-default bg-subtle/80 p-1.5 sm:p-3 min-w-0">
-              <span className="font-serif text-base sm:text-2xl font-bold text-text-primary tracking-tight leading-none">
+              <span className="font-serif lining-nums text-base sm:text-2xl font-bold text-text-primary tracking-tight leading-none">
                 $2M
               </span>
               <span className="text-[9px] sm:text-[11px] font-extrabold text-primary uppercase tracking-tight sm:tracking-wider text-center mt-0.5">
@@ -70,7 +70,7 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
             </div>
 
             <div className="flex flex-col items-center justify-center gap-0.5 rounded-xl sm:rounded-2xl border border-border-default bg-subtle/80 p-1.5 sm:p-3 min-w-0">
-              <span className="font-serif text-base sm:text-2xl font-bold text-text-primary tracking-tight leading-none">
+              <span className="font-serif lining-nums text-base sm:text-2xl font-bold text-text-primary tracking-tight leading-none">
                 100%
               </span>
               <span className="text-[9px] sm:text-[11px] font-extrabold text-primary uppercase tracking-tight sm:tracking-wider text-center mt-0.5">
@@ -82,11 +82,11 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
             </div>
 
             <div className="flex flex-col items-center justify-center gap-0.5 rounded-xl sm:rounded-2xl border border-border-default bg-subtle/80 p-1.5 sm:p-3 min-w-0">
-              <span className="font-serif text-base sm:text-2xl font-bold text-text-primary tracking-tight leading-none">
+              <span className="font-serif lining-nums text-base sm:text-2xl font-bold text-text-primary tracking-tight leading-none">
                 24h
               </span>
               <span className="text-[9px] sm:text-[11px] font-extrabold text-primary uppercase tracking-tight sm:tracking-wider text-center mt-0.5">
-                Sparkle Pledge
+                Clean Pledge
               </span>
               <span className="text-[8px] sm:text-[10px] text-text-muted font-semibold text-center leading-none mt-0.5">
                 Free Reclean

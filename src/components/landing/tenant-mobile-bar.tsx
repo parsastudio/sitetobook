@@ -19,11 +19,8 @@ export function TenantMobileBar({ brand, trust }: TenantMobileBarProps) {
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="flex flex-col min-w-0 text-left">
             <div className="flex items-center gap-1 leading-none">
-              <span className="font-serif text-sm font-bold tracking-tight text-text-primary uppercase truncate">
-                Sparkle
-              </span>
-              <span className="rounded bg-primary px-1 py-0.2 text-[8px] font-sans font-black text-text-inverse shrink-0">
-                PRO
+              <span className="font-sans text-xs sm:text-sm font-bold tracking-tight text-text-primary truncate">
+                {brand.name}
               </span>
             </div>
             <span className="text-[10px] font-bold text-rating flex items-center gap-0.5 pt-0.5">

@@ -44,16 +44,13 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
           <div className="flex flex-col text-left min-w-0">
             <div className="flex items-center gap-1.5 leading-none">
               <span
-                className={`text-base sm:text-lg md:text-xl font-serif font-bold tracking-tight uppercase transition-colors ${
+                className={`text-base sm:text-lg md:text-xl font-sans font-extrabold tracking-tight transition-colors ${
                   isScrolled
                     ? "text-text-primary group-hover:text-primary"
                     : "text-white group-hover:text-accent drop-shadow-sm"
                 }`}
               >
-                Sparkle
-              </span>
-              <span className="rounded-md bg-primary px-1.5 py-0.5 text-[9px] sm:text-[10px] font-sans font-black tracking-widest text-text-inverse shadow-xs">
-                PRO
+                {brand.name}
               </span>
             </div>
             <span

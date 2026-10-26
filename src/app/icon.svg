@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <!-- Deep luxury emerald medallion base -->
+    <linearGradient id="medallion-base" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F382B" />
+      <stop offset="55%" stop-color="#08261E" />
+      <stop offset="100%" stop-color="#03120E" />
+    </linearGradient>
+
+    <!-- Pillar stem gradient -->
+    <linearGradient id="pillar-tone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="60%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <!-- Sculptural loop gradient with specular sheen -->
+    <linearGradient id="loop-tone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="45%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#065F46" />
+    </linearGradient>
+
+    <!-- Subtle gold accent for the negative-space diamond -->
+    <linearGradient id="facet-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="60%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circular Heritage Medallion Base -->
+  <circle cx="32" cy="32" r="29.5" fill="url(#medallion-base)" stroke="#165B46" stroke-width="1.25" />
+  <circle cx="32" cy="32" r="26.5" fill="none" stroke="#0E3D2E" stroke-width="0.75" opacity="0.6" />
+
+  <!-- Monogram Pillar (P Vertical Stem) -->
+  <rect x="18" y="16" width="8" height="32" rx="1.5" fill="url(#pillar-tone)" />
+
+  <!-- Architectural P Loop -->
+  <path
+    d="M 26 16
+       L 38 16
+       C 43.8 16 47.5 19.6 47.5 25
+       C 47.5 30.4 43.8 34 38 34
+       L 26 34
+       Z
+       M 26 21
+       L 37 21
+       C 39.8 21 41.5 22.8 41.5 25
+       C 41.5 27.2 39.8 29 37 29
+       L 26 29
+       Z"
+    fill="url(#loop-tone)"
+    fill-rule="evenodd"
+  />
+
+  <!-- Crisp Polished Specular Ridge (Rim Light) -->
+  <path
+    d="M 26 16.8 L 38 16.8 C 42.6 16.8 46 19.8 46.5 24.5"
+    stroke="#FFFFFF"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    opacity="0.85"
+  />
+
+  <!-- The Pristine Diamond Core (Set inside the loop's negative space) -->
+  <polygon points="32,22 34.8,25 32,28 29.2,25" fill="url(#facet-gold)" />
+</svg>

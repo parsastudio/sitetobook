@@ -96,7 +96,7 @@ export function TenantReviews({ trust, city, businessName }: TenantReviewsProps)
                   </div>
                 )}
                 <div className="flex flex-col">
-                  <span className="font-serif text-sm font-bold text-text-primary">
+                  <span className="font-sans text-sm font-bold text-text-primary tracking-tight">
                     {rev.author}
                   </span>
                   <span className="text-[11px] text-text-muted">

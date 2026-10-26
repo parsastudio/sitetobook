@@ -52,7 +52,7 @@ export function TenantFaq({ faqs }: TenantFaqProps) {
                   aria-expanded={isOpen}
                   className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left transition-colors"
                 >
-                  <span className="font-serif text-sm sm:text-base font-bold text-text-primary leading-snug">
+                  <span className="font-sans text-sm sm:text-base font-semibold text-text-primary leading-snug tracking-tight">
                     {faq.question}
                   </span>
                   <div

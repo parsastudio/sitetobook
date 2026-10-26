@@ -68,7 +68,7 @@ export function TenantChecklist({ checklist }: TenantChecklistProps) {
               key={cat.category}
               className="rounded-2xl border border-border-default bg-surface p-5 sm:p-6 flex flex-col gap-4 shadow-2xs"
             >
-              <h3 className="font-serif text-base font-bold text-text-primary tracking-tight flex items-center gap-2 border-b border-border-subtle pb-3">
+              <h3 className="font-sans text-sm sm:text-base font-bold text-text-primary tracking-tight flex items-center gap-2 border-b border-border-subtle pb-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 <span>{cat.category}</span>
               </h3>

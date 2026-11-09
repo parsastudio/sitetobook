@@ -5,6 +5,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { ActionResponse } from "@/app/actions/tenant.actions";
 import { CheckoutProvisionInputSchema, SAAS_PLANS } from "@/entities/saas/plans";
 import { createDefaultTenant } from "@/entities/tenant/factory";
+import { formatPhoneDisplay } from "@/entities/tenant/schema";
 import { getTenantBySlug, saveTenant } from "@/services/tenant.service";
 import { hashPasscode } from "@/lib/security";
 import { setOwnerSession } from "@/lib/auth-guard";
@@ -80,6 +81,14 @@ export async function processStripeCheckoutAction(
     if (existing && input.claimExistingSlug) {
       existing.brand.ownerPinHash = hashedPin;
       existing.brand.subscription = subscriptionMeta;
+      if (input.name.trim()) {
+        existing.brand.name = input.name.trim();
+      }
+      if (input.phone.trim()) {
+        existing.brand.phone = input.phone.trim();
+        existing.brand.formattedPhone = formatPhoneDisplay(input.phone.trim());
+        existing.brand.whatsappNumber = input.whatsappNumber;
+      }
       if (input.email && input.email !== "hello@pristineclean.com") {
         existing.brand.email = input.email;
       }

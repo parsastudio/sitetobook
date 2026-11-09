@@ -14,7 +14,8 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const activeItem = items[selectedIndex] ?? items[0];
+  const safeIndex = selectedIndex < items.length ? selectedIndex : 0;
+  const activeItem = items[safeIndex];
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -56,7 +57,7 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
       {items.length > 1 && (
         <div className="flex flex-wrap items-center justify-center gap-1.5 p-1 sm:p-1.5 rounded-2xl bg-surface border border-border-default shadow-xs w-full sm:w-auto max-w-full">
           {items.map((item, idx) => {
-            const isActive = selectedIndex === idx;
+            const isActive = safeIndex === idx;
             return (
               <button
                 key={item.id}

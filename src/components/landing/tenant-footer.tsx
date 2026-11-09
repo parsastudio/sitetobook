@@ -52,7 +52,7 @@ export function TenantFooter({ tenant }: TenantFooterProps) {
               )}
               <li>
                 <a href="#checklist" className="hover:text-primary transition-colors">
-                  40-Point Scope Checklist
+                  Room-by-Room Scope Checklist
                 </a>
               </li>
             </ul>

@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { SparkleIcon, CheckIcon } from "@/components/ui/icons";
 
-export function PortfolioTourDock() {
+function PortfolioTourDockInner() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const isPitchMode = searchParams.get("pitch") === "true";
+
   const [isOpen, setIsOpen] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
@@ -27,37 +30,37 @@ export function PortfolioTourDock() {
       label: "2. Stripe Checkout Simulator",
       href: "/checkout?plan=growth&billing=annual",
       badge: "4242 Card",
-      active: pathname?.startsWith("/checkout"),
+      active: Boolean(pathname?.startsWith("/checkout")),
     },
     {
       label: "3. Dallas Client Portal (Emerald)",
       href: "/sparkle-pro",
       badge: "Live Site",
-      active: pathname === "/sparkle-pro",
+      active: pathname === "/sparkle-pro" && !isPitchMode,
     },
     {
       label: "4. Miami Client Portal (Ocean)",
       href: "/azure-breeze",
       badge: "Multi-Theme",
-      active: pathname === "/azure-breeze",
+      active: pathname === "/azure-breeze" && !isPitchMode,
     },
     {
       label: "5. Cold Outreach Pitch Mode",
       href: "/sparkle-pro?pitch=true",
       badge: "Claim Modal",
-      active: false,
+      active: isPitchMode,
     },
     {
       label: "6. Owner PIN Command Deck",
       href: "/sparkle-pro/owner",
       badge: "PIN: 1234",
-      active: pathname?.endsWith("/owner"),
+      active: Boolean(pathname?.endsWith("/owner")),
     },
     {
       label: "7. Master Admin Gateway",
       href: "/admin",
       badge: "Protected",
-      active: pathname?.startsWith("/admin"),
+      active: Boolean(pathname?.startsWith("/admin")),
     },
   ];
 
@@ -148,5 +151,13 @@ export function PortfolioTourDock() {
         <span>Explore Architecture</span>
       </button>
     </div>
+  );
+}
+
+export function PortfolioTourDock() {
+  return (
+    <Suspense fallback={null}>
+      <PortfolioTourDockInner />
+    </Suspense>
   );
 }

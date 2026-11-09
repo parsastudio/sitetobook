@@ -452,7 +452,15 @@ export function OwnerPortalView({
         </div>
 
         <Link
-          href={`/checkout?plan=agency&billing=annual&claimSlug=${brand.slug}&claimName=${encodeURIComponent(brand.name)}&claimCity=${encodeURIComponent(brand.location.city)}`}
+          href={`/checkout?plan=agency&billing=annual&claimSlug=${encodeURIComponent(
+            brand.slug
+          )}&claimName=${encodeURIComponent(
+            brand.name
+          )}&claimCity=${encodeURIComponent(
+            brand.location.city
+          )}&claimState=${encodeURIComponent(
+            brand.location.state
+          )}&claimPhone=${encodeURIComponent(brand.phone)}`}
           className="inline-flex items-center justify-center rounded-xl border border-border-default bg-canvas hover:border-primary px-3.5 py-2 text-xs font-bold text-text-primary transition-colors shrink-0"
         >
           Upgrade Plan ↗

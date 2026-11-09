@@ -46,6 +46,7 @@ export async function createTenantAction(
 
     revalidateTag(`tenant-${newTenant.brand.slug}`, "max");
     revalidateTag("all-tenants", "max");
+    revalidatePath("/");
     revalidatePath("/admin");
 
     logAuditEvent({
@@ -85,6 +86,7 @@ export async function deleteTenantAction(
 
     revalidateTag(`tenant-${slug}`, "max");
     revalidateTag("all-tenants", "max");
+    revalidatePath("/");
     revalidatePath("/admin");
 
     logAuditEvent({

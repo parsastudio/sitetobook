@@ -15,7 +15,7 @@ export function TenantHowItWorks() {
     {
       number: "03",
       title: "Hotel-Standard Clean",
-      description: "Our vetted, background-checked staff arrives fully equipped with eco-grade supplies and completes our 40-point checklist.",
+      description: "Our vetted, background-checked staff arrives fully equipped with eco-grade supplies and completes our room-by-room scope checklist.",
       badge: "24h Reclean Guarantee",
     },
   ];

@@ -28,7 +28,7 @@ export interface AuditLogPayload {
 export function logAuditEvent(payload: AuditLogPayload): void {
   const structuredEntry = {
     timestamp: new Date().toISOString(),
-    service: "pristine-clean-platform",
+    service: "sitetobook-platform",
     environment: process.env.NODE_ENV || "development",
     ...payload,
   };

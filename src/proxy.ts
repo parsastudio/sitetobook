@@ -11,7 +11,7 @@ export async function proxy(request: NextRequest) {
   const hostname = host.split(":")[0].toLowerCase();
   const rootDomain = (
     env.NEXT_PUBLIC_ROOT_DOMAIN ||
-    (hostname.endsWith("localhost") ? "localhost" : "pristineclean.com")
+    (hostname.endsWith("localhost") ? "localhost" : "sitetobook.com")
   ).toLowerCase();
 
   let tenantSlug: string | null = null;

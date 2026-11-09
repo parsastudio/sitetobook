@@ -98,7 +98,11 @@ export async function processStripeCheckoutAction(
         existing.brand.formattedPhone = formatPhoneDisplay(input.phone.trim());
         existing.brand.whatsappNumber = input.whatsappNumber;
       }
-      if (input.email && input.email !== "hello@pristineclean.com") {
+      if (
+        input.email &&
+        input.email !== "hello@sitetobook.com" &&
+        input.email !== "hello@pristineclean.com"
+      ) {
         existing.brand.email = input.email;
       }
       existing.brand.themeOverrides = {

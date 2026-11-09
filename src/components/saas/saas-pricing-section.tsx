@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { BillingCycle, SAAS_PLANS } from "@/entities/saas/plans";
-import { CheckIcon, SparkleIcon } from "@/components/ui/icons";
+import { CheckIcon } from "@/components/ui/icons";
 
 export function SaasPricingSection() {
   const [billing, setBilling] = useState<BillingCycle>("annual");
@@ -12,9 +12,8 @@ export function SaasPricingSection() {
     <section id="pricing" className="w-full py-20 px-4 sm:px-6 bg-surface border-t border-border-default scroll-mt-16">
       <div className="mx-auto max-w-6xl flex flex-col items-center gap-12">
         <div className="flex flex-col items-center text-center gap-3 max-w-2xl">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-subtle px-3.5 py-1 text-[11px] font-black uppercase tracking-widest text-primary border border-primary/20">
-            <SparkleIcon className="h-3.5 w-3.5" />
-            <span>Transparent SaaS Licensing</span>
+          <span className="text-[11px] font-black uppercase tracking-[0.2em] text-primary">
+            Flat-Rate Licensing
           </span>
           <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-text-primary leading-tight">
             One New Cleaning Client Pays for{" "}

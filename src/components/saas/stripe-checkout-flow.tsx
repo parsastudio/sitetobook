@@ -19,7 +19,6 @@ import {
 import {
   CheckIcon,
   ShieldCheckIcon,
-  SparkleIcon,
   ArrowUpRightIcon,
 } from "@/components/ui/icons";
 
@@ -198,7 +197,7 @@ export function StripeCheckoutFlow() {
         state: state.trim() || "TX",
         phone: phone.trim() || "+1 (214) 555-0199",
         whatsappNumber,
-        email: email.trim() || "hello@pristineclean.com",
+        email: email.trim() || "hello@sitetobook.com",
         primaryColor,
         accentColor,
         baseDispatchFee: 49,
@@ -308,7 +307,7 @@ export function StripeCheckoutFlow() {
           <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between">
               <Link href="/" className="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-colors">
-                <span>← Back to PristineClean.os</span>
+                <span>← Back to sitetobook.com</span>
               </Link>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400/15 border border-amber-400/30 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-300">
                 Sandbox Mode
@@ -459,19 +458,17 @@ export function StripeCheckoutFlow() {
               <button
                 type="button"
                 onClick={handleAutoFillDemoCompany}
-                className="inline-flex items-center gap-1 rounded-xl bg-primary-subtle px-3 py-1.5 text-[11px] font-black text-primary hover:bg-primary hover:text-text-inverse transition-colors"
+                className="inline-flex items-center rounded-xl border border-primary/25 bg-primary-subtle px-3 py-1.5 text-[11px] font-black text-primary hover:bg-primary hover:text-text-inverse transition-colors"
               >
-                <SparkleIcon className="h-3.5 w-3.5" />
-                <span>Auto-Fill Demo Company</span>
+                Auto-Fill Demo Company
               </button>
             ) : (
               <button
                 type="button"
                 onClick={handleFillStripeTestCard}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-primary-subtle px-3 py-1.5 text-[11px] font-black text-primary hover:bg-primary hover:text-text-inverse transition-colors"
+                className="inline-flex items-center rounded-xl border border-primary/25 bg-primary-subtle px-3 py-1.5 text-[11px] font-black text-primary hover:bg-primary hover:text-text-inverse transition-colors"
               >
-                <SparkleIcon className="h-3.5 w-3.5" />
-                <span>Fill Test Card (4242)</span>
+                Fill Test Card (4242)
               </button>
             )}
           </div>

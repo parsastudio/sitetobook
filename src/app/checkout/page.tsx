@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { StripeCheckoutFlow } from "@/components/saas/stripe-checkout-flow";
 
 export const metadata: Metadata = {
-  title: "Stripe Checkout & Instant Portal Onboarding | PristineClean.os",
+  title: "Checkout & Instant Portal Onboarding | SiteToBook",
   description:
-    "Configure your residential cleaning portal and complete instant onboarding.",
+    "Configure your residential cleaning portal and complete instant onboarding on SiteToBook.",
 };
 
 function CheckoutSkeleton() {

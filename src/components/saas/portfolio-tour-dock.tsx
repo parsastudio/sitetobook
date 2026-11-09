@@ -3,7 +3,7 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { SparkleIcon, CheckIcon } from "@/components/ui/icons";
+import { CheckIcon } from "@/components/ui/icons";
 
 function PortfolioTourDockInner() {
   const pathname = usePathname();
@@ -145,10 +145,10 @@ function PortfolioTourDockInner() {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-slate-950/90 px-3.5 py-2 text-xs font-black text-white shadow-xl backdrop-blur-md transition-all hover:scale-105 hover:bg-slate-900 active:scale-95"
+        className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-slate-950/90 px-4 py-2 text-xs font-bold tracking-tight text-white shadow-xl backdrop-blur-md transition-all hover:bg-slate-900 active:scale-95"
       >
-        <SparkleIcon className="h-3.5 w-3.5 text-emerald-400" />
-        <span>Explore Architecture</span>
+        <span className="h-2 w-2 rounded-full bg-emerald-400" />
+        <span>Interactive Demo Tour</span>
       </button>
     </div>
   );

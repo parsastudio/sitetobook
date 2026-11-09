@@ -16,7 +16,7 @@ const ServerEnvSchema = z.object({
 });
 
 const ClientEnvSchema = z.object({
-  NEXT_PUBLIC_ROOT_DOMAIN: z.string().default("pristineclean.com"),
+  NEXT_PUBLIC_ROOT_DOMAIN: z.string().default("sitetobook.com"),
   NEXT_PUBLIC_AGENCY_WHATSAPP: z.string().default("12145550189"),
 });
 
@@ -86,7 +86,7 @@ const resolvedServerEnv = isServer
 const resolvedClientEnv = clientParsed.success
   ? clientParsed.data
   : {
-      NEXT_PUBLIC_ROOT_DOMAIN: processEnv.NEXT_PUBLIC_ROOT_DOMAIN || "pristineclean.com",
+      NEXT_PUBLIC_ROOT_DOMAIN: processEnv.NEXT_PUBLIC_ROOT_DOMAIN || "sitetobook.com",
       NEXT_PUBLIC_AGENCY_WHATSAPP: processEnv.NEXT_PUBLIC_AGENCY_WHATSAPP || "12145550189",
     };
 

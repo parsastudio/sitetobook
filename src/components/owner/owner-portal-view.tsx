@@ -16,6 +16,7 @@ import {
   SparkleIcon,
   PinLocationIcon,
   ShieldCheckIcon,
+  LockIcon,
 } from "@/components/ui/icons";
 
 interface OwnerPortalViewProps {
@@ -289,7 +290,7 @@ export function OwnerPortalView({
         <div className="w-full max-w-sm rounded-3xl border border-primary/20 bg-surface/90 p-7 sm:p-9 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-6">
           <div className="flex flex-col items-center gap-3 text-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-text-inverse shadow-md border border-white/20">
-              <SparkleIcon className="h-6 w-6" />
+              <LockIcon className="h-5 w-5" />
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-serif font-bold tracking-tight text-text-primary">
@@ -376,8 +377,8 @@ export function OwnerPortalView({
     <div className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-6 sm:py-10 flex flex-col gap-6 pb-28">
       <div className="flex items-center justify-between gap-4 border-b border-border-default pb-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-text-inverse shadow-xs">
-            <SparkleIcon className="h-5 w-5" />
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-text-inverse font-serif font-bold text-lg shadow-xs">
+            {brand.name.charAt(0)}
           </div>
           <div className="flex flex-col text-left">
             <div className="flex items-center gap-2">

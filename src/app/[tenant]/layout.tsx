@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   if (!tenant) {
     return {
-      title: "Cleaner Not Found | PristineClean",
+      title: "Cleaner Not Found | SiteToBook",
       description: "Verified residential cleaning provider.",
     };
   }

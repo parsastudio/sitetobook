@@ -6,7 +6,6 @@ import {
   SparkleIcon,
   SpeedIcon,
   MessageTextIcon,
-  ShieldCheckIcon,
   CurrencyIcon,
   ArrowUpRightIcon,
 } from "@/components/ui/icons";
@@ -57,18 +56,13 @@ export default async function HomePage() {
       {/* SaaS Top Navigation */}
       <header className="sticky top-0 z-50 w-full border-b border-border-default bg-surface/90 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-text-inverse shadow-xs">
-              <SparkleIcon className="h-4 w-4" />
-            </div>
-            <div className="flex flex-col text-left leading-none">
-              <span className="text-base font-extrabold tracking-tight text-text-primary">
-                PristineClean<span className="text-primary">.os</span>
-              </span>
-              <span className="text-[9px] font-bold uppercase tracking-widest text-text-muted mt-0.5">
-                Multi-Tenant Cleaning SaaS
-              </span>
-            </div>
+          <Link href="/" className="flex items-baseline gap-1.5">
+            <span className="text-lg font-extrabold tracking-tight text-text-primary">
+              sitetobook
+            </span>
+            <span className="text-xs font-serif italic text-primary font-semibold">
+              .com
+            </span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-text-secondary">
@@ -111,14 +105,13 @@ export default async function HomePage() {
 
       <main className="flex-1 flex flex-col">
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-14 pb-20 sm:pt-20 sm:pb-28 px-4 sm:px-6 border-b border-border-default">
-          <div className="mx-auto max-w-5xl flex flex-col items-center text-center gap-7">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary-subtle px-4 py-1.5 text-xs font-bold text-primary shadow-2xs">
-              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              <span>Turnkey Operating System for Residential Cleaning Founders</span>
-            </div>
+        <section className="relative overflow-hidden pt-16 pb-20 sm:pt-24 sm:pb-28 px-4 sm:px-6 border-b border-border-default">
+          <div className="mx-auto max-w-5xl flex flex-col items-center text-center gap-6">
+            <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-primary">
+              Direct-Booking Infrastructure for Cleaning Companies
+            </span>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-text-primary leading-[1.08] max-w-4xl">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-text-primary leading-[1.06] max-w-4xl">
               Turn Website Visitors Into{" "}
               <span className="font-serif italic font-medium text-primary">
                 Pre-Priced SMS Bookings
@@ -303,7 +296,7 @@ export default async function HomePage() {
               </span>
               <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-text-primary">
                 Why Top Cleaning Crews Switch to{" "}
-                <span className="font-serif italic text-primary">PristineClean</span>
+                <span className="font-serif italic text-primary">SiteToBook</span>
               </h2>
               <p className="text-xs sm:text-base text-text-secondary">
                 Every component is purpose-built to remove homeowner hesitation and lock in recurring bi-weekly and deep-cleaning clients.
@@ -336,12 +329,11 @@ export default async function HomePage() {
 
             {/* Interactive Owner Command Deck Callout */}
             {flagship && (
-              <div className="w-full rounded-3xl border border-primary/25 bg-surface p-6 sm:p-10 shadow-lg flex flex-col lg:flex-row items-center justify-between gap-6 text-left">
+              <div className="w-full rounded-3xl border border-border-default bg-surface p-6 sm:p-10 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 text-left">
                 <div className="flex flex-col gap-2 max-w-xl">
-                  <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-primary">
-                    <ShieldCheckIcon className="h-4 w-4" />
-                    <span>Interactive Sandbox Available</span>
-                  </div>
+                  <span className="text-[11px] font-black uppercase tracking-widest text-primary">
+                    Live Interactive Sandbox
+                  </span>
                   <h3 className="text-2xl sm:text-3xl font-normal text-text-primary tracking-tight">
                     Test the <span className="font-serif italic text-primary">Owner Command Deck</span> Live
                   </h3>
@@ -376,15 +368,12 @@ export default async function HomePage() {
       {/* SaaS Footer */}
       <footer className="w-full border-t border-border-default bg-canvas py-12 px-4 sm:px-6">
         <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-text-muted">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-text-inverse">
-              <SparkleIcon className="h-3.5 w-3.5" />
-            </div>
-            <span className="font-bold text-text-primary">
-              PristineClean.os
+          <div className="flex items-center gap-2">
+            <span className="font-extrabold text-sm text-text-primary tracking-tight">
+              sitetobook.com
             </span>
             <span>·</span>
-            <span>Multi-Tenant Residential Cleaning Platform</span>
+            <span>Direct-Booking Websites for Residential Cleaners</span>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-5 font-semibold text-text-secondary">

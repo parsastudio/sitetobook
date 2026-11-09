@@ -15,9 +15,9 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "PristineClean | Premium Residential Cleaning Services",
+  title: "SiteToBook | Instant-Quote Websites for Residential Cleaning Companies",
   description:
-    "Professional, bonded, and insured residential house cleaning services. Instant transparent quote and hassle-free online booking.",
+    "Turn website visitors into pre-priced SMS bookings. Instant room calculators, before/after proof sliders, and direct dispatch portals for cleaning businesses.",
   icons: {
     icon: [
       {

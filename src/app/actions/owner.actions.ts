@@ -57,6 +57,12 @@ export async function verifyOwnerPinAction(
         status: "failure",
         details: { remainingAttempts: rateCheck.remaining },
       });
+      if (rateCheck.remaining === 0) {
+        return {
+          success: false,
+          error: "Maximum PIN attempts reached. Portal lock engaged for 10 minutes.",
+        };
+      }
       return {
         success: false,
         error: `Incorrect passcode. (${rateCheck.remaining} attempt${rateCheck.remaining === 1 ? "" : "s"} remaining)`,

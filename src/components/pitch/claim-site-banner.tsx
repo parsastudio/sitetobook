@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, Suspense } from "react";
+import { useState, useTransition, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { buildSmsHref, PublicTenant } from "@/entities/tenant/schema";
@@ -24,6 +24,15 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
   if (!isPitchMode || isDismissed) {
     return null;
   }
@@ -44,7 +53,13 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
     tenant.brand.location.city
   )}&claimState=${encodeURIComponent(
     tenant.brand.location.state
-  )}&claimPhone=${encodeURIComponent(tenant.brand.phone)}`;
+  )}&claimPhone=${encodeURIComponent(
+    tenant.brand.phone
+  )}&claimPrimary=${encodeURIComponent(
+    tenant.brand.themeOverrides?.primaryColor || "#0a3326"
+  )}&claimAccent=${encodeURIComponent(
+    tenant.brand.themeOverrides?.accentColor || "#115e45"
+  )}`;
 
   const handleSubmitLead = (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,8 +121,14 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-60 flex items-center justify-center bg-overlay p-4 backdrop-blur-xs">
-          <div className="relative w-full max-w-lg rounded-3xl border border-border-default bg-surface p-6 sm:p-8 shadow-2xl flex flex-col gap-6">
+        <div
+          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 z-60 flex items-center justify-center bg-overlay p-4 backdrop-blur-xs"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-lg rounded-3xl border border-border-default bg-surface p-6 sm:p-8 shadow-2xl flex flex-col gap-6"
+          >
             <button
               type="button"
               onClick={() => setIsOpen(false)}

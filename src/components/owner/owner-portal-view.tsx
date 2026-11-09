@@ -468,7 +468,13 @@ export function OwnerPortalView({
             brand.location.city
           )}&claimState=${encodeURIComponent(
             brand.location.state
-          )}&claimPhone=${encodeURIComponent(brand.phone)}`}
+          )}&claimPhone=${encodeURIComponent(
+            brand.phone
+          )}&claimPrimary=${encodeURIComponent(
+            brand.themeOverrides?.primaryColor || "#0a3326"
+          )}&claimAccent=${encodeURIComponent(
+            brand.themeOverrides?.accentColor || "#115e45"
+          )}`}
           className="inline-flex items-center justify-center rounded-xl border border-border-default bg-canvas hover:border-primary px-3.5 py-2 text-xs font-bold text-text-primary transition-colors shrink-0"
         >
           Upgrade Plan ↗
@@ -761,7 +767,7 @@ export function OwnerPortalView({
       <GalleryManager slug={brand.slug} gallery={tenant.gallery} />
 
       {isDirty && (
-        <div className="fixed bottom-3 inset-x-3 z-40 mx-auto max-w-2xl">
+        <div className="fixed bottom-3 inset-x-3 z-40 mx-auto max-w-xl">
           <div className="flex items-center justify-between gap-3 rounded-xl border border-primary bg-surface/95 p-3 shadow-xl backdrop-blur-md">
             <div className="flex items-center gap-2 text-xs">
               <span className="h-2 w-2 rounded-full bg-accent animate-ping" />

@@ -113,7 +113,7 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
             <div className="flex items-center gap-2.5 sm:gap-3">
               <button
                 type="button"
-                onClick={() => setBedrooms((b) => Math.max(1, b - 1))}
+                onClick={() => setBedrooms((b) => Math.max(0, b - 1))}
                 aria-label="Decrease bedrooms"
                 className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface border border-border-default text-text-primary hover:border-primary active:scale-95 transition-all shadow-2xs"
               >
@@ -124,7 +124,7 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
               </span>
               <button
                 type="button"
-                onClick={() => setBedrooms((b) => Math.min(8, b + 1))}
+                onClick={() => setBedrooms((b) => Math.min(10, b + 1))}
                 aria-label="Increase bedrooms"
                 className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface border border-border-default text-text-primary hover:border-primary active:scale-95 transition-all shadow-2xs"
               >
@@ -154,7 +154,7 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
               </span>
               <button
                 type="button"
-                onClick={() => setBathrooms((b) => Math.min(6, b + 1))}
+                onClick={() => setBathrooms((b) => Math.min(10, b + 1))}
                 aria-label="Increase bathrooms"
                 className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-surface border border-border-default text-text-primary hover:border-primary active:scale-95 transition-all shadow-2xs"
               >

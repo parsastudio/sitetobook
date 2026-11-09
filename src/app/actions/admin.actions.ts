@@ -44,6 +44,12 @@ export async function loginAdminAction(
         status: "failure",
         details: { remainingAttempts: rateCheck.remaining },
       });
+      if (rateCheck.remaining === 0) {
+        return {
+          success: false,
+          error: "Maximum login attempts reached. Admin login is temporarily locked.",
+        };
+      }
       return {
         success: false,
         error: `Invalid master password. (${rateCheck.remaining} attempt${rateCheck.remaining === 1 ? "" : "s"} remaining)`,

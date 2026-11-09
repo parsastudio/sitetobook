@@ -11,6 +11,7 @@ import {
 import {
   DEFAULT_ACCENT_COLOR,
   DEFAULT_PRIMARY_COLOR,
+  RESERVED_TENANT_SLUGS,
 } from "@/entities/tenant/schema";
 import {
   CheckoutReceiptData,
@@ -39,6 +40,8 @@ export function StripeCheckoutFlow() {
   const claimCityParam = searchParams.get("claimCity") || "";
   const claimStateParam = searchParams.get("claimState") || "TX";
   const claimPhoneParam = searchParams.get("claimPhone") || "";
+  const claimPrimaryParam = searchParams.get("claimPrimary") || DEFAULT_PRIMARY_COLOR;
+  const claimAccentParam = searchParams.get("claimAccent") || DEFAULT_ACCENT_COLOR;
 
   const [selectedPlanId, setSelectedPlanId] = useState<SaasPlanId>(
     SAAS_PLANS.some((p) => p.id === initialPlanParam)
@@ -70,8 +73,16 @@ export function StripeCheckoutFlow() {
     claimSlugParam ? `founder@${claimSlugParam.replace(/[^a-z0-9]/g, "")}.com` : ""
   );
   const [ownerPin, setOwnerPin] = useState("1234");
-  const [primaryColor, setPrimaryColor] = useState(DEFAULT_PRIMARY_COLOR);
-  const [accentColor, setAccentColor] = useState(DEFAULT_ACCENT_COLOR);
+  const [primaryColor, setPrimaryColor] = useState(
+    /^#([0-9a-fA-F]{3}){1,2}$/.test(claimPrimaryParam)
+      ? claimPrimaryParam
+      : DEFAULT_PRIMARY_COLOR
+  );
+  const [accentColor, setAccentColor] = useState(
+    /^#([0-9a-fA-F]{3}){1,2}$/.test(claimAccentParam)
+      ? claimAccentParam
+      : DEFAULT_ACCENT_COLOR
+  );
 
   // Step 2: Stripe Card Simulator State
   const [cardHolderName, setCardHolderName] = useState("");
@@ -147,8 +158,13 @@ export function StripeCheckoutFlow() {
 
   const handleContinueToPayment = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !slug.trim() || !city.trim() || !phone.trim() || !email.trim()) {
+    const cleanSlug = slug.trim().toLowerCase();
+    if (!name.trim() || !cleanSlug || !city.trim() || !phone.trim() || !email.trim()) {
       setErrorMsg("Please complete all required business fields.");
+      return;
+    }
+    if (cleanSlug.length < 2 || RESERVED_TENANT_SLUGS.has(cleanSlug)) {
+      setErrorMsg("This URL slug is reserved or invalid. Please choose another slug.");
       return;
     }
     if (!/^\d{4}$/.test(ownerPin)) {
@@ -167,8 +183,17 @@ export function StripeCheckoutFlow() {
       return;
     }
     const expiryMatch = cardExpiry.match(/^(0[1-9]|1[0-2])\/(\d{2})$/);
-    if (!expiryMatch || Number(expiryMatch[2]) < 26) {
-      setErrorMsg("Please enter a valid future expiration date (MM/YY).");
+    if (!expiryMatch) {
+      setErrorMsg("Please enter a valid expiration date in MM/YY format.");
+      return;
+    }
+    const expMonth = Number(expiryMatch[1]);
+    const expYear = 2000 + Number(expiryMatch[2]);
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+    if (expYear < currentYear || (expYear === currentYear && expMonth < currentMonth)) {
+      setErrorMsg("This card expiration date has already passed.");
       return;
     }
     if (cardCvc.length < 3) {

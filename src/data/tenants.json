@@ -272,22 +272,19 @@
         "id": "gal-1",
         "title": "Chef's Gas Range & Backsplash Restoration",
         "area": "Kitchen Deep Detail",
-        "beforeImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
-        "afterImage": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+        "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "gal-2",
         "title": "Master Ensuite Tile & Glass Enclosure",
         "area": "Bathroom Sanitization",
-        "beforeImage": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=1200&q=80",
-        "afterImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+        "image": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "gal-3",
         "title": "Hardwood Floor Polishing & Window Glow",
         "area": "Living Room Restoration",
-        "beforeImage": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=80",
-        "afterImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
       }
     ],
     "faqs": [
@@ -528,19 +525,22 @@
     {
       "id": "gal-mia-1",
       "title": "Brickell Penthouse Kitchen & Marble Island",
-      "area": "Kitchen Detail",
-      "beforeImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
-      "afterImage": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+      "area": "Kitchen Deep Detail",
+      "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
     },
     {
       "id": "gal-mia-2",
       "title": "Master Spa Glass & Rain Shower Restoration",
       "area": "Bathroom Sanitization",
-      "beforeImage": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=1200&q=80",
-      "afterImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+      "image": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "gal-mia-3",
+      "title": "Waterfront Travertine & Panoramic Living Suite",
+      "area": "Living Room Restoration",
+      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
     }
-  ],
-  "faqs": [
+  ],  "faqs": [
     {
       "id": "faq-mia-1",
       "question": "Can you provide a Certificate of Insurance (COI) for my condo association?",
@@ -740,12 +740,22 @@
     {
       "id": "gal-nyc-1",
       "title": "SoHo Cast-Iron Loft Kitchen Restoration",
-      "area": "Kitchen Detail",
-      "beforeImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
-      "afterImage": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+      "area": "Kitchen Deep Detail",
+      "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "gal-nyc-2",
+      "title": "Tribeca Marble Ensuite & Soaking Tub Detail",
+      "area": "Bathroom Sanitization",
+      "image": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "gal-nyc-3",
+      "title": "Upper East Side Brownstone Parlor & Hardwood",
+      "area": "Living Room Restoration",
+      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
     }
-  ],
-  "faqs": [
+  ],  "faqs": [
     {
       "id": "faq-nyc-1",
       "question": "How do you handle key drop-off with NYC doormen?",

@@ -91,8 +91,7 @@ export const BeforeAfterItemSchema = z.object({
   id: z.string(),
   title: z.string(),
   area: z.string(),
-  beforeImage: z.string(),
-  afterImage: z.string(),
+  image: z.string(),
 });
 export type BeforeAfterItem = z.infer<typeof BeforeAfterItemSchema>;
 

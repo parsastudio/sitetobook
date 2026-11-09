@@ -23,7 +23,6 @@ export const ImageUrlSchema = z
 export const AddGalleryPairInputSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   area: z.string().min(2, "Service area name is required"),
-  beforeImageUrl: ImageUrlSchema,
-  afterImageUrl: ImageUrlSchema,
+  imageUrl: ImageUrlSchema,
 });
 export type AddGalleryPairInput = z.infer<typeof AddGalleryPairInputSchema>;

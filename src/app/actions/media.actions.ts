@@ -32,8 +32,7 @@ export async function addGalleryPairAction(
     const created = await addTenantGalleryItem(slug, {
       title: input.title,
       area: input.area,
-      beforeImage: input.beforeImageUrl,
-      afterImage: input.afterImageUrl,
+      image: input.imageUrl,
     });
 
     revalidateTag(`tenant-${slug}`, "max");

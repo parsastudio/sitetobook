@@ -64,7 +64,7 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
                 Before & After <span className="font-serif italic text-primary">Transformations</span>
               </h2>
               <p className="text-xs sm:text-sm text-text-secondary max-w-md">
-                Slide to see the difference our deep sanitization makes in actual {brand.location.city} homes.
+                Select a room category below to inspect real deep-sanitization results in {brand.location.city} homes.
               </p>
             </div>
             <BeforeAfterSlider items={gallery} />

@@ -12,6 +12,10 @@ import { TenantTrustStrip } from "@/components/landing/tenant-trust-strip";
 import { TenantChecklist } from "@/components/landing/tenant-checklist";
 import { TenantFaq } from "@/components/landing/tenant-faq";
 import { TenantReviews } from "@/components/landing/tenant-reviews";
+import { TenantNavbar } from "@/components/landing/tenant-navbar";
+import { TenantFooter } from "@/components/landing/tenant-footer";
+import { TenantMobileBar } from "@/components/landing/tenant-mobile-bar";
+import { ClaimSiteBanner } from "@/components/pitch/claim-site-banner";
 import { PinLocationIcon } from "@/components/ui/icons";
 
 interface TenantPageProps {
@@ -40,8 +44,11 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
   const { brand, trust, checklist, gallery, faqs } = publicTenant;
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <TenantHero brand={brand} trust={trust} />
+    <>
+      <TenantNavbar brand={brand} />
+
+      <main className="flex-1 flex flex-col items-center w-full">
+        <TenantHero brand={brand} trust={trust} />
       <TenantTrustStrip trust={trust} />
 
       {gallery.length > 0 && (
@@ -112,7 +119,12 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
       <div id="reviews" className="w-full scroll-mt-20">
         <TenantReviews trust={trust} city={brand.location.city} businessName={brand.name} />
       </div>
-    </div>
+      </main>
+
+      <ClaimSiteBanner tenant={publicTenant} />
+      <TenantMobileBar brand={brand} trust={trust} />
+      <TenantFooter tenant={publicTenant} />
+    </>
   );
 }
 

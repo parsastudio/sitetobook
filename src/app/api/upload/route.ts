@@ -5,6 +5,14 @@ import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from "@/entities/media/schem
 
 export async function POST(request: NextRequest) {
   try {
+    const contentLength = Number(request.headers.get("content-length") || "0");
+    if (contentLength > MAX_IMAGE_FILE_SIZE + 1024 * 100) {
+      return NextResponse.json(
+        { success: false, error: "File size exceeds 5MB limit." },
+        { status: 413 }
+      );
+    }
+
     const formData = await request.formData();
     const slug = formData.get("slug") as string | null;
     const file = formData.get("file") as File | null;

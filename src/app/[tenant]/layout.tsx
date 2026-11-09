@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllTenants, getTenantBySlug } from "@/services/tenant.service";
-import { sanitizeTenantForPublic } from "@/entities/tenant/schema";
-import { ClaimSiteBanner } from "@/components/pitch/claim-site-banner";
-import { TenantNavbar } from "@/components/landing/tenant-navbar";
-import { TenantFooter } from "@/components/landing/tenant-footer";
-import { TenantMobileBar } from "@/components/landing/tenant-mobile-bar";
 import { env } from "@/env";
 
 interface TenantLayoutProps {
@@ -65,7 +60,6 @@ export default async function TenantLayout({
     notFound();
   }
 
-  const publicTenant = sanitizeTenantForPublic(tenant);
   const dynamicStyles: Record<string, string> = {};
   if (tenant.brand.themeOverrides?.primaryColor) {
     dynamicStyles["--primary"] = tenant.brand.themeOverrides.primaryColor;
@@ -79,15 +73,7 @@ export default async function TenantLayout({
       style={dynamicStyles as React.CSSProperties}
       className="min-h-screen flex flex-col bg-canvas text-text-primary selection:bg-primary-subtle selection:text-primary"
     >
-      <TenantNavbar brand={publicTenant.brand} />
-
-      <main className="flex-1">{children}</main>
-
-      <ClaimSiteBanner tenant={publicTenant} />
-
-      <TenantMobileBar brand={publicTenant.brand} trust={publicTenant.trust} />
-
-      <TenantFooter tenant={publicTenant} />
+      {children}
     </div>
   );
 }

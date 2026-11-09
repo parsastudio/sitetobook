@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { CreateTenantInputSchema } from "@/entities/tenant/schema";
 import { createDefaultTenant } from "@/entities/tenant/factory";
 import { saveTenant, deleteTenant, getTenantBySlug } from "@/services/tenant.service";
@@ -46,6 +46,7 @@ export async function createTenantAction(
 
     revalidateTag(`tenant-${newTenant.brand.slug}`, "max");
     revalidateTag("all-tenants", "max");
+    revalidatePath("/admin");
 
     logAuditEvent({
       action: "TENANT_CREATED",
@@ -84,6 +85,7 @@ export async function deleteTenantAction(
 
     revalidateTag(`tenant-${slug}`, "max");
     revalidateTag("all-tenants", "max");
+    revalidatePath("/admin");
 
     logAuditEvent({
       action: "TENANT_DELETED",

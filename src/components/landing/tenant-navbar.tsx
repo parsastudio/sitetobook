@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { buildSmsHref, PublicBrandConfig } from "@/entities/tenant/schema";
 import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
 import { PhoneIcon } from "@/components/ui/icons";
@@ -12,13 +11,9 @@ interface TenantNavbarProps {
 }
 
 export function TenantNavbar({ brand }: TenantNavbarProps) {
-  const pathname = usePathname();
-  const isOwnerPage = pathname?.endsWith("/owner") ?? false;
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (isOwnerPage) return;
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -26,11 +21,7 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isOwnerPage]);
-
-  if (isOwnerPage) {
-    return null;
-  }
+  }, []);
 
   const headerClasses = `absolute top-0 inset-x-0 z-50 w-full md:fixed transition-all duration-300 ${
     isScrolled

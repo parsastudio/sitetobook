@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { BeforeAfterItem } from "@/entities/tenant/schema";
 
@@ -12,23 +12,9 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const activeItem = items[selectedIndex] ?? items[0];
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const updateWidth = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.clientWidth);
-      }
-    };
-    updateWidth();
-    const observer = new ResizeObserver(updateWidth);
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -118,21 +104,16 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
 
           <div
             className="absolute inset-0 overflow-hidden"
-            style={{ width: `${sliderPosition}%` }}
+            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
           >
-            <div
-              className="relative h-full"
-              style={{ width: containerWidth > 0 ? `${containerWidth}px` : "100%" }}
-            >
-              <Image
-                src={activeItem.beforeImage}
-                alt={`${activeItem.title} - Before`}
-                fill
-                sizes="(max-width: 768px) 100vw, 800px"
-                className="object-cover"
-                priority
-              />
-            </div>
+            <Image
+              src={activeItem.beforeImage}
+              alt={`${activeItem.title} - Before`}
+              fill
+              sizes="(max-width: 768px) 100vw, 800px"
+              className="object-cover"
+              priority
+            />
             <span className="absolute top-3 left-3 sm:top-4 sm:left-4 rounded-full border border-white/20 bg-slate-950/70 backdrop-blur-md px-3 py-1 text-[9px] sm:text-[10px] font-bold tracking-widest text-white uppercase shadow-md">
               BEFORE
             </span>

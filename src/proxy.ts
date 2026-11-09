@@ -16,35 +16,37 @@ export async function proxy(request: NextRequest) {
 
   let tenantSlug: string | null = null;
   let isCustomDomain = false;
+  const isSystemPath = pathname.startsWith("/admin") || pathname.startsWith("/api");
 
-  // 1. Query parameter resolution for rapid testing (?tenant=slug)
-  const queryTenant = url.searchParams.get("tenant");
-  if (queryTenant) {
-    tenantSlug = queryTenant.toLowerCase().trim();
-  }
-  // 2. Subdomain extraction (e.g. clean-apex.localhost or clean-apex.pristineclean.com)
-  else if (hostname !== rootDomain && hostname.endsWith(`.${rootDomain}`)) {
-    const extractedSubdomain = hostname.replace(`.${rootDomain}`, "").trim();
-    if (
-      extractedSubdomain &&
-      extractedSubdomain !== "www" &&
-      extractedSubdomain !== "admin" &&
-      extractedSubdomain !== "api"
-    ) {
-      tenantSlug = extractedSubdomain;
+  if (!isSystemPath) {
+    // 1. Query parameter resolution for rapid testing (?tenant=slug)
+    const queryTenant = url.searchParams.get("tenant");
+    if (queryTenant) {
+      tenantSlug = queryTenant.toLowerCase().trim();
     }
-  }
-  else if (
-    hostname !== rootDomain &&
-    hostname !== "localhost" &&
-    hostname !== "127.0.0.1" &&
-    hostname !== "::1" &&
-    !hostname.endsWith(".localhost") &&
-    !hostname.endsWith(".vercel.app") &&
-    !hostname.startsWith("admin.")
-  ) {
-    isCustomDomain = true;
-    tenantSlug = await getTenantSlugByCustomDomain(hostname);
+    // 2. Subdomain extraction (e.g. clean-apex.localhost or clean-apex.pristineclean.com)
+    else if (hostname !== rootDomain && hostname.endsWith(`.${rootDomain}`)) {
+      const extractedSubdomain = hostname.replace(`.${rootDomain}`, "").trim();
+      if (
+        extractedSubdomain &&
+        extractedSubdomain !== "www" &&
+        extractedSubdomain !== "admin" &&
+        extractedSubdomain !== "api"
+      ) {
+        tenantSlug = extractedSubdomain;
+      }
+    } else if (
+      hostname !== rootDomain &&
+      hostname !== "localhost" &&
+      hostname !== "127.0.0.1" &&
+      hostname !== "::1" &&
+      !hostname.endsWith(".localhost") &&
+      !hostname.endsWith(".vercel.app") &&
+      !hostname.startsWith("admin.")
+    ) {
+      isCustomDomain = true;
+      tenantSlug = await getTenantSlugByCustomDomain(hostname);
+    }
   }
 
   const cspHeader = `

@@ -77,10 +77,14 @@ export default async function HomePage() {
           <Link href="/admin" className="hover:text-primary transition-colors">
             Admin Gateway 🔒
           </Link>
-          <span>·</span>
-          <Link href={`/${flagship?.brand.slug}/owner`} className="hover:text-primary transition-colors">
-            Owner Command Portal ⚙️
-          </Link>
+          {flagship && (
+            <>
+              <span>·</span>
+              <Link href={`/${flagship.brand.slug}/owner`} className="hover:text-primary transition-colors">
+                Owner Command Portal ⚙️
+              </Link>
+            </>
+          )}
         </div>
       </main>
     </div>

@@ -45,7 +45,29 @@ if (!serverParsed.success || !clientParsed.success) {
   }
 }
 
+const resolvedServerEnv = serverParsed.success
+  ? serverParsed.data
+  : {
+      NODE_ENV: "development" as const,
+      DATABASE_URL: undefined,
+      ADMIN_MASTER_PASSWORD:
+        processEnv.ADMIN_MASTER_PASSWORD && processEnv.ADMIN_MASTER_PASSWORD.length >= 8
+          ? processEnv.ADMIN_MASTER_PASSWORD
+          : "AdminPristine2026!",
+      SESSION_ENCRYPTION_KEY:
+        processEnv.SESSION_ENCRYPTION_KEY && processEnv.SESSION_ENCRYPTION_KEY.length >= 32
+          ? processEnv.SESSION_ENCRYPTION_KEY
+          : "pristine_clean_enterprise_master_key_32_bytes!!",
+    };
+
+const resolvedClientEnv = clientParsed.success
+  ? clientParsed.data
+  : {
+      NEXT_PUBLIC_ROOT_DOMAIN: processEnv.NEXT_PUBLIC_ROOT_DOMAIN || "pristineclean.com",
+      NEXT_PUBLIC_AGENCY_WHATSAPP: processEnv.NEXT_PUBLIC_AGENCY_WHATSAPP || "12145550189",
+    };
+
 export const env = {
-  ...(serverParsed.success ? serverParsed.data : ServerEnvSchema.parse({})),
-  ...(clientParsed.success ? clientParsed.data : ClientEnvSchema.parse({})),
+  ...resolvedServerEnv,
+  ...resolvedClientEnv,
 };

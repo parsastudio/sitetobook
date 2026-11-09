@@ -5,6 +5,8 @@ import { CreateTenantInputSchema } from "@/entities/tenant/schema";
 import { createDefaultTenant } from "@/entities/tenant/factory";
 import { saveTenant, deleteTenant, getTenantBySlug } from "@/services/tenant.service";
 import { hashPasscode } from "@/lib/security";
+import { getAdminSession } from "@/lib/auth-guard";
+import { logAuditEvent } from "@/lib/logger";
 
 export type ActionResponse<T = unknown> =
   | { success: true; data: T }
@@ -14,6 +16,14 @@ export async function createTenantAction(
   rawInput: unknown
 ): Promise<ActionResponse<{ slug: string }>> {
   try {
+    const session = await getAdminSession();
+    if (!session) {
+      return {
+        success: false,
+        error: "Unauthorized. Master Admin session is required.",
+      };
+    }
+
     const validation = CreateTenantInputSchema.safeParse(rawInput);
     if (!validation.success) {
       const firstIssue = validation.error.issues[0]?.message ?? "Invalid input data";
@@ -37,6 +47,14 @@ export async function createTenantAction(
     revalidateTag(`tenant-${newTenant.brand.slug}`, "max");
     revalidateTag("all-tenants", "max");
 
+    logAuditEvent({
+      action: "TENANT_CREATED",
+      actor: { role: "master-admin" },
+      target: newTenant.brand.slug,
+      status: "success",
+      details: { name: newTenant.brand.name, city: newTenant.brand.location.city },
+    });
+
     return { success: true, data: { slug: newTenant.brand.slug } };
   } catch (error) {
     console.error("createTenantAction error:", error);
@@ -51,6 +69,14 @@ export async function deleteTenantAction(
   slug: string
 ): Promise<ActionResponse<boolean>> {
   try {
+    const session = await getAdminSession();
+    if (!session) {
+      return {
+        success: false,
+        error: "Unauthorized. Master Admin session is required.",
+      };
+    }
+
     const deleted = await deleteTenant(slug);
     if (!deleted) {
       return { success: false, error: "Tenant not found or already deleted" };
@@ -58,6 +84,13 @@ export async function deleteTenantAction(
 
     revalidateTag(`tenant-${slug}`, "max");
     revalidateTag("all-tenants", "max");
+
+    logAuditEvent({
+      action: "TENANT_DELETED",
+      actor: { role: "master-admin" },
+      target: slug,
+      status: "success",
+    });
 
     return { success: true, data: true };
   } catch (error) {

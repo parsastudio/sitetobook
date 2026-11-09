@@ -15,8 +15,9 @@ export const ImageUrlSchema = z
     (val) =>
       val.startsWith("https://") ||
       val.startsWith("http://") ||
-      val.startsWith("/"),
-    "Image must be a valid hosted URL or path"
+      val.startsWith("/") ||
+      /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(val),
+    "Image must be a valid hosted URL, path, or encoded image data"
   );
 
 export const AddGalleryPairInputSchema = z.object({

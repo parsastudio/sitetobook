@@ -24,7 +24,6 @@ export const tenantsTable = pgTable("tenants", {
   city: varchar("city", { length: 64 }).notNull(),
   state: varchar("state", { length: 8 }).notNull(),
   serviceAreas: jsonb("service_areas").$type<string[]>().notNull().default([]),
-  zipCodes: jsonb("zip_codes").$type<string[]>().notNull().default([]),
   primaryColor: varchar("primary_color", { length: 16 }).default("#0F766E"),
   accentColor: varchar("accent_color", { length: 16 }).default("#0D9488"),
   operatingHours: text("operating_hours").default("Mon - Sat: 8:00 AM - 6:00 PM"),
@@ -65,23 +64,6 @@ export const tenantGalleryTable = pgTable("tenant_gallery", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-export const tenantReviewsTable = pgTable("tenant_reviews", {
-  id: varchar("id", { length: 36 })
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  tenantId: varchar("tenant_id", { length: 36 })
-    .notNull()
-    .references(() => tenantsTable.id, { onDelete: "cascade" }),
-  author: varchar("author", { length: 128 }).notNull(),
-  neighborhood: varchar("neighborhood", { length: 128 }).notNull(),
-  rating: integer("rating").notNull().default(5),
-  text: text("text").notNull(),
-  serviceUsed: varchar("service_used", { length: 128 }).notNull(),
-  date: varchar("date", { length: 64 }).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
-
 export type TenantRecord = typeof tenantsTable.$inferSelect;
 export type NewTenantRecord = typeof tenantsTable.$inferInsert;
 export type TenantGalleryRecord = typeof tenantGalleryTable.$inferSelect;
-export type TenantReviewRecord = typeof tenantReviewsTable.$inferSelect;

@@ -24,6 +24,21 @@ export async function verifyOwnerPinAction(
     const clientIp = getClientIp(headersList);
     const rateLimitKey = `owner_pin:${clientIp}:${slug.toLowerCase()}`;
 
+    const rateCheck = await checkRateLimit(rateLimitKey, 5, 10 * 60 * 1000);
+    if (!rateCheck.allowed) {
+      logAuditEvent({
+        action: "OWNER_PIN_FAILED",
+        actor: { role: "anonymous", identifier: slug, ip: clientIp },
+        target: slug,
+        status: "failure",
+        details: { reason: "RATE_LIMITED", retryAfter: rateCheck.retryAfterSeconds },
+      });
+      return {
+        success: false,
+        error: `Too many failed attempts. Locked for ${rateCheck.retryAfterSeconds}s to protect your account.`,
+      };
+    }
+
     const tenant = await getTenantBySlug(slug);
     if (!tenant) {
       return { success: false, error: "Business outlet not found" };
@@ -35,21 +50,6 @@ export async function verifyOwnerPinAction(
     );
 
     if (!isValid) {
-      const rateCheck = await checkRateLimit(rateLimitKey, 5, 10 * 60 * 1000);
-      if (!rateCheck.allowed) {
-        logAuditEvent({
-          action: "OWNER_PIN_FAILED",
-          actor: { role: "anonymous", identifier: slug, ip: clientIp },
-          target: slug,
-          status: "failure",
-          details: { reason: "RATE_LIMITED", retryAfter: rateCheck.retryAfterSeconds },
-        });
-        return {
-          success: false,
-          error: `Too many failed attempts. Locked for ${rateCheck.retryAfterSeconds}s to protect your account.`,
-        };
-      }
-
       logAuditEvent({
         action: "OWNER_PIN_FAILED",
         actor: { role: "anonymous", identifier: slug, ip: clientIp },

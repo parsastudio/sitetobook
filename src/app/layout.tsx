@@ -17,6 +17,16 @@ export const metadata: Metadata = {
   title: "PristineClean | Premium Residential Cleaning Services",
   description:
     "Professional, bonded, and insured residential house cleaning services. Instant transparent quote and hassle-free online booking.",
+  icons: {
+    icon: [
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

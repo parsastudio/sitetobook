@@ -1,4 +1,5 @@
 import "server-only";
+import { createHash } from "crypto";
 import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from "@/entities/media/schema";
 
 export async function uploadImageBuffer(
@@ -41,11 +42,17 @@ export async function uploadImageBuffer(
     const matches = cloudinaryUrl.match(/cloudinary:\/\/([^:]+):([^@]+)@([^/]+)/);
     if (matches) {
       const [, apiKey, apiSecret, cloudName] = matches;
+      const timestamp = Math.floor(Date.now() / 1000).toString();
+      const signature = createHash("sha1")
+        .update(`timestamp=${timestamp}${apiSecret}`)
+        .digest("hex");
+
       const formData = new FormData();
       const base64Data = `data:${contentType};base64,${buffer.toString("base64")}`;
       formData.append("file", base64Data);
       formData.append("api_key", apiKey);
-      formData.append("upload_preset", process.env.CLOUDINARY_UPLOAD_PRESET || "ml_default");
+      formData.append("timestamp", timestamp);
+      formData.append("signature", signature);
 
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,

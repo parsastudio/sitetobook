@@ -72,7 +72,7 @@ export function TenantListManager({ tenants }: TenantListManagerProps) {
 
               <div className="flex flex-col gap-0.5 text-xs text-text-secondary">
                 <span>Phone: <strong className="text-text-primary">{t.brand.phone}</strong></span>
-                <span>SMS Dispatch: <strong className="font-mono text-text-primary">{t.brand.phone}</strong></span>
+                <span>SMS / WhatsApp: <strong className="font-mono text-text-primary">{t.brand.whatsappNumber}</strong></span>
                 <span className="text-text-muted text-[11px]">
                   ${t.pricing.baseDispatchFee} base • ${t.pricing.ratePerBedroom}/bed • ${t.pricing.ratePerBathroom}/bath
                 </span>

@@ -2,6 +2,7 @@
 
 import { useState, useTransition, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Tenant } from "@/entities/tenant/schema";
 import {
   verifyOwnerPinAction,
@@ -21,6 +22,7 @@ export function OwnerPortalView({
   initialAuthenticated,
 }: OwnerPortalViewProps) {
   const { brand, pricing } = tenant;
+  const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(initialAuthenticated);
 
   const [pin, setPin] = useState("");
@@ -46,6 +48,21 @@ export function OwnerPortalView({
     brand.location.serviceAreas
   );
   const [newAreaInput, setNewAreaInput] = useState("");
+
+  const [savedBaseline, setSavedBaseline] = useState(() => ({
+    baseFee: pricing.baseDispatchFee,
+    bedRate: pricing.ratePerBedroom,
+    bathRate: pricing.ratePerBathroom,
+    phone: brand.phone,
+    whatsappNumber: brand.whatsappNumber,
+    serviceAreas: brand.location.serviceAreas,
+    addOns: pricing.addOns.map((a) => ({
+      id: a.id,
+      name: a.name,
+      price: a.price,
+      enabled: a.enabled !== false,
+    })),
+  }));
 
   const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">("idle");
   const [saveErrorMsg, setSaveErrorMsg] = useState<string | null>(null);
@@ -121,22 +138,33 @@ export function OwnerPortalView({
   }, [isAuthenticated, isVerifying, handleKeyClick, handleBackspace, handleClear]);
 
   const isDirty = useMemo(() => {
-    if (baseFee !== pricing.baseDispatchFee) return true;
-    if (bedRate !== pricing.ratePerBedroom) return true;
-    if (bathRate !== pricing.ratePerBathroom) return true;
-    if (phone !== brand.phone) return true;
-    if (whatsappNumber !== brand.whatsappNumber) return true;
-    if (JSON.stringify(serviceAreas) !== JSON.stringify(brand.location.serviceAreas)) return true;
+    if (baseFee !== savedBaseline.baseFee) return true;
+    if (bedRate !== savedBaseline.bedRate) return true;
+    if (bathRate !== savedBaseline.bathRate) return true;
+    if (phone !== savedBaseline.phone) return true;
+    if (whatsappNumber !== savedBaseline.whatsappNumber) return true;
+    if (newAreaInput.trim().length > 0) return true;
+    if (JSON.stringify(serviceAreas) !== JSON.stringify(savedBaseline.serviceAreas)) return true;
 
     return addOnsState.some((current) => {
-      const original = pricing.addOns.find((a) => a.id === current.id);
+      const original = savedBaseline.addOns.find((a) => a.id === current.id);
       return (
         !original ||
         original.price !== current.price ||
-        (original.enabled !== false) !== current.enabled
+        original.enabled !== current.enabled
       );
     });
-  }, [baseFee, bedRate, bathRate, phone, whatsappNumber, serviceAreas, addOnsState, pricing, brand]);
+  }, [
+    baseFee,
+    bedRate,
+    bathRate,
+    phone,
+    whatsappNumber,
+    newAreaInput,
+    serviceAreas,
+    addOnsState,
+    savedBaseline,
+  ]);
 
   const handleLogout = () => {
     startVerifyTransition(async () => {
@@ -180,20 +208,14 @@ export function OwnerPortalView({
   };
 
   const handleDiscardChanges = () => {
-    setBaseFee(pricing.baseDispatchFee);
-    setBedRate(pricing.ratePerBedroom);
-    setBathRate(pricing.ratePerBathroom);
-    setAddOnsState(
-      pricing.addOns.map((a) => ({
-        id: a.id,
-        name: a.name,
-        price: a.price,
-        enabled: a.enabled !== false,
-      }))
-    );
-    setPhone(brand.phone);
-    setWhatsappNumber(brand.whatsappNumber);
-    setServiceAreas(brand.location.serviceAreas);
+    setBaseFee(savedBaseline.baseFee);
+    setBedRate(savedBaseline.bedRate);
+    setBathRate(savedBaseline.bathRate);
+    setAddOnsState(savedBaseline.addOns.map((a) => ({ ...a })));
+    setPhone(savedBaseline.phone);
+    setWhatsappNumber(savedBaseline.whatsappNumber);
+    setServiceAreas([...savedBaseline.serviceAreas]);
+    setNewAreaInput("");
     setSaveStatus("idle");
     setSaveErrorMsg(null);
   };
@@ -201,6 +223,15 @@ export function OwnerPortalView({
   const handleSaveAllSettings = () => {
     setSaveStatus("idle");
     setSaveErrorMsg(null);
+
+    const pendingArea = newAreaInput.trim();
+    const nextServiceAreas =
+      pendingArea && !serviceAreas.includes(pendingArea)
+        ? [...serviceAreas, pendingArea]
+        : serviceAreas;
+
+    const cleanPhone = phone.trim();
+    const cleanWhatsapp = whatsappNumber.replace(/\D/g, "");
 
     startSaveTransition(async () => {
       const res = await updateOwnerSettingsAction(brand.slug, {
@@ -212,14 +243,30 @@ export function OwnerPortalView({
           price: a.price,
           enabled: a.enabled,
         })),
-        phone: phone.trim(),
-        whatsappNumber: whatsappNumber.replace(/\D/g, ""),
-        serviceAreas,
+        phone: cleanPhone,
+        whatsappNumber: cleanWhatsapp,
+        serviceAreas: nextServiceAreas,
       });
 
       if (res.success) {
+        setServiceAreas(nextServiceAreas);
+        setNewAreaInput("");
+        setPhone(cleanPhone);
+        setWhatsappNumber(cleanWhatsapp);
+        setSavedBaseline({
+          baseFee,
+          bedRate,
+          bathRate,
+          phone: cleanPhone,
+          whatsappNumber: cleanWhatsapp,
+          serviceAreas: nextServiceAreas,
+          addOns: addOnsState.map((a) => ({ ...a })),
+        });
         setSaveStatus("success");
-        setLastSyncTime(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+        setLastSyncTime(
+          new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+        );
+        router.refresh();
         setTimeout(() => setSaveStatus("idle"), 4000);
       } else {
         setSaveStatus("error");

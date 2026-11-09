@@ -14,8 +14,6 @@ import { TenantFaq } from "@/components/landing/tenant-faq";
 import { TenantReviews } from "@/components/landing/tenant-reviews";
 import { PinLocationIcon } from "@/components/ui/icons";
 
-export const instant = false;
-
 interface TenantPageProps {
   params: Promise<{ tenant: string }>;
 }

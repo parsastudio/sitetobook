@@ -160,6 +160,11 @@ export function sanitizeTenantForPublic(tenant: Tenant): PublicTenant {
   };
 }
 
+export function buildSmsHref(phone: string, body: string): string {
+  const sanitizedPhone = phone.replace(/[^\d+]/g, "");
+  return `sms:${sanitizedPhone}?body=${encodeURIComponent(body)}`;
+}
+
 export const QuoteCalculationInputSchema = z.object({
   bedrooms: z.number().int().min(0).max(10),
   bathrooms: z.number().min(1).max(10),

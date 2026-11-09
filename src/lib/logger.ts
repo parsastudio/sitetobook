@@ -9,7 +9,8 @@ export type AuditAction =
   | "OWNER_SETTINGS_UPDATED"
   | "TENANT_CREATED"
   | "TENANT_DELETED"
-  | "GALLERY_UPDATED";
+  | "GALLERY_UPDATED"
+  | "LEAD_CLAIM_SUBMITTED";
 
 export interface AuditLogPayload {
   action: AuditAction;

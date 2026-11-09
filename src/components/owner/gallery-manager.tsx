@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useRef, useEffect } from "react";
 import Image from "next/image";
 import { BeforeAfterItem } from "@/entities/tenant/schema";
 import {
@@ -24,6 +24,15 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
   const [afterPreview, setAfterPreview] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isUploading, startUploadTransition] = useTransition();
+  const beforeInputRef = useRef<HTMLInputElement>(null);
+  const afterInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (beforePreview) URL.revokeObjectURL(beforePreview);
+      if (afterPreview) URL.revokeObjectURL(afterPreview);
+    };
+  }, [beforePreview, afterPreview]);
 
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -39,9 +48,11 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
 
     const previewUrl = URL.createObjectURL(file);
     if (type === "before") {
+      if (beforePreview) URL.revokeObjectURL(beforePreview);
       setBeforeFile(file);
       setBeforePreview(previewUrl);
     } else {
+      if (afterPreview) URL.revokeObjectURL(afterPreview);
       setAfterFile(file);
       setAfterPreview(previewUrl);
     }
@@ -103,8 +114,12 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
           setArea("");
           setBeforeFile(null);
           setAfterFile(null);
+          if (beforePreview) URL.revokeObjectURL(beforePreview);
+          if (afterPreview) URL.revokeObjectURL(afterPreview);
           setBeforePreview(null);
           setAfterPreview(null);
+          if (beforeInputRef.current) beforeInputRef.current.value = "";
+          if (afterInputRef.current) afterInputRef.current.value = "";
         } else {
           setErrorMsg(res.error);
         }
@@ -183,6 +198,7 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
             </span>
             <label className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border-default bg-surface p-3 cursor-pointer hover:border-primary transition-colors">
               <input
+                ref={beforeInputRef}
                 type="file"
                 accept="image/jpeg,image/png,image/webp"
                 onChange={(e) => handleFileChange(e, "before")}
@@ -211,6 +227,7 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
             </span>
             <label className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border-default bg-surface p-3 cursor-pointer hover:border-primary transition-colors">
               <input
+                ref={afterInputRef}
                 type="file"
                 accept="image/jpeg,image/png,image/webp"
                 onChange={(e) => handleFileChange(e, "after")}

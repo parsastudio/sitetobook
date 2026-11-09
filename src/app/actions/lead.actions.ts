@@ -33,7 +33,7 @@ export async function submitClaimLeadAction(
     const lead = validation.data;
 
     logAuditEvent({
-      action: "TENANT_CREATED",
+      action: "LEAD_CLAIM_SUBMITTED",
       actor: { role: "anonymous", ip: clientIp },
       target: lead.slug,
       status: "success",

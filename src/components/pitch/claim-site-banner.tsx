@@ -2,7 +2,7 @@
 
 import { useState, useTransition, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { PublicTenant } from "@/entities/tenant/schema";
+import { buildSmsHref, PublicTenant } from "@/entities/tenant/schema";
 import { submitClaimLeadAction } from "@/app/actions/lead.actions";
 import { SpeedIcon, MessageTextIcon, ShieldCheckIcon, SparkleIcon } from "@/components/ui/icons";
 
@@ -29,9 +29,10 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
   const agencyContactNumber =
     process.env.NEXT_PUBLIC_AGENCY_WHATSAPP || tenant.brand.phone;
 
-  const claimSmsUrl = `sms:${agencyContactNumber}?&body=${encodeURIComponent(
+  const claimSmsUrl = buildSmsHref(
+    agencyContactNumber,
     `Hi! I am the owner of ${tenant.brand.name} in ${tenant.brand.location.city}. I reviewed the custom website demo you built for us and would like to claim it and connect our custom domain.`
-  )}`;
+  );
 
   const handleSubmitLead = (e: React.FormEvent) => {
     e.preventDefault();

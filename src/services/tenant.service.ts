@@ -198,7 +198,6 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
           city: validated.brand.location.city,
           state: validated.brand.location.state,
           serviceAreas: validated.brand.location.serviceAreas,
-          zipCodes: [],
           primaryColor: validated.brand.themeOverrides?.primaryColor || "#0F766E",
           accentColor: validated.brand.themeOverrides?.accentColor || "#0D9488",
           operatingHours: validated.brand.operatingHours,
@@ -246,6 +245,7 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
       return;
     } catch (error) {
       console.error(`Drizzle error upserting tenant '${slug}':`, error);
+      throw new Error("Database failed to save tenant configuration.");
     }
   }
 
@@ -271,6 +271,7 @@ export async function deleteTenant(slug: string): Promise<boolean> {
       return (res.rowCount ?? 0) > 0;
     } catch (error) {
       console.error(`Drizzle error deleting tenant '${normalizedSlug}':`, error);
+      throw new Error("Database failed to delete tenant.");
     }
   }
 
@@ -326,9 +327,17 @@ export async function addTenantGalleryItem(
 
         return { id: newItemId, ...item };
       }
+      throw new Error("Tenant outlet not found.");
     } catch (error) {
       console.error(`Drizzle error inserting gallery item for '${normalizedSlug}':`, error);
+      throw error instanceof Error ? error : new Error("Failed to add gallery item.");
     }
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(
+      "Database connection is unconfigured. File mutation is forbidden in production."
+    );
   }
 
   const fileStore = await readTenantsFile();
@@ -374,9 +383,17 @@ export async function deleteTenantGalleryItem(
 
         return true;
       }
+      return false;
     } catch (error) {
       console.error(`Drizzle error deleting gallery item for '${normalizedSlug}':`, error);
+      throw new Error("Failed to delete gallery item.");
     }
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(
+      "Database connection is unconfigured. File mutation is forbidden in production."
+    );
   }
 
   const fileStore = await readTenantsFile();

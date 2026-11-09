@@ -3,13 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PublicBrandConfig, TrustAndProof } from "@/entities/tenant/schema";
+import { buildSmsHref, PublicBrandConfig } from "@/entities/tenant/schema";
 import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
 import { PhoneIcon } from "@/components/ui/icons";
 
 interface TenantNavbarProps {
   brand: PublicBrandConfig;
-  trust: TrustAndProof;
 }
 
 export function TenantNavbar({ brand }: TenantNavbarProps) {
@@ -77,7 +76,10 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
           </a>
 
           <a
-            href={`sms:${brand.phone}?&body=${encodeURIComponent("Hi! I would like to check available cleaning slots this week in " + brand.location.city + ".")}`}
+            href={buildSmsHref(
+              brand.phone,
+              `Hi! I would like to check available cleaning slots this week in ${brand.location.city}.`
+            )}
             className={`hidden sm:inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap shadow-xs ${
               isScrolled
                 ? "border-border-default bg-surface text-text-primary hover:border-primary hover:text-primary"

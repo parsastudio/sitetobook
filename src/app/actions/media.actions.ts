@@ -8,6 +8,7 @@ import {
 } from "@/services/tenant.service";
 import { getOwnerSession } from "@/lib/auth-guard";
 import { AddGalleryPairInputSchema } from "@/entities/media/schema";
+import { logAuditEvent } from "@/lib/logger";
 
 export async function addGalleryPairAction(
   slug: string,
@@ -38,6 +39,14 @@ export async function addGalleryPairAction(
     revalidateTag(`tenant-${slug}`, "max");
     revalidateTag("all-tenants", "max");
 
+    logAuditEvent({
+      action: "GALLERY_UPDATED",
+      actor: { role: "owner", identifier: slug },
+      target: slug,
+      status: "success",
+      details: { operation: "ADD", itemId: created.id },
+    });
+
     return { success: true, data: { id: created.id } };
   } catch (error) {
     console.error("addGalleryPairAction error:", error);
@@ -65,6 +74,14 @@ export async function deleteGalleryPairAction(
 
     revalidateTag(`tenant-${slug}`, "max");
     revalidateTag("all-tenants", "max");
+
+    logAuditEvent({
+      action: "GALLERY_UPDATED",
+      actor: { role: "owner", identifier: slug },
+      target: slug,
+      status: "success",
+      details: { operation: "DELETE", itemId: galleryId },
+    });
 
     return { success: true, data: true };
   } catch (error) {

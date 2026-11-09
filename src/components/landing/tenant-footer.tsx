@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { PublicTenant } from "@/entities/tenant/schema";
+import { buildSmsHref, PublicTenant } from "@/entities/tenant/schema";
 import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
 import { PhoneIcon, ClockIcon, MessageTextIcon } from "@/components/ui/icons";
 
@@ -95,7 +94,10 @@ export function TenantFooter({ tenant }: TenantFooterProps) {
             </div>
 
             <a
-              href={`sms:${brand.phone}?&body=${encodeURIComponent("Hi! I would like to schedule a residential cleaning appointment in " + brand.location.city + ".")}`}
+              href={buildSmsHref(
+                brand.phone,
+                `Hi! I would like to schedule a residential cleaning appointment in ${brand.location.city}.`
+              )}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary hover:bg-primary-hover px-4 py-3 text-xs font-black text-text-inverse shadow-xs transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
               <MessageTextIcon className="h-4 w-4 shrink-0" />

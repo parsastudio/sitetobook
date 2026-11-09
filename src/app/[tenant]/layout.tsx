@@ -6,8 +6,7 @@ import { ClaimSiteBanner } from "@/components/pitch/claim-site-banner";
 import { TenantNavbar } from "@/components/landing/tenant-navbar";
 import { TenantFooter } from "@/components/landing/tenant-footer";
 import { TenantMobileBar } from "@/components/landing/tenant-mobile-bar";
-
-export const instant = false;
+import { env } from "@/env";
 
 interface TenantLayoutProps {
   children: React.ReactNode;
@@ -39,7 +38,7 @@ export async function generateMetadata({
   const { brand, trust } = tenant;
 
   return {
-    metadataBase: new URL(`https://${brand.slug}.pristineclean.com`),
+    metadataBase: new URL(`https://${brand.slug}.${env.NEXT_PUBLIC_ROOT_DOMAIN}`),
     title: `${brand.name} | ${brand.location.city} Residential Cleaning`,
     description: `${brand.tagline}. Bonded, insured, and background-checked home cleaning in ${brand.location.city}, ${brand.location.state}. Rated ${trust.googleRating}★ by local homeowners.`,
     openGraph: {
@@ -80,7 +79,7 @@ export default async function TenantLayout({
       style={dynamicStyles as React.CSSProperties}
       className="min-h-screen flex flex-col bg-canvas text-text-primary selection:bg-primary-subtle selection:text-primary"
     >
-      <TenantNavbar brand={publicTenant.brand} trust={publicTenant.trust} />
+      <TenantNavbar brand={publicTenant.brand} />
 
       <main className="flex-1">{children}</main>
 

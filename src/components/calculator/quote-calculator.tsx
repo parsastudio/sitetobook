@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { CleaningType, PublicTenant } from "@/entities/tenant/schema";
+import { buildSmsHref, CleaningType, PublicTenant } from "@/entities/tenant/schema";
 import { calculateCleaningQuote } from "@/entities/tenant/calculator";
 import {
   MinusIcon,
@@ -66,12 +66,7 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
       `What is your earliest available booking slot?`,
     ].join("\n");
 
-    const separator =
-      typeof navigator !== "undefined" && /iPad|iPhone|iPod/.test(navigator.userAgent)
-        ? "&"
-        : "?";
-
-    return `sms:${brand.phone}${separator}body=${encodeURIComponent(text)}`;
+    return buildSmsHref(brand.phone, text);
   }, [brand, pricing, serviceType, bedrooms, bathrooms, selectedAddOns, quote]);
 
   const getAddOnIcon = (id: string) => {

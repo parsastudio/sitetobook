@@ -7,8 +7,6 @@ interface OwnerPageProps {
   params: Promise<{ tenant: string }>;
 }
 
-export const instant = false;
-
 export const metadata = {
   title: "Owner Command Deck | Residential Cleaning Portal",
   description: "Secure operational control panel for pricing and dispatch management.",

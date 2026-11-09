@@ -6,6 +6,7 @@ import { clearAdminSession, setAdminSession } from "@/lib/auth-guard";
 import { getClientIp } from "@/lib/network";
 import { checkRateLimit, resetRateLimit } from "@/lib/rate-limiter";
 import { logAuditEvent } from "@/lib/logger";
+import { verifyTimingSafeString } from "@/lib/security";
 import { env } from "@/env";
 
 const MASTER_PASSWORD = env.ADMIN_MASTER_PASSWORD;
@@ -34,7 +35,7 @@ export async function loginAdminAction(
       };
     }
 
-    if (password !== MASTER_PASSWORD) {
+    if (!verifyTimingSafeString(password, MASTER_PASSWORD)) {
       logAuditEvent({
         action: "ADMIN_LOGIN_FAILED",
         actor: { role: "anonymous", ip: clientIp },

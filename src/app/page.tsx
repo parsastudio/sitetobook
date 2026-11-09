@@ -2,8 +2,6 @@ import Link from "next/link";
 import { cacheLife, cacheTag } from "next/cache";
 import { getAllTenants } from "@/services/tenant.service";
 
-export const instant = false;
-
 export default async function HomePage() {
   "use cache";
   cacheLife("days");

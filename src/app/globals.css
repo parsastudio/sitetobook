@@ -12,13 +12,13 @@
   --text-inverse: #ffffff;
 
   --primary: #0a3326;
-  --primary-hover: #07261c;
-  --primary-subtle: #edf3f0;
-  --primary-active: #041812;
+  --primary-hover: color-mix(in srgb, var(--primary) 85%, #000000);
+  --primary-subtle: color-mix(in srgb, var(--primary) 8%, #ffffff);
+  --primary-active: color-mix(in srgb, var(--primary) 72%, #000000);
 
   --accent: #115e45;
-  --accent-hover: #0d4a36;
-  --accent-subtle: #e3ede8;
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, #000000);
+  --accent-subtle: color-mix(in srgb, var(--accent) 12%, #ffffff);
 
   --rating: #c59b27;
   --rating-subtle: #fdf8eb;
@@ -37,6 +37,13 @@
 }
 
 @theme inline {
+  --breakpoint-xs: 30rem;
+
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-subtle: var(--bg-subtle);
+  --color-overlay: var(--bg-overlay);
+
   --color-bg-canvas: var(--bg-canvas);
   --color-bg-surface: var(--bg-surface);
   --color-bg-subtle: var(--bg-subtle);
@@ -86,6 +93,12 @@ body {
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+.font-serif,
+[class*="font-serif"] {
+  font-feature-settings: "lnum" 1, "pnum" 1;
+  font-variant-numeric: lining-nums proportional-nums;
 }
 
 button:not(:disabled),

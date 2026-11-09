@@ -12,8 +12,6 @@ import { redirect } from "next/navigation";
 import { getAdminSession } from "@/lib/auth-guard";
 import { logoutAdminAction } from "@/app/actions/admin.actions";
 
-export const instant = false;
-
 export default async function AdminDashboardPage() {
   const session = await getAdminSession();
   if (!session) {

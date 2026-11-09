@@ -30,13 +30,6 @@ const BRAND_THEMES = [
   { name: "Spruce & Mint", primary: "#0F766E", accent: "#0D9488" },
 ];
 
-const PROVISION_STEPS = [
-  "Authorizing Stripe test token (•••• 4242)...",
-  "Provisioning isolated multi-tenant edge route...",
-  "Seeding 60-second room & add-on quote engine...",
-  "Encrypting 4-digit Owner Command Deck PIN...",
-];
-
 export function StripeCheckoutFlow() {
   const searchParams = useSearchParams();
 
@@ -45,6 +38,8 @@ export function StripeCheckoutFlow() {
   const claimSlugParam = searchParams.get("claimSlug") || "";
   const claimNameParam = searchParams.get("claimName") || "";
   const claimCityParam = searchParams.get("claimCity") || "";
+  const claimStateParam = searchParams.get("claimState") || "TX";
+  const claimPhoneParam = searchParams.get("claimPhone") || "";
 
   const [selectedPlanId, setSelectedPlanId] = useState<SaasPlanId>(
     SAAS_PLANS.some((p) => p.id === initialPlanParam)
@@ -68,8 +63,10 @@ export function StripeCheckoutFlow() {
       : ""
   );
   const [city, setCity] = useState(claimCityParam);
-  const [state, setState] = useState("TX");
-  const [phone, setPhone] = useState(claimSlugParam ? "+1 (214) 555-0189" : "");
+  const [state, setState] = useState(claimStateParam);
+  const [phone, setPhone] = useState(
+    claimPhoneParam || (claimSlugParam ? "+1 (214) 555-0189" : "")
+  );
   const [email, setEmail] = useState(
     claimSlugParam ? `founder@${claimSlugParam.replace(/[^a-z0-9]/g, "")}.com` : ""
   );
@@ -85,7 +82,6 @@ export function StripeCheckoutFlow() {
   const [billingZip, setBillingZip] = useState("");
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [provisionStepIndex, setProvisionStepIndex] = useState(0);
   const [receipt, setReceipt] = useState<CheckoutReceiptData | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -181,17 +177,8 @@ export function StripeCheckoutFlow() {
     }
 
     setErrorMsg(null);
-    setProvisionStepIndex(0);
-
-    const stepInterval = setInterval(() => {
-      setProvisionStepIndex((prev) =>
-        prev < PROVISION_STEPS.length - 1 ? prev + 1 : prev
-      );
-    }, 350);
 
     startTransition(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1400));
-
       const cleanDigitsPhone = phone.replace(/\D/g, "");
       const whatsappNumber =
         cleanDigitsPhone.length >= 10
@@ -228,8 +215,6 @@ export function StripeCheckoutFlow() {
         cardLast4: rawCardDigits.slice(-4) || "4242",
         claimExistingSlug: Boolean(claimSlugParam),
       });
-
-      clearInterval(stepInterval);
 
       if (!res.success) {
         setErrorMsg(res.error);
@@ -297,13 +282,13 @@ export function StripeCheckoutFlow() {
               href={`/${receipt.slug}/owner`}
               className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border-default bg-canvas hover:border-primary px-6 py-4 text-xs sm:text-sm font-extrabold text-text-primary transition-all"
             >
-              <span>Open Owner Command Deck ⚙️</span>
+              <span>Open Owner Command Deck</span>
             </Link>
           </div>
 
           <div className="flex items-center justify-between w-full pt-4 border-t border-border-subtle text-xs text-text-muted">
             <Link href={`/${receipt.slug}?pitch=true`} className="font-bold text-primary hover:underline">
-              Preview in Agency Pitch Mode 🎯
+              Preview in Agency Pitch Mode →
             </Link>
             <Link href="/" className="hover:text-text-primary">
               ← Back to SaaS Directory
@@ -482,9 +467,10 @@ export function StripeCheckoutFlow() {
               <button
                 type="button"
                 onClick={handleFillStripeTestCard}
-                className="inline-flex items-center gap-1 rounded-xl bg-primary-subtle px-3 py-1.5 text-[11px] font-black text-primary hover:bg-primary hover:text-text-inverse transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-primary-subtle px-3 py-1.5 text-[11px] font-black text-primary hover:bg-primary hover:text-text-inverse transition-colors"
               >
-                <span>⚡ Fill Test Card (4242)</span>
+                <SparkleIcon className="h-3.5 w-3.5" />
+                <span>Fill Test Card (4242)</span>
               </button>
             )}
           </div>
@@ -756,23 +742,14 @@ export function StripeCheckoutFlow() {
                 </div>
               </div>
 
-              {isPending && (
-                <div className="rounded-2xl border border-primary/25 bg-primary-subtle p-4 flex items-center gap-3">
-                  <div className="h-4 w-4 rounded-full border-2 border-primary border-t-transparent animate-spin shrink-0" />
-                  <span className="text-xs font-bold text-primary">
-                    {PROVISION_STEPS[provisionStepIndex]}
-                  </span>
-                </div>
-              )}
-
               <button
                 type="submit"
                 disabled={isPending}
                 className="mt-2 inline-flex w-full items-center justify-center rounded-2xl bg-primary hover:bg-primary-hover py-4 text-xs sm:text-sm font-black text-text-inverse shadow-lg transition-all active:scale-[0.99] disabled:opacity-60"
               >
                 {isPending
-                  ? "Provisioning Portal on Edge..."
-                  : `Pay $${totalDueToday}.00 & Launch Portal Instantly 🔒`}
+                  ? "Provisioning Edge Route..."
+                  : `Pay $${totalDueToday}.00 & Launch Portal →`}
               </button>
             </form>
           )}

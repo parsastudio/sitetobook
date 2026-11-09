@@ -19,7 +19,7 @@ export function TenantChecklist({ checklist }: TenantChecklistProps) {
             Standard of Excellence
           </span>
           <h2 className="text-2xl sm:text-4xl font-normal text-text-primary tracking-tight">
-            The 40-Point Hotel-Grade <span className="font-serif italic text-primary">Scope of Work</span>
+            The Hotel-Grade <span className="font-serif italic text-primary">Scope of Work</span>
           </h2>
           <p className="text-xs sm:text-sm text-text-secondary max-w-md">
             Review exactly what our team inspects and delivers in every room before leaving your premises.

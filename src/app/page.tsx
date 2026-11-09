@@ -274,14 +274,14 @@ export default async function HomePage() {
                           href={`/${t.brand.slug}?pitch=true`}
                           className="inline-flex items-center justify-center rounded-xl border border-border-default bg-surface px-3 py-2 text-[11px] font-bold text-text-primary hover:border-primary transition-colors"
                         >
-                          Pitch Banner 🎯
+                          Pitch Mode
                         </Link>
                         <Link
                           href={`/${t.brand.slug}/owner`}
                           style={{ color: accentHex }}
                           className="inline-flex items-center justify-center rounded-xl border border-border-default bg-surface px-3 py-2 text-[11px] font-extrabold hover:border-primary transition-colors"
                         >
-                          Owner PIN ⚙️
+                          Owner Deck
                         </Link>
                       </div>
                     </div>
@@ -359,7 +359,7 @@ export default async function HomePage() {
                     href="/admin"
                     className="inline-flex items-center justify-center rounded-2xl border border-border-default bg-canvas hover:border-primary px-5 py-3.5 text-xs sm:text-sm font-bold text-text-primary transition-all"
                   >
-                    Master Admin Gateway 🔒
+                    Master Admin Gateway
                   </Link>
                 </div>
               </div>

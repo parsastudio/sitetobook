@@ -11,6 +11,9 @@ interface TenantHeroProps {
 export function TenantHero({ brand, trust }: TenantHeroProps) {
   const ratingValue = trust?.googleRating ?? 4.9;
   const reviewCount = trust?.googleReviewCount ?? 190;
+  const policyLabel = trust?.insurancePolicyDetails?.includes("COI")
+    ? "COI Insured"
+    : "Liability Policy";
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden px-3.5 pt-16 pb-20 sm:px-6 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20">
@@ -66,10 +69,10 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
                 $2M
               </span>
               <span className="text-[9px] sm:text-[11px] font-extrabold text-primary uppercase tracking-tight sm:tracking-wider text-center mt-0.5">
-                Hiscox Policy
+                {policyLabel}
               </span>
               <span className="text-[8px] sm:text-[10px] text-text-muted font-semibold text-center leading-none mt-0.5">
-                Full Coverage
+                Bonded & Covered
               </span>
             </div>
 

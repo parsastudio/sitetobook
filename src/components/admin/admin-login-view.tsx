@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { loginAdminAction } from "@/app/actions/admin.actions";
+import { ShieldCheckIcon, LockIcon } from "@/components/ui/icons";
 
 export function AdminLoginView() {
   const [password, setPassword] = useState("");
@@ -30,9 +31,9 @@ export function AdminLoginView() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-canvas px-4 py-8">
       <div className="w-full max-w-sm rounded-2xl border border-border-default bg-surface p-6 sm:p-8 shadow-lg flex flex-col gap-5 text-left">
-        <div className="flex flex-col items-center gap-1.5 text-center">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-text-inverse font-black text-lg shadow-xs">
-            🛡️
+        <div className="flex flex-col items-center gap-2 text-center">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-text-inverse shadow-xs">
+            <ShieldCheckIcon className="h-5 w-5" />
           </div>
           <h1 className="text-xl font-black tracking-tight text-text-primary">
             Master Shield
@@ -76,9 +77,10 @@ export function AdminLoginView() {
           <button
             type="submit"
             disabled={isPending}
-            className="inline-flex w-full items-center justify-center rounded-xl bg-primary py-2.5 text-xs font-black uppercase tracking-wider text-text-inverse shadow-xs transition-all hover:bg-primary-hover active:scale-[0.98] disabled:opacity-50"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-2.5 text-xs font-black uppercase tracking-wider text-text-inverse shadow-xs transition-all hover:bg-primary-hover active:scale-[0.98] disabled:opacity-50"
           >
-            {isPending ? "Authenticating..." : "Unlock Platform 🔒"}
+            <LockIcon className="h-3.5 w-3.5" />
+            <span>{isPending ? "Authenticating..." : "Unlock Platform"}</span>
           </button>
         </form>
 

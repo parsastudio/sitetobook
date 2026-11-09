@@ -9,7 +9,7 @@ interface TenantReviewsProps {
 }
 
 export function TenantReviews({ trust, city, businessName }: TenantReviewsProps) {
-  const googleMapsQuery = encodeURIComponent(`${businessName ?? "SparklePro Residential Cleaners"} ${city}`);
+  const googleMapsQuery = encodeURIComponent(`${businessName ?? "Residential Cleaning"} ${city}`);
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${googleMapsQuery}`;
 
   return (

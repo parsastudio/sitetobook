@@ -17,10 +17,8 @@ import {
 
 const DATA_FILE_PATH = path.join(process.cwd(), "src", "data", "tenants.json");
 
-// In-memory runtime store for serverless portfolio environments without a live Postgres DB
 let memoryStoreCache: Record<string, Tenant> | null = null;
 
-// Helper: Convert Database Row to Validated Domain Entity
 function mapRecordToEntity(record: TenantRecord): Tenant {
   return TenantSchema.parse({
     brand: {
@@ -60,7 +58,6 @@ function mapRecordToEntity(record: TenantRecord): Tenant {
   });
 }
 
-// Fallback JSON + In-Memory Store Helpers (works seamlessly in local dev and serverless demos)
 async function readTenantsFile(): Promise<Record<string, Tenant>> {
   if (memoryStoreCache) {
     return memoryStoreCache;
@@ -95,10 +92,6 @@ async function writeTenantsFile(store: Record<string, Tenant>): Promise<void> {
     // In read-only serverless environments (e.g. Vercel without DB), memoryStoreCache persists for the instance lifecycle
   }
 }
-
-// -------------------------------------------------------------
-// PUBLIC DATA ACCESS LAYER (DAL) METHODS
-// -------------------------------------------------------------
 
 export async function getTenantSlugByCustomDomain(
   customDomain: string
@@ -137,7 +130,6 @@ export async function getTenantSlugByCustomDomain(
 export async function getTenantBySlug(slug: string): Promise<Tenant | null> {
   const normalizedSlug = slug.toLowerCase().trim();
 
-  // 1. Production Mode: Query Drizzle ORM via Serverless HTTP Pooler
   if (db) {
     try {
       const records = await db
@@ -155,13 +147,11 @@ export async function getTenantBySlug(slug: string): Promise<Tenant | null> {
     }
   }
 
-  // 2. Fallback Mode: Local File Store
   const fileStore = await readTenantsFile();
   return fileStore[normalizedSlug] ?? null;
 }
 
 export async function getAllTenants(): Promise<Tenant[]> {
-  // 1. Production Mode: Fetch all via Drizzle
   if (db) {
     try {
       const records = await db.select().from(tenantsTable);
@@ -171,7 +161,6 @@ export async function getAllTenants(): Promise<Tenant[]> {
     }
   }
 
-  // 2. Fallback Mode: Local File Store
   const fileStore = await readTenantsFile();
   return Object.values(fileStore);
 }
@@ -180,7 +169,6 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
   const validated = TenantSchema.parse(tenant);
   const slug = validated.brand.slug.toLowerCase().trim();
 
-  // 1. Production Mode: Upsert into PostgreSQL via Drizzle
   if (db) {
     try {
       await db

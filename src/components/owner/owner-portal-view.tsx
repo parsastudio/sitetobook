@@ -287,14 +287,6 @@ export function OwnerPortalView({
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
         <div className="w-full max-w-sm rounded-3xl border border-primary/20 bg-surface/90 p-7 sm:p-9 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-6">
-          <input
-            type="text"
-            name="security_honeypot_token"
-            tabIndex={-1}
-            autoComplete="off"
-            className="hidden"
-          />
-
           <div className="flex flex-col items-center gap-3 text-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-text-inverse shadow-md border border-white/20">
               <SparkleIcon className="h-6 w-6" />
@@ -773,7 +765,7 @@ export function OwnerPortalView({
               onClick={handleSaveAllSettings}
               className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-xs font-extrabold text-text-inverse shadow-xs transition-transform hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
             >
-              {isSaving ? "Syncing..." : "⚡ Save & Publish"}
+              {isSaving ? "Syncing..." : "Save & Publish"}
             </button>
           </div>
         </div>

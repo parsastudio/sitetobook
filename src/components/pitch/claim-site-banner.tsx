@@ -40,7 +40,11 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
     tenant.brand.slug
   )}&claimName=${encodeURIComponent(
     tenant.brand.name
-  )}&claimCity=${encodeURIComponent(tenant.brand.location.city)}`;
+  )}&claimCity=${encodeURIComponent(
+    tenant.brand.location.city
+  )}&claimState=${encodeURIComponent(
+    tenant.brand.location.state
+  )}&claimPhone=${encodeURIComponent(tenant.brand.phone)}`;
 
   const handleSubmitLead = (e: React.FormEvent) => {
     e.preventDefault();

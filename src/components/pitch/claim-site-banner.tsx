@@ -65,7 +65,7 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
 
   return (
     <>
-      <div className="fixed bottom-4 inset-x-4 z-50 mx-auto max-w-xl">
+      <div className="fixed bottom-20 md:bottom-4 inset-x-4 z-40 mx-auto max-w-xl">
         <div className="flex items-center justify-between gap-3 rounded-2xl border border-primary/40 bg-text-primary/95 p-3 sm:p-3.5 shadow-2xl backdrop-blur-lg text-text-inverse">
           <div className="flex items-center gap-3 text-left">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-text-inverse font-black">

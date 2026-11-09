@@ -67,13 +67,27 @@ export async function processStripeCheckoutAction(
     }
 
     const hashedPin = await hashPasscode(input.ownerPin);
+    const subscriptionMeta = {
+      planId: plan.id,
+      planName: plan.name,
+      billingCycle: input.billingCycle,
+      cardLast4: input.cardLast4,
+      status: "active" as const,
+    };
+
+    let finalBusinessName = input.name;
 
     if (existing && input.claimExistingSlug) {
       existing.brand.ownerPinHash = hashedPin;
-      existing.brand.email = input.email;
+      existing.brand.subscription = subscriptionMeta;
+      if (input.email && input.email !== "hello@pristineclean.com") {
+        existing.brand.email = input.email;
+      }
+      finalBusinessName = existing.brand.name;
       await saveTenant(existing);
     } else {
       const newTenant = createDefaultTenant(input, hashedPin);
+      newTenant.brand.subscription = subscriptionMeta;
       await saveTenant(newTenant);
     }
 
@@ -106,7 +120,7 @@ export async function processStripeCheckoutAction(
       success: true,
       data: {
         slug: input.slug,
-        businessName: input.name,
+        businessName: finalBusinessName,
         planName: plan.name,
         amountCharged,
         billingCycle: input.billingCycle,

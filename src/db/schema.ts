@@ -8,6 +8,7 @@ import {
   DEFAULT_PRIMARY_COLOR,
   FAQItem,
   ReviewItem,
+  SubscriptionMetadata,
 } from "@/entities/tenant/schema";
 
 export const tenantsTable = pgTable("tenants", {
@@ -23,6 +24,7 @@ export const tenantsTable = pgTable("tenants", {
   email: varchar("email", { length: 128 }).notNull(),
   ownerPinHash: text("owner_pin_hash").notNull(),
   customDomain: varchar("custom_domain", { length: 128 }).unique(),
+  subscription: jsonb("subscription").$type<SubscriptionMetadata>(),
   city: varchar("city", { length: 64 }).notNull(),
   state: varchar("state", { length: 8 }).notNull(),
   serviceAreas: jsonb("service_areas").$type<string[]>().notNull().default([]),

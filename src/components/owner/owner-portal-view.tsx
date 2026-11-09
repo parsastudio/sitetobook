@@ -443,18 +443,18 @@ export function OwnerPortalView({
           <div className="flex flex-col">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-black uppercase tracking-wider text-primary">
-                Growth Fleet License
+                {brand.subscription?.planName ?? "Growth Fleet"} License
               </span>
               <span className="rounded-md bg-subtle px-2 py-0.5 font-mono text-[10px] font-bold text-text-secondary">
-                VISA •••• 4242
+                VISA •••• {brand.subscription?.cardLast4 ?? "4242"}
               </span>
               <span className="rounded-md bg-primary-subtle px-2 py-0.5 text-[10px] font-bold text-primary">
-                Edge SSL Active
+                {brand.subscription?.billingCycle === "monthly" ? "Monthly" : "Annual"} · Active
               </span>
             </div>
             <span className="text-xs text-text-secondary mt-1">
               Route: <strong className="font-mono text-text-primary">/{brand.slug}</strong>{" "}
-              {brand.customDomain ? `(${brand.customDomain})` : "· Zero Booking Commission"}
+              {brand.customDomain ? `(${brand.customDomain})` : "· Edge SSL & Zero Commission"}
             </span>
           </div>
         </div>

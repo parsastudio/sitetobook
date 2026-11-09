@@ -62,7 +62,7 @@ export function PortfolioTourDock() {
   ];
 
   return (
-    <div className="fixed bottom-4 left-4 z-50 flex flex-col items-start">
+    <div className="fixed bottom-20 md:bottom-4 left-4 z-50 flex flex-col items-start">
       {isOpen && (
         <div className="mb-2.5 w-80 rounded-2xl border border-slate-800 bg-slate-950/95 p-4 text-left text-white shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-bottom-2 duration-150">
           <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">

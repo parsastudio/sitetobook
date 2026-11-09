@@ -69,8 +69,10 @@ export function StripeCheckoutFlow() {
   );
   const [city, setCity] = useState(claimCityParam);
   const [state, setState] = useState("TX");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState(claimSlugParam ? "+1 (214) 555-0189" : "");
+  const [email, setEmail] = useState(
+    claimSlugParam ? `founder@${claimSlugParam.replace(/[^a-z0-9]/g, "")}.com` : ""
+  );
   const [ownerPin, setOwnerPin] = useState("1234");
   const [primaryColor, setPrimaryColor] = useState(DEFAULT_PRIMARY_COLOR);
   const [accentColor, setAccentColor] = useState(DEFAULT_ACCENT_COLOR);
@@ -166,7 +168,15 @@ export function StripeCheckoutFlow() {
     e.preventDefault();
     const rawCardDigits = cardNumber.replace(/\D/g, "");
     if (rawCardDigits.length < 15) {
-      setErrorMsg("Please enter a valid 16-digit card number or click 'Fill Stripe Test Card'.");
+      setErrorMsg("Please enter a valid 16-digit card number or click 'Fill Test Card (4242)'.");
+      return;
+    }
+    if (!/^\d{2}\/\d{2}$/.test(cardExpiry)) {
+      setErrorMsg("Please enter a valid expiration date in MM/YY format.");
+      return;
+    }
+    if (cardCvc.length < 3) {
+      setErrorMsg("Please enter a valid 3 or 4 digit security CVC code.");
       return;
     }
 

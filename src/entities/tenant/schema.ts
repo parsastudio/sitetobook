@@ -91,6 +91,15 @@ export const FAQItemSchema = z.object({
 });
 export type FAQItem = z.infer<typeof FAQItemSchema>;
 
+export const SubscriptionMetadataSchema = z.object({
+  planId: z.enum(["starter", "growth", "agency"]).default("growth"),
+  planName: z.string().default("Growth Fleet"),
+  billingCycle: z.enum(["monthly", "annual"]).default("annual"),
+  cardLast4: z.string().default("4242"),
+  status: z.enum(["active", "demo"]).default("active"),
+});
+export type SubscriptionMetadata = z.infer<typeof SubscriptionMetadataSchema>;
+
 export const BrandConfigSchema = z.object({
   name: z.string(),
   tagline: z.string(),
@@ -101,6 +110,7 @@ export const BrandConfigSchema = z.object({
   email: z.string().email(),
   ownerPinHash: z.string().min(10),
   customDomain: z.string().optional(),
+  subscription: SubscriptionMetadataSchema.optional(),
   location: z.object({
     city: z.string(),
     state: z.string(),

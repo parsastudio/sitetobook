@@ -17,6 +17,9 @@ import {
 
 const DATA_FILE_PATH = path.join(process.cwd(), "src", "data", "tenants.json");
 
+// In-memory runtime store for serverless portfolio environments without a live Postgres DB
+let memoryStoreCache: Record<string, Tenant> | null = null;
+
 // Helper: Convert Database Row to Validated Domain Entity
 function mapRecordToEntity(record: TenantRecord): Tenant {
   return TenantSchema.parse({
@@ -30,6 +33,7 @@ function mapRecordToEntity(record: TenantRecord): Tenant {
       email: record.email,
       ownerPinHash: record.ownerPinHash,
       customDomain: record.customDomain || undefined,
+      subscription: record.subscription || undefined,
       location: {
         city: record.city,
         state: record.state,
@@ -56,8 +60,12 @@ function mapRecordToEntity(record: TenantRecord): Tenant {
   });
 }
 
-// Fallback JSON File Helpers (for local development without DB setup)
+// Fallback JSON + In-Memory Store Helpers (works seamlessly in local dev and serverless demos)
 async function readTenantsFile(): Promise<Record<string, Tenant>> {
+  if (memoryStoreCache) {
+    return memoryStoreCache;
+  }
+
   try {
     const raw = await fs.readFile(DATA_FILE_PATH, "utf-8");
     const json = JSON.parse(raw);
@@ -70,15 +78,22 @@ async function readTenantsFile(): Promise<Record<string, Tenant>> {
       }
     }
 
+    memoryStoreCache = parsedStore;
     return parsedStore;
   } catch {
-    return {};
+    memoryStoreCache = {};
+    return memoryStoreCache;
   }
 }
 
 async function writeTenantsFile(store: Record<string, Tenant>): Promise<void> {
-  const serialized = JSON.stringify(store, null, 2);
-  await fs.writeFile(DATA_FILE_PATH, serialized, "utf-8");
+  memoryStoreCache = { ...store };
+  try {
+    const serialized = JSON.stringify(store, null, 2);
+    await fs.writeFile(DATA_FILE_PATH, serialized, "utf-8");
+  } catch {
+    // In read-only serverless environments (e.g. Vercel without DB), memoryStoreCache persists for the instance lifecycle
+  }
 }
 
 // -------------------------------------------------------------
@@ -180,6 +195,7 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
           email: validated.brand.email,
           ownerPinHash: validated.brand.ownerPinHash,
           customDomain: validated.brand.customDomain ?? null,
+          subscription: validated.brand.subscription ?? null,
           city: validated.brand.location.city,
           state: validated.brand.location.state,
           serviceAreas: validated.brand.location.serviceAreas,
@@ -208,6 +224,7 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
             email: validated.brand.email,
             ownerPinHash: validated.brand.ownerPinHash,
             customDomain: validated.brand.customDomain ?? null,
+            subscription: validated.brand.subscription ?? null,
             city: validated.brand.location.city,
             state: validated.brand.location.state,
             serviceAreas: validated.brand.location.serviceAreas,
@@ -234,12 +251,6 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
     }
   }
 
-  if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "Database connection is unconfigured. File mutation is forbidden in production."
-    );
-  }
-
   const fileStore = await readTenantsFile();
   fileStore[slug] = validated;
   await writeTenantsFile(fileStore);
@@ -258,12 +269,6 @@ export async function deleteTenant(slug: string): Promise<boolean> {
       console.error(`Drizzle error deleting tenant '${normalizedSlug}':`, error);
       throw new Error("Database failed to delete tenant.");
     }
-  }
-
-  if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "Database connection is unconfigured. File mutation is forbidden in production."
-    );
   }
 
   const fileStore = await readTenantsFile();
@@ -306,12 +311,6 @@ export async function addTenantGalleryItem(
       console.error(`Drizzle error inserting gallery item for '${normalizedSlug}':`, error);
       throw error instanceof Error ? error : new Error("Failed to add gallery item.");
     }
-  }
-
-  if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "Database connection is unconfigured. File mutation is forbidden in production."
-    );
   }
 
   const fileStore = await readTenantsFile();
@@ -361,12 +360,6 @@ export async function deleteTenantGalleryItem(
       console.error(`Drizzle error deleting gallery item for '${normalizedSlug}':`, error);
       throw new Error("Failed to delete gallery item.");
     }
-  }
-
-  if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "Database connection is unconfigured. File mutation is forbidden in production."
-    );
   }
 
   const fileStore = await readTenantsFile();

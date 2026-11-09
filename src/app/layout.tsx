@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Geist } from "next/font/google";
+import { PortfolioTourDock } from "@/components/saas/portfolio-tour-dock";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,7 +40,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${cormorant.variable} h-full antialiased scroll-smooth overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col overflow-x-hidden max-w-full">{children}</body>
+      <body className="min-h-full flex flex-col overflow-x-hidden max-w-full">
+        {children}
+        <PortfolioTourDock />
+      </body>
     </html>
   );
 }

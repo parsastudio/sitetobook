@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useTransition, Suspense } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { buildSmsHref, PublicTenant } from "@/entities/tenant/schema";
 import { submitClaimLeadAction } from "@/app/actions/lead.actions";
-import { SpeedIcon, MessageTextIcon, ShieldCheckIcon, SparkleIcon } from "@/components/ui/icons";
+import { SpeedIcon, MessageTextIcon, ShieldCheckIcon, SparkleIcon, ArrowUpRightIcon } from "@/components/ui/icons";
 import { env } from "@/env";
 
 interface ClaimSiteBannerProps {
@@ -34,6 +35,12 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
     agencyContactNumber,
     `Hi! I am the owner of ${tenant.brand.name} in ${tenant.brand.location.city}. I reviewed the custom website demo you built for us and would like to claim it and connect our custom domain.`
   );
+
+  const stripeClaimUrl = `/checkout?plan=growth&billing=annual&claimSlug=${encodeURIComponent(
+    tenant.brand.slug
+  )}&claimName=${encodeURIComponent(
+    tenant.brand.name
+  )}&claimCity=${encodeURIComponent(tenant.brand.location.city)}`;
 
   const handleSubmitLead = (e: React.FormEvent) => {
     e.preventDefault();
@@ -172,12 +179,20 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
               </div>
             ) : (
               <div className="flex flex-col gap-3">
+                <Link
+                  href={stripeClaimUrl}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary hover:bg-primary-hover px-6 py-3.5 text-xs sm:text-sm font-black text-text-inverse shadow-md transition-all hover:scale-[1.01]"
+                >
+                  <span>Activate Subscription via Stripe ($79/mo)</span>
+                  <ArrowUpRightIcon className="h-4 w-4" />
+                </Link>
+
                 <a
                   href={claimSmsUrl}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary hover:bg-primary-hover px-6 py-3.5 text-sm font-bold text-text-inverse shadow-sm transition-all hover:scale-[1.01]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-border-default bg-canvas hover:border-primary px-6 py-3 text-xs font-bold text-text-primary transition-all"
                 >
-                  <MessageTextIcon className="h-4 w-4" />
-                  <span>Claim Instantly via Direct SMS</span>
+                  <MessageTextIcon className="h-4 w-4 text-primary" />
+                  <span>Or Text Agency Dispatcher Directly</span>
                 </a>
 
                 <div className="flex items-center gap-3">

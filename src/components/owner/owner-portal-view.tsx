@@ -10,7 +10,13 @@ import {
   updateOwnerSettingsAction,
 } from "@/app/actions/owner.actions";
 import { GalleryManager } from "@/components/owner/gallery-manager";
-import { PhoneIcon, CurrencyIcon, SparkleIcon, PinLocationIcon } from "@/components/ui/icons";
+import {
+  PhoneIcon,
+  CurrencyIcon,
+  SparkleIcon,
+  PinLocationIcon,
+  ShieldCheckIcon,
+} from "@/components/ui/icons";
 
 interface OwnerPortalViewProps {
   tenant: Tenant;
@@ -428,6 +434,38 @@ export function OwnerPortalView({
           ✕ {saveErrorMsg || "Failed to save updates. Please try again."}
         </div>
       )}
+
+      <div className="rounded-2xl border border-primary/25 bg-surface p-5 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-left">
+        <div className="flex items-start gap-3.5">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-subtle text-primary border border-primary/20">
+            <ShieldCheckIcon className="h-5 w-5" />
+          </div>
+          <div className="flex flex-col">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-black uppercase tracking-wider text-primary">
+                Growth Fleet License
+              </span>
+              <span className="rounded-md bg-subtle px-2 py-0.5 font-mono text-[10px] font-bold text-text-secondary">
+                VISA •••• 4242
+              </span>
+              <span className="rounded-md bg-primary-subtle px-2 py-0.5 text-[10px] font-bold text-primary">
+                Edge SSL Active
+              </span>
+            </div>
+            <span className="text-xs text-text-secondary mt-1">
+              Route: <strong className="font-mono text-text-primary">/{brand.slug}</strong>{" "}
+              {brand.customDomain ? `(${brand.customDomain})` : "· Zero Booking Commission"}
+            </span>
+          </div>
+        </div>
+
+        <Link
+          href={`/checkout?plan=agency&billing=annual&claimSlug=${brand.slug}&claimName=${encodeURIComponent(brand.name)}&claimCity=${encodeURIComponent(brand.location.city)}`}
+          className="inline-flex items-center justify-center rounded-xl border border-border-default bg-canvas hover:border-primary px-3.5 py-2 text-xs font-bold text-text-primary transition-colors shrink-0"
+        >
+          Upgrade Plan ↗
+        </Link>
+      </div>
 
       <div className="rounded-2xl border border-border-default bg-surface p-5 shadow-xs flex flex-col gap-4 text-left">
         <div className="flex flex-col gap-0.5 border-b border-border-subtle pb-3">

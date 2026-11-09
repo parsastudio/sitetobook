@@ -16,7 +16,10 @@ export async function proxy(request: NextRequest) {
 
   let tenantSlug: string | null = null;
   let isCustomDomain = false;
-  const isSystemPath = pathname.startsWith("/admin") || pathname.startsWith("/api");
+  const isSystemPath =
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/checkout");
 
   if (!isSystemPath) {
     // 1. Query parameter resolution for rapid testing (?tenant=slug)
@@ -84,8 +87,7 @@ export async function proxy(request: NextRequest) {
   if (
     tenantSlug &&
     !pathname.startsWith(`/${tenantSlug}`) &&
-    !pathname.startsWith("/admin") &&
-    !pathname.startsWith("/api")
+    !isSystemPath
   ) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-tenant-slug", tenantSlug);

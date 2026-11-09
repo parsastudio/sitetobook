@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CreateTenantInputSchema } from "@/entities/tenant/schema";
 
 export const BillingCycleSchema = z.enum(["monthly", "annual"]);
 export type BillingCycle = z.infer<typeof BillingCycleSchema>;
@@ -74,3 +75,16 @@ export const SAAS_PLANS: SaasPlan[] = [
     ],
   },
 ];
+
+export const CheckoutProvisionInputSchema = CreateTenantInputSchema.extend({
+  planId: SaasPlanIdSchema.default("growth"),
+  billingCycle: BillingCycleSchema.default("annual"),
+  ownerPin: z
+    .string()
+    .regex(/^\d{4}$/, "Owner PIN must be exactly 4 digits")
+    .default("1234"),
+  cardHolderName: z.string().min(2, "Cardholder name is required"),
+  cardLast4: z.string().regex(/^\d{4}$/).default("4242"),
+  claimExistingSlug: z.boolean().default(false),
+});
+export type CheckoutProvisionInput = z.infer<typeof CheckoutProvisionInputSchema>;

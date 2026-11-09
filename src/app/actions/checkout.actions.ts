@@ -84,6 +84,15 @@ export async function processStripeCheckoutAction(
       if (input.name.trim()) {
         existing.brand.name = input.name.trim();
       }
+      if (input.tagline.trim()) {
+        existing.brand.tagline = input.tagline.trim();
+      }
+      if (input.city.trim()) {
+        existing.brand.location.city = input.city.trim();
+      }
+      if (input.state.trim()) {
+        existing.brand.location.state = input.state.trim();
+      }
       if (input.phone.trim()) {
         existing.brand.phone = input.phone.trim();
         existing.brand.formattedPhone = formatPhoneDisplay(input.phone.trim());
@@ -92,6 +101,10 @@ export async function processStripeCheckoutAction(
       if (input.email && input.email !== "hello@pristineclean.com") {
         existing.brand.email = input.email;
       }
+      existing.brand.themeOverrides = {
+        primaryColor: input.primaryColor,
+        accentColor: input.accentColor,
+      };
       finalBusinessName = existing.brand.name;
       await saveTenant(existing);
     } else {

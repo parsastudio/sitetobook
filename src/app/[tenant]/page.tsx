@@ -18,6 +18,8 @@ import { TenantMobileBar } from "@/components/landing/tenant-mobile-bar";
 import { ClaimSiteBanner } from "@/components/pitch/claim-site-banner";
 import { PinLocationIcon } from "@/components/ui/icons";
 
+export const instant = false;
+
 interface TenantPageProps {
   params: Promise<{ tenant: string }>;
 }

@@ -1,18 +1,20 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { getAllTenants } from "@/services/tenant.service";
 import { TenantCreatorForm } from "@/components/admin/tenant-creator-form";
 import { TenantListManager } from "@/components/admin/tenant-list-manager";
+import { getAdminSession } from "@/lib/auth-guard";
+import { logoutAdminAction } from "@/app/actions/admin.actions";
+
+export const instant = false;
 
 export const metadata = {
   title: "Admin Command Center | Instant Client Site Generator",
   description: "Rapidly provision custom residential cleaning portals in under 2 minutes.",
 };
 
-import { redirect } from "next/navigation";
-import { getAdminSession } from "@/lib/auth-guard";
-import { logoutAdminAction } from "@/app/actions/admin.actions";
-
-export default async function AdminDashboardPage() {
+async function AdminDashboardContent() {
   const session = await getAdminSession();
   if (!session) {
     redirect("/admin/login");
@@ -60,5 +62,13 @@ export default async function AdminDashboardPage() {
         <TenantListManager tenants={tenants} />
       </main>
     </div>
+  );
+}
+
+export default function AdminDashboardPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-canvas" />}>
+      <AdminDashboardContent />
+    </Suspense>
   );
 }

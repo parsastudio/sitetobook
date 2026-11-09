@@ -106,7 +106,7 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4 backdrop-blur-xs">
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-overlay p-4 backdrop-blur-xs">
           <div className="relative w-full max-w-lg rounded-3xl border border-border-default bg-surface p-6 sm:p-8 shadow-2xl flex flex-col gap-6">
             <button
               type="button"

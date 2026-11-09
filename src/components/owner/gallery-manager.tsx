@@ -28,6 +28,10 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
   const afterInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    setItems(gallery);
+  }, [gallery]);
+
+  useEffect(() => {
     return () => {
       if (beforePreview) URL.revokeObjectURL(beforePreview);
       if (afterPreview) URL.revokeObjectURL(afterPreview);

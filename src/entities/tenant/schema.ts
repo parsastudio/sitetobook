@@ -3,6 +3,19 @@ import { z } from "zod";
 export const DEFAULT_PRIMARY_COLOR = "#0a3326";
 export const DEFAULT_ACCENT_COLOR = "#115e45";
 
+export const RESERVED_TENANT_SLUGS = new Set([
+  "admin",
+  "api",
+  "checkout",
+  "login",
+  "owner",
+  "static",
+  "_next",
+  "favicon.ico",
+  "robots.txt",
+  "sitemap.xml",
+]);
+
 export const CleaningTypeSchema = z.enum(["standard", "deep", "move-in-out"]);
 export type CleaningType = z.infer<typeof CleaningTypeSchema>;
 
@@ -214,7 +227,12 @@ export const CreateTenantInputSchema = z.object({
   slug: z
     .string()
     .min(2, "Slug must be at least 2 characters")
-    .regex(/^[a-z0-9-]+$/, "Slug must only contain lowercase letters, numbers, and hyphens"),
+    .max(48, "Slug must be 48 characters or fewer")
+    .regex(/^[a-z0-9-]+$/, "Slug must only contain lowercase letters, numbers, and hyphens")
+    .refine(
+      (val) => !RESERVED_TENANT_SLUGS.has(val.toLowerCase()),
+      "This URL slug is reserved by the platform. Please choose another slug."
+    ),
   city: z.string().min(2, "City is required"),
   state: z.string().min(2, "State abbreviation is required (e.g. TX, CA)"),
   phone: z.string().min(7, "Phone number is required"),

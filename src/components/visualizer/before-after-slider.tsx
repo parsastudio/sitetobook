@@ -50,6 +50,16 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
     setIsDragging(false);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      setSliderPosition((prev) => Math.max(0, prev - 5));
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      setSliderPosition((prev) => Math.min(100, prev + 5));
+    }
+  };
+
   if (!activeItem) return null;
 
   return (
@@ -83,11 +93,18 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
       <div className="w-full max-w-3xl flex flex-col items-center">
         <div
           ref={containerRef}
+          role="slider"
+          tabIndex={0}
+          aria-label={`Before and after comparison for ${activeItem.title}`}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(sliderPosition)}
+          onKeyDown={handleKeyDown}
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
           onPointerMove={handlePointerMove}
           onPointerCancel={handlePointerCancel}
-          className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-border-default bg-surface shadow-xl select-none touch-none cursor-ew-resize"
+          className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-border-default bg-surface shadow-xl select-none touch-none cursor-ew-resize focus-visible:ring-2 focus-visible:ring-primary outline-hidden"
         >
           <div className="absolute inset-0">
             <Image

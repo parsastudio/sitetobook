@@ -11,6 +11,8 @@ import {
   ArrowUpRightIcon,
 } from "@/components/ui/icons";
 
+export const instant = false;
+
 export default async function HomePage() {
   "use cache";
   cacheLife("days");

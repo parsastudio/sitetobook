@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { getAllTenants, getTenantBySlug } from "@/services/tenant.service";
 import { env } from "@/env";
 
+export const instant = false;
+
 interface TenantLayoutProps {
   children: React.ReactNode;
   params: Promise<{ tenant: string }>;

@@ -167,8 +167,9 @@ export function StripeCheckoutFlow() {
       setErrorMsg("Please enter a valid 16-digit card number or click 'Fill Test Card (4242)'.");
       return;
     }
-    if (!/^\d{2}\/\d{2}$/.test(cardExpiry)) {
-      setErrorMsg("Please enter a valid expiration date in MM/YY format.");
+    const expiryMatch = cardExpiry.match(/^(0[1-9]|1[0-2])\/(\d{2})$/);
+    if (!expiryMatch || Number(expiryMatch[2]) < 26) {
+      setErrorMsg("Please enter a valid future expiration date (MM/YY).");
       return;
     }
     if (cardCvc.length < 3) {

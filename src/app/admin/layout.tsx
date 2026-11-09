@@ -1,5 +1,7 @@
 import { Geist_Mono } from "next/font/google";
 
+export const instant = false;
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],

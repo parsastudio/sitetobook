@@ -31,7 +31,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
           <button
             onClick={() => reset()}
             type="button"
-            className="inline-flex w-full items-center justify-center rounded-xl bg-teal-600 px-5 py-3 text-xs font-bold text-white transition-all hover:bg-teal-500"
+            className="inline-flex w-full items-center justify-center rounded-xl bg-[#0a3326] px-5 py-3 text-xs font-bold text-white transition-all hover:bg-[#115e45]"
           >
             Attempt Platform Recovery
           </button>

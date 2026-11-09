@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { formatPhoneDisplay, OwnerSettingsUpdateSchema } from "@/entities/tenant/schema";
 import { getTenantBySlug, saveTenant } from "@/services/tenant.service";
 import { ActionResponse } from "@/app/actions/tenant.actions";
@@ -145,6 +145,8 @@ export async function updateOwnerSettingsAction(
     // Instant On-Demand Cache Invalidation for Edge Caches
     revalidateTag(`tenant-${slug}`, "max");
     revalidateTag("all-tenants", "max");
+    revalidatePath(`/${slug}`);
+    revalidatePath(`/${slug}/owner`);
 
     logAuditEvent({
       action: "OWNER_SETTINGS_UPDATED",

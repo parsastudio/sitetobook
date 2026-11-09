@@ -291,26 +291,466 @@
       }
     ],
     "faqs": [
+    {
+      "id": "faq-1",
+      "question": "Do I need to be home during the cleaning appointment?",
+      "answer": "No, you do not need to be home. Over 75% of our residential clients provide entry via smart keypad, lockbox, or apartment concierge. Our bonded staff locks up securely after completing the 40-point checklist."
+    },
+    {
+      "id": "faq-2",
+      "question": "How does your 24-Hour Sparkle Guarantee work?",
+      "answer": "If any detail does not meet five-star hotel standards, simply message us within 24 hours with a photo. A crew member returns and recleans the missed area at zero cost to you."
+    },
+    {
+      "id": "faq-3",
+      "question": "Do your crews bring their own equipment and supplies?",
+      "answer": "Yes, our crew arrives fully equipped with commercial HEPA vacuums, fresh color-coded microfiber sets, step ladders, and hospital-grade eco-friendly sanitizing solutions."
+    },
+    {
+      "id": "faq-4",
+      "question": "How are your cleaning professionals vetted and insured?",
+      "answer": "Every cleaner passes strict 7-year nationwide criminal background clearances and identity verification. All work is covered by our $2,000,000 commercial liability policy with Hiscox."
+    }
+  ]
+},
+"azure-breeze": {
+  "brand": {
+    "name": "AzureBreeze Coastal Maids",
+    "tagline": "Miami's Luxury Waterfront & Condo Sanitization Specialists",
+    "slug": "azure-breeze",
+    "phone": "+13055550144",
+    "formattedPhone": "+1 (305) 555-0144",
+    "whatsappNumber": "13055550144",
+    "email": "concierge@azurebreezeclean.com",
+    "ownerPinHash": "4fa8892f25a98bf686c1be7fa72bb193:2a417646fa1275ca74a589cf879faef89c3132f84c593847aa3b72aa64f2ad7c88b90ad31238ebcf27d11f8e79872501d51a66e4a2824cf481774d75d799042c",
+    "location": {
+      "city": "Miami",
+      "state": "FL",
+      "serviceAreas": [
+        "Brickell",
+        "Coral Gables",
+        "Coconut Grove",
+        "South Beach",
+        "Sunny Isles",
+        "Key Biscayne"
+      ]
+    },
+    "themeOverrides": {
+      "primaryColor": "#1E3A8A",
+      "accentColor": "#0284C7"
+    },
+    "operatingHours": "Mon - Sun: 7:30 AM - 7:00 PM"
+  },
+  "pricing": {
+    "currencySymbol": "$",
+    "baseDispatchFee": 59,
+    "ratePerBedroom": 40,
+    "ratePerBathroom": 45,
+    "services": [
       {
-        "id": "faq-1",
-        "question": "Do I need to be home during the cleaning appointment?",
-        "answer": "No, you do not need to be home. Over 75% of our residential clients provide entry via smart keypad, lockbox, or apartment concierge. Our bonded staff locks up securely after completing the 40-point checklist."
+        "id": "standard",
+        "name": "Coastal Breeze Upkeep",
+        "tagline": "Weekly or bi-weekly resort-level condo maintenance",
+        "description": "Salt-air glass wipe down, marble-safe mopping, HEPA vacuuming, and full bathroom sanitization.",
+        "multiplier": 1,
+        "isPopular": false
       },
       {
-        "id": "faq-2",
-        "question": "How does your 24-Hour Sparkle Guarantee work?",
-        "answer": "If any detail does not meet five-star hotel standards, simply message us within 24 hours with a photo. A crew member returns and recleans the missed area at zero cost to you."
+        "id": "deep",
+        "name": "Deep Marine & Grout Detail",
+        "tagline": "Essential for high-humidity coastal residences",
+        "description": "Includes standard plus balcony door tracks, air vent detailing, baseboard hand-washing, and lime descaling.",
+        "multiplier": 1.45,
+        "isPopular": true
       },
       {
-        "id": "faq-3",
-        "question": "Do your crews bring their own equipment and supplies?",
-        "answer": "Yes, our crew arrives fully equipped with commercial HEPA vacuums, fresh color-coded microfiber sets, step ladders, and hospital-grade eco-friendly sanitizing solutions."
+        "id": "move-in-out",
+        "name": "Luxury Turnover / Move Clean",
+        "tagline": "White-glove inspection ready for brokers & landlords",
+        "description": "Complete interior cabinet sanitization, appliance restoration, closet detailing, and floor buffing.",
+        "multiplier": 1.8,
+        "isPopular": false
+      }
+    ],
+    "addOns": [
+      {
+        "id": "oven",
+        "name": "Inside Oven Restoration",
+        "description": "Heavy-duty grease removal and stainless polishing",
+        "price": 49,
+        "icon": "flame",
+        "enabled": true
       },
       {
-        "id": "faq-4",
-        "question": "How are your cleaning professionals vetted and insured?",
-        "answer": "Every cleaner passes strict 7-year nationwide criminal background clearances and identity verification. All work is covered by our $2,000,000 commercial liability policy with Hiscox."
+        "id": "fridge",
+        "name": "Sub-Zero / Fridge Sanitization",
+        "description": "Glass shelves washed, seals detailed, and deodorized",
+        "price": 45,
+        "icon": "snowflake",
+        "enabled": true
+      },
+      {
+        "id": "windows",
+        "name": "Floor-to-Ceiling Glass & Tracks",
+        "description": "Streak-free interior panoramic glass and slider tracks",
+        "price": 65,
+        "icon": "sun",
+        "enabled": true
+      },
+      {
+        "id": "cabinets",
+        "name": "Inside Italian Cabinetry",
+        "description": "Gentle microfiber wipe down of interior shelving",
+        "price": 55,
+        "icon": "archive",
+        "enabled": true
       }
     ]
-  }
+  },
+  "trust": {
+    "bondedAndInsured": true,
+    "insurancePolicyDetails": "$2,000,000 Luxury Condo & High-Rise COI Coverage",
+    "backgroundCheckGuarantee": "100% Concierge-Cleared & Background Vetted Specialists",
+    "satisfactionGuarantee": "24-Hour White-Glove Pledge: Complimentary return visit if any detail is overlooked.",
+    "googleRating": 5.0,
+    "googleReviewCount": 142,
+    "reviews": [
+      {
+        "id": "rev-mia-1",
+        "author": "Carlos V.",
+        "neighborhood": "Brickell Key",
+        "rating": 5,
+        "text": "Our building management requires strict COI insurance and front-desk check-ins. AzureBreeze handled everything seamlessly and left our travertine floors gleaming.",
+        "serviceUsed": "Deep Marine & Grout Detail",
+        "date": "2 days ago",
+        "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
+      },
+      {
+        "id": "rev-mia-2",
+        "author": "Sophia L.",
+        "neighborhood": "Coral Gables",
+        "rating": 5,
+        "text": "The instant online quote was spot on. They removed all salt buildup from our sliding glass tracks and made the kitchen look showroom ready.",
+        "serviceUsed": "Coastal Breeze Upkeep",
+        "date": "5 days ago",
+        "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80"
+      },
+      {
+        "id": "rev-mia-3",
+        "author": "Marcus G.",
+        "neighborhood": "Coconut Grove",
+        "rating": 5,
+        "text": "Best residential crew in Miami. Zero hassle, instant SMS confirmation, and hotel-level attention to detail every single visit.",
+        "serviceUsed": "Luxury Turnover / Move Clean",
+        "date": "2 weeks ago",
+        "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150&q=80"
+      }
+    ]
+  },
+  "checklist": [
+    {
+      "category": "Kitchen & Dining",
+      "items": [
+        {
+          "task": "Sanitize quartz/marble countertops & backsplash",
+          "standard": true,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Polish stainless steel appliances & hood",
+          "standard": true,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Hand-wipe cabinet doors & hardware",
+          "standard": false,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Sanitize inside all empty drawers & pantry",
+          "standard": false,
+          "deep": false,
+          "moveInOut": true
+        }
+      ]
+    },
+    {
+      "category": "Bathrooms & Spa",
+      "items": [
+        {
+          "task": "Disinfect toilets, bidets & vanity surfaces",
+          "standard": true,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Descale rainfall shower glass & chrome fixtures",
+          "standard": false,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Sanitize inside medicine cabinets & drawers",
+          "standard": false,
+          "deep": false,
+          "moveInOut": true
+        }
+      ]
+    },
+    {
+      "category": "Living Spaces & Suites",
+      "items": [
+        {
+          "task": "HEPA vacuum rugs & pH-neutral mop stone floors",
+          "standard": true,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Detail sliding door tracks & baseboards",
+          "standard": false,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Detail walk-in closets & shelving",
+          "standard": false,
+          "deep": false,
+          "moveInOut": true
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gal-mia-1",
+      "title": "Brickell Penthouse Kitchen & Marble Island",
+      "area": "Kitchen Detail",
+      "beforeImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+      "afterImage": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "gal-mia-2",
+      "title": "Master Spa Glass & Rain Shower Restoration",
+      "area": "Bathroom Sanitization",
+      "beforeImage": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=1200&q=80",
+      "afterImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-mia-1",
+      "question": "Can you provide a Certificate of Insurance (COI) for my condo association?",
+      "answer": "Yes! We routinely register with Brickell, South Beach, and Sunny Isles high-rise concierge desks and provide our $2M Hiscox COI prior to arrival."
+    },
+    {
+      "id": "faq-mia-2",
+      "question": "Are your cleaning products safe for natural marble and travertine?",
+      "answer": "Absolutely. We strictly use pH-neutral, stone-safe formulations that protect delicate sealants while delivering a streak-free shine."
+    }
+  ]
+},
+"velvet-glove": {
+  "brand": {
+    "name": "VelvetGlove Penthouse Care",
+    "tagline": "Manhattan's Discreet White-Glove Brownstone & Loft Housekeeping",
+    "slug": "velvet-glove",
+    "phone": "+12125550192",
+    "formattedPhone": "+1 (212) 555-0192",
+    "whatsappNumber": "12125550192",
+    "email": "dispatch@velvetglovenyc.com",
+    "ownerPinHash": "4fa8892f25a98bf686c1be7fa72bb193:2a417646fa1275ca74a589cf879faef89c3132f84c593847aa3b72aa64f2ad7c88b90ad31238ebcf27d11f8e79872501d51a66e4a2824cf481774d75d799042c",
+    "location": {
+      "city": "New York",
+      "state": "NY",
+      "serviceAreas": [
+        "Tribeca",
+        "SoHo",
+        "Upper East Side",
+        "West Village",
+        "Chelsea",
+        "Brooklyn Heights"
+      ]
+    },
+    "themeOverrides": {
+      "primaryColor": "#4C1D95",
+      "accentColor": "#7C3AED"
+    },
+    "operatingHours": "Mon - Sat: 8:00 AM - 8:00 PM"
+  },
+  "pricing": {
+    "currencySymbol": "$",
+    "baseDispatchFee": 65,
+    "ratePerBedroom": 45,
+    "ratePerBathroom": 50,
+    "services": [
+      {
+        "id": "standard",
+        "name": "Executive Loft Upkeep",
+        "tagline": "Meticulous weekly care for busy NYC professionals",
+        "description": "High-filtration dust extraction, hardwood treatment, kitchen sanitization, and hotel towel styling.",
+        "multiplier": 1,
+        "isPopular": false
+      },
+      {
+        "id": "deep",
+        "name": "Brownstone Deep Restoration",
+        "tagline": "Intensive pre-season or post-event sanitization",
+        "description": "Includes crown molding detailing, radiator/vent scrubbing, grout restoration, and cabinet exteriors.",
+        "multiplier": 1.45,
+        "isPopular": true
+      },
+      {
+        "id": "move-in-out",
+        "name": "Co-Op Board Turnover Clean",
+        "tagline": "Guaranteed inspection standard for NYC closings",
+        "description": "Full interior cabinetry, appliance degreasing, wall spot treatment, and closet sanitization.",
+        "multiplier": 1.8,
+        "isPopular": false
+      }
+    ],
+    "addOns": [
+      {
+        "id": "oven",
+        "name": "Chef's Range & Oven Detail",
+        "description": "Viking/Wolf safe carbon & grease extraction",
+        "price": 55,
+        "icon": "flame",
+        "enabled": true
+      },
+      {
+        "id": "fridge",
+        "name": "Integrated Fridge Sanitization",
+        "description": "Complete shelf wash and organic odor neutralization",
+        "price": 49,
+        "icon": "snowflake",
+        "enabled": true
+      },
+      {
+        "id": "windows",
+        "name": "Interior Casement Windows",
+        "description": "Streak-free interior panes and sill detailing",
+        "price": 65,
+        "icon": "sun",
+        "enabled": true
+      },
+      {
+        "id": "cabinets",
+        "name": "Pantry & Custom Millwork",
+        "description": "Interior wipe down and organization prep",
+        "price": 59,
+        "icon": "archive",
+        "enabled": true
+      }
+    ]
+  },
+  "trust": {
+    "bondedAndInsured": true,
+    "insurancePolicyDetails": "$2,000,000 Co-Op & Brownstone Liability Coverage",
+    "backgroundCheckGuarantee": "NDA-Ready, 100% Background Vetted Career Housekeepers",
+    "satisfactionGuarantee": "24-Hour Perfection Guarantee: Immediate priority reclean if any item is missed.",
+    "googleRating": 4.9,
+    "googleReviewCount": 218,
+    "reviews": [
+      {
+        "id": "rev-nyc-1",
+        "author": "Claire H.",
+        "neighborhood": "Tribeca",
+        "rating": 5,
+        "text": "Discreet, punctual, and extraordinarily thorough. They work effortlessly with our doorman and treat our hardwood floors and art pieces with total care.",
+        "serviceUsed": "Brownstone Deep Restoration",
+        "date": "Yesterday",
+        "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80"
+      },
+      {
+        "id": "rev-nyc-2",
+        "author": "Jonathan R.",
+        "neighborhood": "Upper East Side",
+        "rating": 5,
+        "text": "Finally a Manhattan cleaning service with transparent flat pricing instead of vague hourly estimates. Worth every penny.",
+        "serviceUsed": "Executive Loft Upkeep",
+        "date": "1 week ago",
+        "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
+      }
+    ]
+  },
+  "checklist": [
+    {
+      "category": "Chef's Kitchen",
+      "items": [
+        {
+          "task": "Sanitize stone counters & backsplash",
+          "standard": true,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Detail exterior of integrated appliances",
+          "standard": true,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Hand-wipe custom cabinetry & brass hardware",
+          "standard": false,
+          "deep": true,
+          "moveInOut": true
+        }
+      ]
+    },
+    {
+      "category": "Ensuite Baths",
+      "items": [
+        {
+          "task": "Sanitize fixtures, soaking tub & vanity",
+          "standard": true,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Deep scrub tile grout & glass enclosures",
+          "standard": false,
+          "deep": true,
+          "moveInOut": true
+        }
+      ]
+    },
+    {
+      "category": "Gallery & Bedrooms",
+      "items": [
+        {
+          "task": "HEPA vacuum & hardwood conditioning mop",
+          "standard": true,
+          "deep": true,
+          "moveInOut": true
+        },
+        {
+          "task": "Hand-wipe crown moldings & baseboards",
+          "standard": false,
+          "deep": true,
+          "moveInOut": true
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gal-nyc-1",
+      "title": "SoHo Cast-Iron Loft Kitchen Restoration",
+      "area": "Kitchen Detail",
+      "beforeImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+      "afterImage": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-nyc-1",
+      "question": "How do you handle key drop-off with NYC doormen?",
+      "answer": "Our vetted team members carry photo ID and coordinate directly with your building's front desk or KeyCafe lockbox."
+    }
+  ]
+}
 }

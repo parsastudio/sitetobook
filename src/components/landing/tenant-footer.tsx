@@ -7,7 +7,7 @@ interface TenantFooterProps {
 }
 
 export function TenantFooter({ tenant }: TenantFooterProps) {
-  const { brand, pricing } = tenant;
+  const { brand, pricing, gallery } = tenant;
   const currentYear = new Date().getFullYear();
 
   return (
@@ -43,11 +43,13 @@ export function TenantFooter({ tenant }: TenantFooterProps) {
                   </ScrollToCalculatorButton>
                 </li>
               ))}
-              <li>
-                <a href="#before-after" className="hover:text-primary transition-colors">
-                  Oven & Detail Showcase
-                </a>
-              </li>
+              {gallery.length > 0 && (
+                <li>
+                  <a href="#before-after" className="hover:text-primary transition-colors">
+                    Oven & Detail Showcase
+                  </a>
+                </li>
+              )}
               <li>
                 <a href="#checklist" className="hover:text-primary transition-colors">
                   40-Point Scope Checklist

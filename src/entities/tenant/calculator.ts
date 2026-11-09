@@ -18,7 +18,8 @@ export function calculateCleaningQuote(
 
   const selectedService =
     pricing.services.find((s) => s.id === serviceType) ?? pricing.services[0];
-  const serviceMultiplier = selectedService.multiplier;
+  const serviceMultiplier = selectedService?.multiplier ?? 1;
+  const serviceName = selectedService?.name ?? "Standard Clean";
   const serviceTotal = Math.round(baseSubtotal * serviceMultiplier);
 
   const addOnsTotal = selectedAddOnIds.reduce((sum, addOnId) => {
@@ -42,7 +43,7 @@ export function calculateCleaningQuote(
       ? ` + Add-ons: ${selectedAddOnNames.join(", ")}`
       : "";
 
-  const summaryText = `${selectedService.name} (${bedrooms} Bed, ${bathrooms} Bath)${addOnsSummary}`;
+  const summaryText = `${serviceName} (${bedrooms} Bed, ${bathrooms} Bath)${addOnsSummary}`;
 
   return {
     baseSubtotal,

@@ -16,6 +16,7 @@ interface TenantListManagerProps {
 
 export function TenantListManager({ tenants }: TenantListManagerProps) {
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const handleCopyLink = (slug: string, pitch = false) => {
@@ -28,14 +29,23 @@ export function TenantListManager({ tenants }: TenantListManagerProps) {
 
   const handleDelete = (slug: string, name: string) => {
     if (!confirm(`Are you sure you want to remove '${name}' (${slug})?`)) return;
+    setDeleteError(null);
 
     startTransition(async () => {
-      await deleteTenantAction(slug);
+      const res = await deleteTenantAction(slug);
+      if (!res.success) {
+        setDeleteError(res.error);
+      }
     });
   };
 
   return (
     <div className="w-full flex flex-col gap-3 text-left">
+      {deleteError && (
+        <div className="rounded-lg border border-destructive/30 bg-destructive-subtle p-2.5 text-xs font-semibold text-destructive">
+          ✕ {deleteError}
+        </div>
+      )}
       <div className="flex items-center justify-between border-b border-border-default pb-2">
         <h2 className="text-sm font-bold uppercase tracking-wider text-text-muted">
           Active Client Outlets ({tenants.length})

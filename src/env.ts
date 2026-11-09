@@ -34,13 +34,19 @@ const processEnv = {
   NEXT_PUBLIC_AGENCY_WHATSAPP: process.env.NEXT_PUBLIC_AGENCY_WHATSAPP,
 };
 
-const serverParsed = ServerEnvSchema.safeParse(processEnv);
+const isServer = typeof window === "undefined";
+
+const serverParsed = isServer
+  ? ServerEnvSchema.safeParse(processEnv)
+  : ({ success: true, data: {} as z.infer<typeof ServerEnvSchema> } as const);
+
 const clientParsed = ClientEnvSchema.safeParse(processEnv);
 
-if (!serverParsed.success || !clientParsed.success) {
-  const serverErrors = !serverParsed.success
-    ? serverParsed.error.flatten().fieldErrors
-    : {};
+if ((isServer && !serverParsed.success) || !clientParsed.success) {
+  const serverErrors =
+    isServer && !serverParsed.success
+      ? serverParsed.error.flatten().fieldErrors
+      : {};
   const clientErrors = !clientParsed.success
     ? clientParsed.error.flatten().fieldErrors
     : {};
@@ -55,25 +61,27 @@ if (!serverParsed.success || !clientParsed.success) {
   }
 }
 
-const resolvedServerEnv = serverParsed.success
-  ? serverParsed.data
-  : {
-      NODE_ENV: "development" as const,
-      DATABASE_URL: undefined,
-      ADMIN_MASTER_PASSWORD:
-        processEnv.ADMIN_MASTER_PASSWORD && processEnv.ADMIN_MASTER_PASSWORD.length >= 8
-          ? processEnv.ADMIN_MASTER_PASSWORD
-          : "AdminPristine2026!",
-      SESSION_ENCRYPTION_KEY:
-        processEnv.SESSION_ENCRYPTION_KEY && processEnv.SESSION_ENCRYPTION_KEY.length >= 32
-          ? processEnv.SESSION_ENCRYPTION_KEY
-          : "pristine_clean_enterprise_master_key_32_bytes!!",
-      BLOB_READ_WRITE_TOKEN: processEnv.BLOB_READ_WRITE_TOKEN,
-      CLOUDINARY_URL: processEnv.CLOUDINARY_URL,
-      UPSTASH_REDIS_REST_URL: undefined,
-      UPSTASH_REDIS_REST_TOKEN: undefined,
-      LEAD_WEBHOOK_URL: undefined,
-    };
+const resolvedServerEnv = isServer
+  ? serverParsed.success
+    ? serverParsed.data
+    : {
+        NODE_ENV: "development" as const,
+        DATABASE_URL: undefined,
+        ADMIN_MASTER_PASSWORD:
+          processEnv.ADMIN_MASTER_PASSWORD && processEnv.ADMIN_MASTER_PASSWORD.length >= 8
+            ? processEnv.ADMIN_MASTER_PASSWORD
+            : "AdminPristine2026!",
+        SESSION_ENCRYPTION_KEY:
+          processEnv.SESSION_ENCRYPTION_KEY && processEnv.SESSION_ENCRYPTION_KEY.length >= 32
+            ? processEnv.SESSION_ENCRYPTION_KEY
+            : "pristine_clean_enterprise_master_key_32_bytes!!",
+        BLOB_READ_WRITE_TOKEN: processEnv.BLOB_READ_WRITE_TOKEN,
+        CLOUDINARY_URL: processEnv.CLOUDINARY_URL,
+        UPSTASH_REDIS_REST_URL: undefined,
+        UPSTASH_REDIS_REST_TOKEN: undefined,
+        LEAD_WEBHOOK_URL: undefined,
+      }
+  : ({} as z.infer<typeof ServerEnvSchema>);
 
 const resolvedClientEnv = clientParsed.success
   ? clientParsed.data

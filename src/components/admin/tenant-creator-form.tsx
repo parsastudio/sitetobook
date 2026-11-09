@@ -82,8 +82,10 @@ export function TenantCreatorForm() {
       } else {
         setCreatedSlug(result.data.slug);
         setName("");
+        setTagline("");
         setSlug("");
         setCity("");
+        setServiceAreasInput("");
         setPhone("");
         setWhatsappNumber("");
         setEmail("");

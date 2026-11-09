@@ -3,6 +3,28 @@ import { createHash } from "crypto";
 import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from "@/entities/media/schema";
 import { env } from "@/env";
 
+function hasValidImageMagicBytes(buffer: Buffer, contentType: string): boolean {
+  if (buffer.length < 12) return false;
+  if (contentType === "image/jpeg") {
+    return buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+  }
+  if (contentType === "image/png") {
+    return (
+      buffer[0] === 0x89 &&
+      buffer[1] === 0x50 &&
+      buffer[2] === 0x4e &&
+      buffer[3] === 0x47
+    );
+  }
+  if (contentType === "image/webp") {
+    return (
+      buffer.subarray(0, 4).toString("ascii") === "RIFF" &&
+      buffer.subarray(8, 12).toString("ascii") === "WEBP"
+    );
+  }
+  return false;
+}
+
 export async function uploadImageBuffer(
   buffer: Buffer,
   filename: string,
@@ -14,6 +36,10 @@ export async function uploadImageBuffer(
 
   if (buffer.length > MAX_IMAGE_FILE_SIZE) {
     throw new Error("File size exceeds 5MB limit.");
+  }
+
+  if (!hasValidImageMagicBytes(buffer, contentType)) {
+    throw new Error("File content does not match its declared image format.");
   }
 
   const vercelBlobToken = env.BLOB_READ_WRITE_TOKEN;

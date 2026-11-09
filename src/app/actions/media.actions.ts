@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { ActionResponse } from "@/app/actions/tenant.actions";
 import {
   addTenantGalleryItem,
@@ -38,6 +38,8 @@ export async function addGalleryPairAction(
 
     revalidateTag(`tenant-${slug}`, "max");
     revalidateTag("all-tenants", "max");
+    revalidatePath(`/${slug}`);
+    revalidatePath(`/${slug}/owner`);
 
     logAuditEvent({
       action: "GALLERY_UPDATED",
@@ -74,6 +76,8 @@ export async function deleteGalleryPairAction(
 
     revalidateTag(`tenant-${slug}`, "max");
     revalidateTag("all-tenants", "max");
+    revalidatePath(`/${slug}`);
+    revalidatePath(`/${slug}/owner`);
 
     logAuditEvent({
       action: "GALLERY_UPDATED",

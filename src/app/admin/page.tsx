@@ -42,13 +42,7 @@ export default async function AdminDashboardPage() {
             >
               ← Master Directory
             </Link>
-            <form
-              action={async () => {
-                "use server";
-                await logoutAdminAction();
-                redirect("/admin/login");
-              }}
-            >
+            <form action={logoutAdminAction}>
               <button
                 type="submit"
                 className="inline-flex items-center rounded-xl bg-destructive-subtle px-3 py-2 text-xs font-bold text-destructive hover:bg-destructive hover:text-text-inverse transition-colors"

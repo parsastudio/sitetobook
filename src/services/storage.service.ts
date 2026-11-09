@@ -1,6 +1,7 @@
 import "server-only";
 import { createHash } from "crypto";
 import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from "@/entities/media/schema";
+import { env } from "@/env";
 
 export async function uploadImageBuffer(
   buffer: Buffer,
@@ -15,7 +16,7 @@ export async function uploadImageBuffer(
     throw new Error("File size exceeds 5MB limit.");
   }
 
-  const vercelBlobToken = process.env.BLOB_READ_WRITE_TOKEN;
+  const vercelBlobToken = env.BLOB_READ_WRITE_TOKEN;
   if (vercelBlobToken) {
     const cleanFilename = `${Date.now()}-${filename.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
     const response = await fetch(
@@ -37,7 +38,7 @@ export async function uploadImageBuffer(
     }
   }
 
-  const cloudinaryUrl = process.env.CLOUDINARY_URL;
+  const cloudinaryUrl = env.CLOUDINARY_URL;
   if (cloudinaryUrl) {
     const matches = cloudinaryUrl.match(/cloudinary:\/\/([^:]+):([^@]+)@([^/]+)/);
     if (matches) {

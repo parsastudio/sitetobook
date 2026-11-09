@@ -8,6 +8,11 @@ const ServerEnvSchema = z.object({
     .string()
     .min(32, "SESSION_ENCRYPTION_KEY must be at least 32 characters for AES-256")
     .default("pristine_clean_enterprise_master_key_32_bytes!!"),
+  BLOB_READ_WRITE_TOKEN: z.string().optional(),
+  CLOUDINARY_URL: z.string().optional(),
+  UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
+  LEAD_WEBHOOK_URL: z.string().url().optional(),
 });
 
 const ClientEnvSchema = z.object({
@@ -20,6 +25,11 @@ const processEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
   ADMIN_MASTER_PASSWORD: process.env.ADMIN_MASTER_PASSWORD,
   SESSION_ENCRYPTION_KEY: process.env.SESSION_ENCRYPTION_KEY,
+  BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
+  CLOUDINARY_URL: process.env.CLOUDINARY_URL,
+  UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+  UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
+  LEAD_WEBHOOK_URL: process.env.LEAD_WEBHOOK_URL,
   NEXT_PUBLIC_ROOT_DOMAIN: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
   NEXT_PUBLIC_AGENCY_WHATSAPP: process.env.NEXT_PUBLIC_AGENCY_WHATSAPP,
 };
@@ -58,6 +68,11 @@ const resolvedServerEnv = serverParsed.success
         processEnv.SESSION_ENCRYPTION_KEY && processEnv.SESSION_ENCRYPTION_KEY.length >= 32
           ? processEnv.SESSION_ENCRYPTION_KEY
           : "pristine_clean_enterprise_master_key_32_bytes!!",
+      BLOB_READ_WRITE_TOKEN: processEnv.BLOB_READ_WRITE_TOKEN,
+      CLOUDINARY_URL: processEnv.CLOUDINARY_URL,
+      UPSTASH_REDIS_REST_URL: undefined,
+      UPSTASH_REDIS_REST_TOKEN: undefined,
+      LEAD_WEBHOOK_URL: undefined,
     };
 
 const resolvedClientEnv = clientParsed.success

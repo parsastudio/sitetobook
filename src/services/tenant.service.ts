@@ -5,11 +5,12 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import {
   tenantsTable,
-  tenantGalleryTable,
   TenantRecord,
 } from "@/db/schema";
 import {
   BeforeAfterItem,
+  DEFAULT_ACCENT_COLOR,
+  DEFAULT_PRIMARY_COLOR,
   Tenant,
   TenantSchema,
 } from "@/entities/tenant/schema";
@@ -35,8 +36,8 @@ function mapRecordToEntity(record: TenantRecord): Tenant {
         serviceAreas: record.serviceAreas || [],
       },
       themeOverrides: {
-        primaryColor: record.primaryColor || "#0F766E",
-        accentColor: record.accentColor || "#0D9488",
+        primaryColor: record.primaryColor || DEFAULT_PRIMARY_COLOR,
+        accentColor: record.accentColor || DEFAULT_ACCENT_COLOR,
       },
       operatingHours: record.operatingHours || "Mon - Sat: 8:00 AM - 6:00 PM",
     },
@@ -131,23 +132,7 @@ export async function getTenantBySlug(slug: string): Promise<Tenant | null> {
         .limit(1);
 
       if (records.length > 0) {
-        const entity = mapRecordToEntity(records[0]);
-        const galleryRecords = await db
-          .select()
-          .from(tenantGalleryTable)
-          .where(eq(tenantGalleryTable.tenantId, records[0].id));
-
-        if (galleryRecords.length > 0) {
-          entity.gallery = galleryRecords.map((g) => ({
-            id: g.id,
-            title: g.title,
-            area: g.area,
-            beforeImage: g.beforeImage,
-            afterImage: g.afterImage,
-          }));
-        }
-
-        return entity;
+        return mapRecordToEntity(records[0]);
       }
       return null;
     } catch (error) {
@@ -194,12 +179,12 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
           whatsappNumber: validated.brand.whatsappNumber,
           email: validated.brand.email,
           ownerPinHash: validated.brand.ownerPinHash,
-          customDomain: validated.brand.customDomain,
+          customDomain: validated.brand.customDomain ?? null,
           city: validated.brand.location.city,
           state: validated.brand.location.state,
           serviceAreas: validated.brand.location.serviceAreas,
-          primaryColor: validated.brand.themeOverrides?.primaryColor || "#0F766E",
-          accentColor: validated.brand.themeOverrides?.accentColor || "#0D9488",
+          primaryColor: validated.brand.themeOverrides?.primaryColor || DEFAULT_PRIMARY_COLOR,
+          accentColor: validated.brand.themeOverrides?.accentColor || DEFAULT_ACCENT_COLOR,
           operatingHours: validated.brand.operatingHours,
           currencySymbol: validated.pricing.currencySymbol,
           baseDispatchFee: validated.pricing.baseDispatchFee,
@@ -222,12 +207,12 @@ export async function saveTenant(tenant: Tenant): Promise<void> {
             whatsappNumber: validated.brand.whatsappNumber,
             email: validated.brand.email,
             ownerPinHash: validated.brand.ownerPinHash,
-            customDomain: validated.brand.customDomain,
+            customDomain: validated.brand.customDomain ?? null,
             city: validated.brand.location.city,
             state: validated.brand.location.state,
             serviceAreas: validated.brand.location.serviceAreas,
-            primaryColor: validated.brand.themeOverrides?.primaryColor || "#0F766E",
-            accentColor: validated.brand.themeOverrides?.accentColor || "#0D9488",
+            primaryColor: validated.brand.themeOverrides?.primaryColor || DEFAULT_PRIMARY_COLOR,
+            accentColor: validated.brand.themeOverrides?.accentColor || DEFAULT_ACCENT_COLOR,
             operatingHours: validated.brand.operatingHours,
             currencySymbol: validated.pricing.currencySymbol,
             baseDispatchFee: validated.pricing.baseDispatchFee,
@@ -306,26 +291,15 @@ export async function addTenantGalleryItem(
 
       if (records.length > 0) {
         const tenantId = records[0].id;
-        await db.insert(tenantGalleryTable).values({
-          id: newItemId,
-          tenantId,
-          title: item.title,
-          area: item.area,
-          beforeImage: item.beforeImage,
-          afterImage: item.afterImage,
-        });
-
-        const updatedGallery = [
-          { id: newItemId, ...item },
-          ...(records[0].gallery || []),
-        ];
+        const createdItem: BeforeAfterItem = { id: newItemId, ...item };
+        const updatedGallery = [createdItem, ...(records[0].gallery || [])];
 
         await db
           .update(tenantsTable)
           .set({ gallery: updatedGallery, updatedAt: new Date() })
           .where(eq(tenantsTable.id, tenantId));
 
-        return { id: newItemId, ...item };
+        return createdItem;
       }
       throw new Error("Tenant outlet not found.");
     } catch (error) {
@@ -368,13 +342,12 @@ export async function deleteTenantGalleryItem(
 
       if (records.length > 0) {
         const tenantId = records[0].id;
-        await db
-          .delete(tenantGalleryTable)
-          .where(eq(tenantGalleryTable.id, itemId));
+        const currentGallery = records[0].gallery || [];
+        const updatedGallery = currentGallery.filter((g) => g.id !== itemId);
 
-        const updatedGallery = (records[0].gallery || []).filter(
-          (g) => g.id !== itemId
-        );
+        if (updatedGallery.length === currentGallery.length) {
+          return false;
+        }
 
         await db
           .update(tenantsTable)
@@ -400,7 +373,12 @@ export async function deleteTenantGalleryItem(
   const tenant = fileStore[normalizedSlug];
   if (!tenant) return false;
 
+  const prevCount = tenant.gallery.length;
   tenant.gallery = tenant.gallery.filter((g) => g.id !== itemId);
+  if (tenant.gallery.length === prevCount) {
+    return false;
+  }
+
   await writeTenantsFile(fileStore);
   return true;
 }

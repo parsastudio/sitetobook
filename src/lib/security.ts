@@ -13,7 +13,9 @@ const scryptAsync = promisify(scrypt);
 
 import { env } from "@/env";
 
-const MASTER_ENCRYPTION_KEY = env.SESSION_ENCRYPTION_KEY.slice(0, 32);
+const MASTER_ENCRYPTION_KEY = createHash("sha256")
+  .update(env.SESSION_ENCRYPTION_KEY)
+  .digest();
 
 export interface SessionPayload {
   slug: string;
@@ -60,7 +62,7 @@ export function verifyTimingSafeString(input: string, secret: string): boolean {
 // 2. Encrypted Session Management using AES-256-GCM
 export function encryptSessionToken(payload: SessionPayload): string {
   const iv = randomBytes(12);
-  const cipher = createCipheriv("aes-256-gcm", Buffer.from(MASTER_ENCRYPTION_KEY), iv);
+  const cipher = createCipheriv("aes-256-gcm", MASTER_ENCRYPTION_KEY, iv);
 
   const serialized = JSON.stringify(payload);
   let encrypted = cipher.update(serialized, "utf8", "hex");
@@ -81,9 +83,13 @@ export function decryptSessionToken(token: string): SessionPayload | null {
     const iv = Buffer.from(ivHex, "hex");
     const authTag = Buffer.from(authTagHex, "hex");
 
+    if (iv.length !== 12 || authTag.length !== 16) {
+      return null;
+    }
+
     const decipher = createDecipheriv(
       "aes-256-gcm",
-      Buffer.from(MASTER_ENCRYPTION_KEY),
+      MASTER_ENCRYPTION_KEY,
       iv
     );
     decipher.setAuthTag(authTag);

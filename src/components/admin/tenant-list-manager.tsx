@@ -2,7 +2,12 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
-import { Tenant } from "@/entities/tenant/schema";
+import {
+  buildSmsHref,
+  DEFAULT_ACCENT_COLOR,
+  DEFAULT_PRIMARY_COLOR,
+  Tenant,
+} from "@/entities/tenant/schema";
 import { deleteTenantAction } from "@/app/actions/tenant.actions";
 
 interface TenantListManagerProps {
@@ -40,6 +45,11 @@ export function TenantListManager({ tenants }: TenantListManagerProps) {
         </span>
       </div>
 
+      {tenants.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-border-default bg-surface p-8 text-center text-xs text-text-muted">
+          No client portals provisioned yet. Use the generator above to launch your first outlet.
+        </div>
+      ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {tenants.map((t) => (
           <div
@@ -59,12 +69,12 @@ export function TenantListManager({ tenants }: TenantListManagerProps) {
                 <div className="flex items-center gap-1">
                   <span
                     className="h-3 w-3 rounded-full border border-border-default"
-                    style={{ backgroundColor: t.brand.themeOverrides?.primaryColor || "#0F766E" }}
+                    style={{ backgroundColor: t.brand.themeOverrides?.primaryColor || DEFAULT_PRIMARY_COLOR }}
                     title="Primary"
                   />
                   <span
                     className="h-2.5 w-2.5 rounded-full border border-border-default"
-                    style={{ backgroundColor: t.brand.themeOverrides?.accentColor || "#0D9488" }}
+                    style={{ backgroundColor: t.brand.themeOverrides?.accentColor || DEFAULT_ACCENT_COLOR }}
                     title="Accent"
                   />
                 </div>
@@ -100,7 +110,7 @@ export function TenantListManager({ tenants }: TenantListManagerProps) {
 
               <div className="flex items-center gap-1.5">
                 <a
-                  href={`sms:${t.brand.phone}?&body=Test%20ping`}
+                  href={buildSmsHref(t.brand.phone, "Test ping")}
                   className="rounded bg-emerald-500/10 px-2 py-1 text-xs font-semibold text-emerald-700 hover:bg-emerald-600 hover:text-white transition-colors"
                   title="Send Test SMS"
                 >
@@ -129,6 +139,7 @@ export function TenantListManager({ tenants }: TenantListManagerProps) {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 }

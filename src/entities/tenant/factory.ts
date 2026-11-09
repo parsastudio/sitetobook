@@ -1,4 +1,9 @@
-import { CreateTenantInput, Tenant, TenantSchema } from "@/entities/tenant/schema";
+import {
+  CreateTenantInput,
+  formatPhoneDisplay,
+  Tenant,
+  TenantSchema,
+} from "@/entities/tenant/schema";
 
 export function createDefaultTenant(
   input: CreateTenantInput,
@@ -10,7 +15,7 @@ export function createDefaultTenant(
       tagline: input.tagline,
       slug: input.slug,
       phone: input.phone,
-      formattedPhone: input.phone,
+      formattedPhone: formatPhoneDisplay(input.phone),
       whatsappNumber: input.whatsappNumber,
       email: input.email,
       ownerPinHash,

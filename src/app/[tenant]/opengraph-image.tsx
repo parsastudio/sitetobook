@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getTenantBySlug } from "@/services/tenant.service";
+import { DEFAULT_ACCENT_COLOR, DEFAULT_PRIMARY_COLOR } from "@/entities/tenant/schema";
 
 export const size = {
   width: 1200,
@@ -22,8 +23,8 @@ export default async function OpenGraphImage({
   const tagline = tenant?.brand.tagline ?? "Five-Star Professional House Cleaning";
   const rating = tenant?.trust.googleRating ?? 4.9;
   const reviewCount = tenant?.trust.googleReviewCount ?? 150;
-  const primaryColor = tenant?.brand.themeOverrides?.primaryColor ?? "#0F766E";
-  const accentColor = tenant?.brand.themeOverrides?.accentColor ?? "#0D9488";
+  const primaryColor = tenant?.brand.themeOverrides?.primaryColor ?? DEFAULT_PRIMARY_COLOR;
+  const accentColor = tenant?.brand.themeOverrides?.accentColor ?? DEFAULT_ACCENT_COLOR;
   const initial = businessName.charAt(0);
 
   return new ImageResponse(

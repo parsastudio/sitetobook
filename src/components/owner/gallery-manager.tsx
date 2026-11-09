@@ -267,6 +267,11 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
           Active Comparisons ({items.length})
         </span>
 
+        {items.length === 0 ? (
+          <div className="rounded-xl border border-dashed border-border-default bg-subtle/50 p-6 text-center text-xs text-text-muted">
+            No Before/After comparisons uploaded yet. Add your first transformation above.
+          </div>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {items.map((item) => (
             <div
@@ -304,6 +309,7 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
             </div>
           ))}
         </div>
+        )}
       </div>
     </div>
   );

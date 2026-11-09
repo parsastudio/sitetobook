@@ -1,20 +1,25 @@
+import { TrustAndProof } from "@/entities/tenant/schema";
 import { ShieldCheckIcon, SearchCheckIcon, SparkleIcon, TagIcon } from "@/components/ui/icons";
 
-export function TenantTrustStrip() {
+interface TenantTrustStripProps {
+  trust?: TrustAndProof;
+}
+
+export function TenantTrustStrip({ trust }: TenantTrustStripProps) {
   const guarantees = [
     {
-      title: "Commercial Coverage",
-      caption: "Active policy through Hiscox",
+      title: trust?.bondedAndInsured ? "Bonded & Insured" : "Commercial Coverage",
+      caption: trust?.insurancePolicyDetails || "Active policy through Hiscox",
       Icon: ShieldCheckIcon,
     },
     {
       title: "Strict Background Check",
-      caption: "Nationwide screening clearance",
+      caption: trust?.backgroundCheckGuarantee || "Nationwide screening clearance",
       Icon: SearchCheckIcon,
     },
     {
-      title: "Clean Equipment Guarantee",
-      caption: "Fresh sanitized microfibers per home",
+      title: "24h Sparkle Guarantee",
+      caption: trust?.satisfactionGuarantee || "Fresh sanitized microfibers per home",
       Icon: SparkleIcon,
     },
     {
@@ -32,9 +37,9 @@ export function TenantTrustStrip() {
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border-default bg-subtle text-primary shadow-xs">
               <Icon className="h-5 w-5" />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col min-w-0">
               <span className="text-xs font-bold text-text-primary">{title}</span>
-              <span className="text-[11px] text-text-muted mt-0.5">{caption}</span>
+              <span className="text-[11px] text-text-muted mt-0.5 line-clamp-2">{caption}</span>
             </div>
           </div>
         ))}

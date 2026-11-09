@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { createTenantAction } from "@/app/actions/tenant.actions";
+import { DEFAULT_ACCENT_COLOR, DEFAULT_PRIMARY_COLOR } from "@/entities/tenant/schema";
 
 const COLOR_PRESETS = [
+  { name: "Emerald Heritage", primary: DEFAULT_PRIMARY_COLOR, accent: DEFAULT_ACCENT_COLOR },
   { name: "Spruce & Mint", primary: "#0F766E", accent: "#0D9488" },
   { name: "Ocean Navy", primary: "#1E3A8A", accent: "#0284C7" },
-  { name: "Botanical Forest", primary: "#065F46", accent: "#059669" },
   { name: "Royal Purple", primary: "#4C1D95", accent: "#7C3AED" },
 ];
 
@@ -24,8 +26,8 @@ export function TenantCreatorForm() {
   const [phone, setPhone] = useState("");
   const [whatsappNumber, setWhatsappNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [primaryColor, setPrimaryColor] = useState("#0F766E");
-  const [accentColor, setAccentColor] = useState("#0D9488");
+  const [primaryColor, setPrimaryColor] = useState(DEFAULT_PRIMARY_COLOR);
+  const [accentColor, setAccentColor] = useState(DEFAULT_ACCENT_COLOR);
   const [baseDispatchFee, setBaseDispatchFee] = useState(49);
   const [ratePerBedroom, setRatePerBedroom] = useState(35);
   const [ratePerBathroom, setRatePerBathroom] = useState(40);
@@ -111,14 +113,13 @@ export function TenantCreatorForm() {
           <span className="text-xs font-bold text-success">
             ✓ Site created: <strong className="font-mono">{createdSlug}</strong>
           </span>
-          <a
+          <Link
             href={`/${createdSlug}`}
             target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-lg bg-primary px-3 py-1 text-xs font-bold text-text-inverse hover:bg-primary-hover"
           >
             Open Portal →
-          </a>
+          </Link>
         </div>
       )}
 

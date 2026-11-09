@@ -26,7 +26,12 @@ export function QuoteCalculator({ tenant }: QuoteCalculatorProps) {
   const [bedrooms, setBedrooms] = useState<number>(2);
   const [bathrooms, setBathrooms] = useState<number>(2);
   const [serviceType, setServiceType] = useState<CleaningType>("deep");
-  const [selectedAddOns, setSelectedAddOns] = useState<string[]>(["oven"]);
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>(() => {
+    const defaultOven = pricing.addOns.find(
+      (a) => a.id === "oven" && a.enabled !== false
+    );
+    return defaultOven ? ["oven"] : [];
+  });
 
   const quote = useMemo(() => {
     return calculateCleaningQuote(tenant, {

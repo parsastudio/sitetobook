@@ -31,7 +31,10 @@ export function calculateCleaningQuote(
   const finalEstimatedTotal = serviceTotal + addOnsTotal;
 
   const selectedAddOnNames = selectedAddOnIds
-    .map((id) => pricing.addOns.find((a) => a.id === id)?.name)
+    .map(
+      (id) =>
+        pricing.addOns.find((a) => a.id === id && a.enabled !== false)?.name
+    )
     .filter(Boolean);
 
   const addOnsSummary =

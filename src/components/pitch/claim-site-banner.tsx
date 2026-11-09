@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { buildSmsHref, PublicTenant } from "@/entities/tenant/schema";
 import { submitClaimLeadAction } from "@/app/actions/lead.actions";
 import { SpeedIcon, MessageTextIcon, ShieldCheckIcon, SparkleIcon } from "@/components/ui/icons";
+import { env } from "@/env";
 
 interface ClaimSiteBannerProps {
   tenant: PublicTenant;
@@ -27,7 +28,7 @@ function ClaimSiteBannerInner({ tenant }: ClaimSiteBannerProps) {
   }
 
   const agencyContactNumber =
-    process.env.NEXT_PUBLIC_AGENCY_WHATSAPP || tenant.brand.phone;
+    env.NEXT_PUBLIC_AGENCY_WHATSAPP || tenant.brand.phone;
 
   const claimSmsUrl = buildSmsHref(
     agencyContactNumber,

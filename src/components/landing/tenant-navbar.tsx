@@ -13,7 +13,7 @@ interface TenantNavbarProps {
 
 export function TenantNavbar({ brand }: TenantNavbarProps) {
   const pathname = usePathname();
-  const isOwnerPage = pathname?.includes("/owner");
+  const isOwnerPage = pathname?.endsWith("/owner") ?? false;
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,13 +28,15 @@ export function TenantNavbar({ brand }: TenantNavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isOwnerPage]);
 
-  const headerClasses = isOwnerPage
-    ? "sticky top-0 z-50 w-full border-b border-border-default bg-primary text-text-inverse"
-    : `absolute top-0 inset-x-0 z-50 w-full md:fixed transition-all duration-300 ${
-        isScrolled
-          ? "md:border-b md:border-border-default md:bg-surface/85 md:backdrop-blur-xl md:shadow-xs"
-          : "border-b border-transparent bg-transparent"
-      }`;
+  if (isOwnerPage) {
+    return null;
+  }
+
+  const headerClasses = `absolute top-0 inset-x-0 z-50 w-full md:fixed transition-all duration-300 ${
+    isScrolled
+      ? "md:border-b md:border-border-default md:bg-surface/85 md:backdrop-blur-xl md:shadow-xs"
+      : "border-b border-transparent bg-transparent"
+  }`;
 
   return (
     <header className={headerClasses}>

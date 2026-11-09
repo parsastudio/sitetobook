@@ -42,24 +42,26 @@ async function CachedTenantLandingView({ slug }: { slug: string }) {
   return (
     <div className="flex flex-col items-center w-full">
       <TenantHero brand={brand} trust={trust} />
-      <TenantTrustStrip />
+      <TenantTrustStrip trust={trust} />
 
-      <section id="before-after" className="w-full bg-surface py-16 px-4 sm:px-6 border-b border-border-default scroll-mt-20">
-        <div className="mx-auto max-w-4xl flex flex-col items-center gap-8 text-center">
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-xs font-black uppercase tracking-wider text-primary">
-              Real Local Proof
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-normal text-text-primary tracking-tight">
-              Before & After <span className="font-serif italic text-primary">Transformations</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-text-secondary max-w-md">
-              Slide to see the difference our deep sanitization makes in actual {brand.location.city} homes.
-            </p>
+      {gallery.length > 0 && (
+        <section id="before-after" className="w-full bg-surface py-16 px-4 sm:px-6 border-b border-border-default scroll-mt-20">
+          <div className="mx-auto max-w-4xl flex flex-col items-center gap-8 text-center">
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-xs font-black uppercase tracking-wider text-primary">
+                Real Local Proof
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-normal text-text-primary tracking-tight">
+                Before & After <span className="font-serif italic text-primary">Transformations</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-text-secondary max-w-md">
+                Slide to see the difference our deep sanitization makes in actual {brand.location.city} homes.
+              </p>
+            </div>
+            <BeforeAfterSlider items={gallery} />
           </div>
-          <BeforeAfterSlider items={gallery} />
-        </div>
-      </section>
+        </section>
+      )}
 
       <div id="how-it-works" className="w-full scroll-mt-20">
         <TenantHowItWorks />

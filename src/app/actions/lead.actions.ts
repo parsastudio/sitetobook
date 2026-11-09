@@ -6,6 +6,7 @@ import { ClaimLeadInputSchema } from "@/entities/lead/schema";
 import { getClientIp } from "@/lib/network";
 import { checkRateLimit } from "@/lib/rate-limiter";
 import { logAuditEvent } from "@/lib/logger";
+import { env } from "@/env";
 
 export async function submitClaimLeadAction(
   rawInput: unknown
@@ -45,7 +46,7 @@ export async function submitClaimLeadAction(
       },
     });
 
-    const webhookUrl = process.env.LEAD_WEBHOOK_URL;
+    const webhookUrl = env.LEAD_WEBHOOK_URL;
     if (webhookUrl) {
       try {
         await fetch(webhookUrl, {

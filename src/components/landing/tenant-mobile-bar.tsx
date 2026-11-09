@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { PublicBrandConfig, TrustAndProof } from "@/entities/tenant/schema";
 import { ScrollToCalculatorButton } from "@/components/landing/scroll-to-calculator-button";
 import { PhoneIcon } from "@/components/ui/icons";
@@ -10,6 +11,11 @@ interface TenantMobileBarProps {
 }
 
 export function TenantMobileBar({ brand, trust }: TenantMobileBarProps) {
+  const pathname = usePathname();
+  if (pathname?.endsWith("/owner")) {
+    return null;
+  }
+
   return (
     <aside
       aria-label="Mobile quick actions"

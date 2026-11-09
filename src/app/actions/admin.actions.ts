@@ -1,6 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { ActionResponse } from "@/app/actions/tenant.actions";
 import { clearAdminSession, setAdminSession } from "@/lib/auth-guard";
 import { getClientIp } from "@/lib/network";
@@ -65,17 +66,13 @@ export async function loginAdminAction(
   }
 }
 
-export async function logoutAdminAction(): Promise<ActionResponse<boolean>> {
-  try {
-    await clearAdminSession();
-    logAuditEvent({
-      action: "ADMIN_LOGOUT",
-      actor: { role: "master-admin" },
-      target: "system-admin",
-      status: "success",
-    });
-    return { success: true, data: true };
-  } catch {
-    return { success: false, error: "Failed to logout admin session" };
-  }
+export async function logoutAdminAction(): Promise<void> {
+  await clearAdminSession();
+  logAuditEvent({
+    action: "ADMIN_LOGOUT",
+    actor: { role: "master-admin" },
+    target: "system-admin",
+    status: "success",
+  });
+  redirect("/admin/login");
 }

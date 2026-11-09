@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+export const DEFAULT_PRIMARY_COLOR = "#0a3326";
+export const DEFAULT_ACCENT_COLOR = "#115e45";
+
 export const CleaningTypeSchema = z.enum(["standard", "deep", "move-in-out"]);
 export type CleaningType = z.infer<typeof CleaningTypeSchema>;
 
@@ -165,6 +168,17 @@ export function buildSmsHref(phone: string, body: string): string {
   return `sms:${sanitizedPhone}?body=${encodeURIComponent(body)}`;
 }
 
+export function formatPhoneDisplay(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.length === 10) {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  }
+  if (digits.length === 11 && digits.startsWith("1")) {
+    return `+1 (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7)}`;
+  }
+  return phone.trim();
+}
+
 export const QuoteCalculationInputSchema = z.object({
   bedrooms: z.number().int().min(0).max(10),
   bathrooms: z.number().min(1).max(10),
@@ -201,11 +215,11 @@ export const CreateTenantInputSchema = z.object({
   primaryColor: z
     .string()
     .regex(/^#([0-9a-fA-F]{3}){1,2}$/, "Invalid primary hex color")
-    .default("#0a3326"),
+    .default(DEFAULT_PRIMARY_COLOR),
   accentColor: z
     .string()
     .regex(/^#([0-9a-fA-F]{3}){1,2}$/, "Invalid accent hex color")
-    .default("#115e45"),
+    .default(DEFAULT_ACCENT_COLOR),
   baseDispatchFee: z.coerce.number().min(0).default(49),
   ratePerBedroom: z.coerce.number().min(1).default(35),
   ratePerBathroom: z.coerce.number().min(1).default(40),

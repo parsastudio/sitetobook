@@ -1,4 +1,5 @@
 import "server-only";
+import { env } from "@/env";
 
 interface RateLimitRecord {
   attempts: number;
@@ -20,8 +21,8 @@ export async function checkRateLimit(
   maxAttempts = 5,
   windowMs = 10 * 60 * 1000
 ): Promise<{ allowed: boolean; remaining: number; retryAfterSeconds: number }> {
-  const upstashUrl = process.env.UPSTASH_REDIS_REST_URL;
-  const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const upstashUrl = env.UPSTASH_REDIS_REST_URL;
+  const upstashToken = env.UPSTASH_REDIS_REST_TOKEN;
 
   if (upstashUrl && upstashToken) {
     try {
@@ -92,8 +93,8 @@ export async function checkRateLimit(
 }
 
 export async function resetRateLimit(key: string): Promise<void> {
-  const upstashUrl = process.env.UPSTASH_REDIS_REST_URL;
-  const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const upstashUrl = env.UPSTASH_REDIS_REST_URL;
+  const upstashToken = env.UPSTASH_REDIS_REST_TOKEN;
 
   if (upstashUrl && upstashToken) {
     try {

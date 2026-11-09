@@ -4,6 +4,8 @@ import {
   BeforeAfterItem,
   ChecklistCategory,
   CleaningServiceType,
+  DEFAULT_ACCENT_COLOR,
+  DEFAULT_PRIMARY_COLOR,
   FAQItem,
   ReviewItem,
 } from "@/entities/tenant/schema";
@@ -24,8 +26,8 @@ export const tenantsTable = pgTable("tenants", {
   city: varchar("city", { length: 64 }).notNull(),
   state: varchar("state", { length: 8 }).notNull(),
   serviceAreas: jsonb("service_areas").$type<string[]>().notNull().default([]),
-  primaryColor: varchar("primary_color", { length: 16 }).default("#0F766E"),
-  accentColor: varchar("accent_color", { length: 16 }).default("#0D9488"),
+  primaryColor: varchar("primary_color", { length: 16 }).default(DEFAULT_PRIMARY_COLOR),
+  accentColor: varchar("accent_color", { length: 16 }).default(DEFAULT_ACCENT_COLOR),
   operatingHours: text("operating_hours").default("Mon - Sat: 8:00 AM - 6:00 PM"),
   currencySymbol: varchar("currency_symbol", { length: 8 }).default("$").notNull(),
   baseDispatchFee: integer("base_dispatch_fee").notNull().default(49),
@@ -49,21 +51,5 @@ export const tenantsTable = pgTable("tenants", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const tenantGalleryTable = pgTable("tenant_gallery", {
-  id: varchar("id", { length: 36 })
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  tenantId: varchar("tenant_id", { length: 36 })
-    .notNull()
-    .references(() => tenantsTable.id, { onDelete: "cascade" }),
-  title: text("title").notNull(),
-  area: varchar("area", { length: 64 }).notNull(),
-  beforeImage: text("before_image").notNull(),
-  afterImage: text("after_image").notNull(),
-  sortOrder: integer("sort_order").notNull().default(0),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
-
 export type TenantRecord = typeof tenantsTable.$inferSelect;
 export type NewTenantRecord = typeof tenantsTable.$inferInsert;
-export type TenantGalleryRecord = typeof tenantGalleryTable.$inferSelect;

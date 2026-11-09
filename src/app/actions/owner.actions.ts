@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 import { revalidateTag } from "next/cache";
-import { OwnerSettingsUpdateSchema } from "@/entities/tenant/schema";
+import { formatPhoneDisplay, OwnerSettingsUpdateSchema } from "@/entities/tenant/schema";
 import { getTenantBySlug, saveTenant } from "@/services/tenant.service";
 import { ActionResponse } from "@/app/actions/tenant.actions";
 import { verifyPasscode } from "@/lib/security";
@@ -134,7 +134,7 @@ export async function updateOwnerSettingsAction(
 
     // 3. Update direct dispatch lines
     tenant.brand.phone = input.phone;
-    tenant.brand.formattedPhone = input.phone;
+    tenant.brand.formattedPhone = formatPhoneDisplay(input.phone);
     tenant.brand.whatsappNumber = input.whatsappNumber;
 
     // 4. Update service territories

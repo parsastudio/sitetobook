@@ -37,7 +37,10 @@ export async function proxy(request: NextRequest) {
   else if (
     hostname !== rootDomain &&
     hostname !== "localhost" &&
+    hostname !== "127.0.0.1" &&
+    hostname !== "::1" &&
     !hostname.endsWith(".localhost") &&
+    !hostname.endsWith(".vercel.app") &&
     !hostname.startsWith("admin.")
   ) {
     isCustomDomain = true;

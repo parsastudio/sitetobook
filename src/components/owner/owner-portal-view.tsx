@@ -284,16 +284,14 @@ export function OwnerPortalView({
 
   if (!isAuthenticated) {
     return (
-      <div className="relative flex min-h-[85vh] flex-col items-center justify-center px-4 py-12 overflow-hidden">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-
-        <div className="w-full max-w-sm rounded-3xl border border-primary/20 bg-surface/90 p-7 sm:p-9 shadow-2xl backdrop-blur-xl flex flex-col items-center gap-6">
-          <div className="flex flex-col items-center gap-3 text-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-text-inverse shadow-md border border-white/20">
-              <LockIcon className="h-5 w-5" />
+      <div className="relative flex min-h-dvh flex-col items-center justify-center p-4 overflow-hidden">
+        <div className="w-full max-w-xs rounded-3xl border border-border-default bg-surface p-5 sm:p-6 shadow-xl flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-2 text-center">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-text-inverse shadow-xs">
+              <LockIcon className="h-4 w-4" />
             </div>
             <div className="flex flex-col">
-              <h1 className="text-lg font-serif font-bold tracking-tight text-text-primary">
+              <h1 className="text-base font-serif font-bold tracking-tight text-text-primary line-clamp-1">
                 {brand.name}
               </h1>
               <span className="text-[10px] font-black text-primary uppercase tracking-widest mt-0.5">
@@ -302,16 +300,16 @@ export function OwnerPortalView({
             </div>
           </div>
 
-          <div className="flex items-center gap-4 my-1">
+          <div className="flex items-center gap-3.5 py-0.5">
             {[0, 1, 2, 3].map((idx) => {
               const isFilled = pin.length > idx;
               return (
                 <div
                   key={idx}
-                  className={`h-3.5 w-3.5 rounded-full border-2 transition-all duration-200 ${
+                  className={`h-3 w-3 rounded-full border-2 transition-all duration-150 ${
                     isFilled
-                      ? "border-primary bg-primary scale-125 shadow-xs"
-                      : "border-border-default bg-canvas/80"
+                      ? "border-primary bg-primary scale-110"
+                      : "border-border-default bg-canvas"
                   }`}
                 />
               );
@@ -319,19 +317,19 @@ export function OwnerPortalView({
           </div>
 
           {pinError && (
-            <div className="w-full rounded-xl border border-destructive/30 bg-destructive-subtle px-3.5 py-2 text-xs font-bold text-destructive text-center">
+            <div className="w-full rounded-xl border border-destructive/30 bg-destructive-subtle px-3 py-1.5 text-[11px] font-bold text-destructive text-center">
               ✕ {pinError}
             </div>
           )}
 
-          <div className="grid grid-cols-3 gap-2.5 w-full max-w-[250px]">
+          <div className="grid grid-cols-3 gap-2 w-full max-w-[228px]">
             {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((digit) => (
               <button
                 key={digit}
                 type="button"
                 disabled={isVerifying}
                 onClick={() => handleKeyClick(digit)}
-                className="flex h-13 items-center justify-center rounded-2xl border border-border-default/90 bg-canvas/70 text-lg font-black text-text-primary shadow-xs transition-all hover:border-primary/50 hover:bg-surface hover:scale-[1.03] active:scale-95 disabled:opacity-50"
+                className="flex h-11 items-center justify-center rounded-xl border border-border-default bg-canvas text-base font-black text-text-primary shadow-2xs transition-all hover:border-primary/50 hover:bg-surface active:scale-95 disabled:opacity-50"
               >
                 {digit}
               </button>
@@ -339,7 +337,7 @@ export function OwnerPortalView({
             <button
               type="button"
               onClick={handleClear}
-              className="flex h-13 items-center justify-center rounded-2xl border border-transparent bg-transparent text-xs font-extrabold text-text-muted hover:text-text-primary transition-colors"
+              className="flex h-11 items-center justify-center rounded-xl text-xs font-bold text-text-muted hover:text-text-primary transition-colors"
             >
               Clear
             </button>
@@ -347,26 +345,35 @@ export function OwnerPortalView({
               type="button"
               disabled={isVerifying}
               onClick={() => handleKeyClick("0")}
-              className="flex h-13 items-center justify-center rounded-2xl border border-border-default/90 bg-canvas/70 text-lg font-black text-text-primary shadow-xs transition-all hover:border-primary/50 hover:bg-surface hover:scale-[1.03] active:scale-95 disabled:opacity-50"
+              className="flex h-11 items-center justify-center rounded-xl border border-border-default bg-canvas text-base font-black text-text-primary shadow-2xs transition-all hover:border-primary/50 hover:bg-surface active:scale-95 disabled:opacity-50"
             >
               0
             </button>
             <button
               type="button"
               onClick={handleBackspace}
-              className="flex h-13 items-center justify-center rounded-2xl border border-transparent bg-transparent text-sm font-extrabold text-text-muted hover:text-text-primary transition-colors"
+              className="flex h-11 items-center justify-center rounded-xl text-sm font-bold text-text-muted hover:text-text-primary transition-colors"
             >
               ⌫
             </button>
           </div>
 
-          <div className="flex flex-col items-center gap-1.5 border-t border-border-default/80 pt-4 w-full text-center">
-            <span className="text-[11px] text-text-muted font-medium">
-              Physical keyboard input supported
+          <div className="flex items-center justify-between border-t border-border-subtle pt-3 w-full text-[11px]">
+            <span className="text-text-muted font-medium">
+              Demo PIN: <strong className="font-mono text-text-primary">1234</strong>
             </span>
-            <span className="text-[11px] text-text-secondary font-bold">
-              Default demo PIN: <strong className="font-mono text-primary">1234</strong>
-            </span>
+            <button
+              type="button"
+              disabled={isVerifying}
+              onClick={() => {
+                setPinError(null);
+                setPin("1234");
+                submitPin("1234");
+              }}
+              className="rounded-lg bg-primary-subtle px-2.5 py-1 font-bold text-primary hover:bg-primary hover:text-text-inverse transition-colors"
+            >
+              {isVerifying ? "Unlocking..." : "Quick Unlock →"}
+            </button>
           </div>
         </div>
       </div>

@@ -118,7 +118,7 @@
           "text": "Extremely respectful and quiet while I worked from home. They left our kitchen sparkling like a five-star hotel suite. Worth every dollar.",
           "serviceUsed": "Deep Sanitization Clean",
           "date": "3 days ago",
-          "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80"
+          "avatarUrl": "/images/avatar-female-1.jpeg"
         },
         {
           "id": "rev-2",
@@ -128,17 +128,17 @@
           "text": "Immaculate clean and our oven looks brand new. Giving 4 stars only because weekend slots filled up fast—had to book Tuesday. Booking earlier next time!",
           "serviceUsed": "Standard Maintenance + Oven Detail",
           "date": "1 week ago",
-          "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
+          "avatarUrl": "/images/avatar-male-1.jpeg"
         },
         {
           "id": "rev-3",
-          "author": "Elena R.",
+          "author": "Ethan R.",
           "neighborhood": "Lakewood",
           "rating": 5,
           "text": "Received my full security deposit back on move-out! Our landlord literally said it was the cleanest apartment inspection he conducted this year.",
           "serviceUsed": "Move-In / Move-Out Clean",
           "date": "2 weeks ago",
-          "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150&q=80"
+          "avatarUrl": "/images/avatar-male-2.jpeg"
         }
       ]
     },
@@ -272,19 +272,19 @@
         "id": "gal-1",
         "title": "Chef's Gas Range & Backsplash Restoration",
         "area": "Kitchen Deep Detail",
-        "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/before-after-kitchen.jpg"
       },
       {
         "id": "gal-2",
         "title": "Master Ensuite Tile & Glass Enclosure",
         "area": "Bathroom Sanitization",
-        "image": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/before-after-bathroom.jpg"
       },
       {
         "id": "gal-3",
         "title": "Hardwood Floor Polishing & Window Glow",
         "area": "Living Room Restoration",
-        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/before-after-living.jpg"
       }
     ],
     "faqs": [
@@ -420,7 +420,7 @@
         "text": "Our building management requires strict COI insurance and front-desk check-ins. AzureBreeze handled everything seamlessly and left our travertine floors gleaming.",
         "serviceUsed": "Deep Marine & Grout Detail",
         "date": "2 days ago",
-        "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
+        "avatarUrl": "/images/avatar-male-1.jpeg"
       },
       {
         "id": "rev-mia-2",
@@ -430,7 +430,7 @@
         "text": "The instant online quote was spot on. They removed all salt buildup from our sliding glass tracks and made the kitchen look showroom ready.",
         "serviceUsed": "Coastal Breeze Upkeep",
         "date": "5 days ago",
-        "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80"
+        "avatarUrl": "/images/avatar-female-1.jpeg"
       },
       {
         "id": "rev-mia-3",
@@ -440,7 +440,7 @@
         "text": "Best residential crew in Miami. Zero hassle, instant SMS confirmation, and hotel-level attention to detail every single visit.",
         "serviceUsed": "Luxury Turnover / Move Clean",
         "date": "2 weeks ago",
-        "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150&q=80"
+        "avatarUrl": "/images/avatar-male-2.jpeg"
       }
     ]
   },
@@ -526,19 +526,19 @@
       "id": "gal-mia-1",
       "title": "Brickell Penthouse Kitchen & Marble Island",
       "area": "Kitchen Deep Detail",
-      "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+      "image": "/images/before-after-kitchen.jpg"
     },
     {
       "id": "gal-mia-2",
       "title": "Master Spa Glass & Rain Shower Restoration",
       "area": "Bathroom Sanitization",
-      "image": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+      "image": "/images/before-after-bathroom.jpg"
     },
     {
       "id": "gal-mia-3",
       "title": "Waterfront Travertine & Panoramic Living Suite",
       "area": "Living Room Restoration",
-      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+      "image": "/images/before-after-living.jpg"
     }
   ],  "faqs": [
     {
@@ -663,7 +663,7 @@
         "text": "Discreet, punctual, and extraordinarily thorough. They work effortlessly with our doorman and treat our hardwood floors and art pieces with total care.",
         "serviceUsed": "Brownstone Deep Restoration",
         "date": "Yesterday",
-        "avatarUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80"
+        "avatarUrl": "/images/avatar-female-1.jpeg"
       },
       {
         "id": "rev-nyc-2",
@@ -673,7 +673,7 @@
         "text": "Finally a Manhattan cleaning service with transparent flat pricing instead of vague hourly estimates. Worth every penny.",
         "serviceUsed": "Executive Loft Upkeep",
         "date": "1 week ago",
-        "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
+        "avatarUrl": "/images/avatar-male-2.jpeg"
       }
     ]
   },
@@ -741,19 +741,19 @@
       "id": "gal-nyc-1",
       "title": "SoHo Cast-Iron Loft Kitchen Restoration",
       "area": "Kitchen Deep Detail",
-      "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+      "image": "/images/before-after-kitchen.jpg"
     },
     {
       "id": "gal-nyc-2",
       "title": "Tribeca Marble Ensuite & Soaking Tub Detail",
       "area": "Bathroom Sanitization",
-      "image": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80"
+      "image": "/images/before-after-bathroom.jpg"
     },
     {
       "id": "gal-nyc-3",
       "title": "Upper East Side Brownstone Parlor & Hardwood",
       "area": "Living Room Restoration",
-      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+      "image": "/images/before-after-living.jpg"
     }
   ],  "faqs": [
     {

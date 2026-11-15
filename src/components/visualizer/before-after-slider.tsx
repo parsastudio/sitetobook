@@ -52,7 +52,7 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
       )}
 
       <div className="w-full max-w-3xl flex flex-col items-center">
-        <div className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-border-default bg-surface shadow-xl">
+        <div className="relative aspect-16/10 sm:aspect-video w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-border-default bg-surface shadow-xl">
           <Image
             key={activeItem.id}
             src={activeItem.image}
@@ -60,7 +60,6 @@ export function BeforeAfterSlider({ items }: BeforeAfterSliderProps) {
             fill
             sizes="(max-width: 768px) 100vw, 800px"
             className="object-cover transition-opacity duration-300"
-            priority
           />
 
           <span className="absolute top-3 left-3 sm:top-4 sm:left-4 rounded-full border border-white/20 bg-slate-950/75 backdrop-blur-md px-3 py-1 text-[9px] sm:text-[10px] font-bold tracking-widest text-white uppercase shadow-md">

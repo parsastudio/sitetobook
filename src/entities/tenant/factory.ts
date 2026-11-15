@@ -119,8 +119,7 @@ export function createDefaultTenant(
           text: `The ${input.name} crew arrived right on schedule and made our home look like a luxury hotel suite. Extremely professional and courteous!`,
           serviceUsed: "Deep Sanitization Detail",
           date: "Yesterday",
-          avatarUrl:
-            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+          avatarUrl: "/images/avatar-female-1.jpeg",
         },
         {
           id: "rev-new-2",
@@ -130,8 +129,7 @@ export function createDefaultTenant(
           text: "Booking online through the instant estimate took 1 minute. No back and forth calls or surprise fees. Highly recommend!",
           serviceUsed: "Standard Maintenance Clean",
           date: "Last week",
-          avatarUrl:
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
+          avatarUrl: "/images/avatar-male-1.jpeg",
         },
       ],
     },
@@ -223,22 +221,19 @@ export function createDefaultTenant(
         id: "gal-default-1",
         title: "Chef's Gas Range & Backsplash Restoration",
         area: "Kitchen Detail",
-        image:
-          "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80",
+        image: "/images/before-after-kitchen.jpg",
       },
       {
         id: "gal-default-2",
         title: "Master Ensuite Tile & Glass Enclosure",
         area: "Bathroom Sanitization",
-        image:
-          "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
+        image: "/images/before-after-bathroom.jpg",
       },
       {
         id: "gal-default-3",
         title: "Hardwood Floor Polishing & Window Glow",
         area: "Living Room Restoration",
-        image:
-          "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        image: "/images/before-after-living.jpg",
       },
     ],
     faqs: [

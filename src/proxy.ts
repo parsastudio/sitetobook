@@ -56,7 +56,7 @@ export async function proxy(request: NextRequest) {
     default-src 'self';
     script-src 'self' 'unsafe-eval' 'unsafe-inline';
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://images.unsplash.com https://*.public.blob.vercel-storage.com https://res.cloudinary.com;
+    img-src 'self' blob: data: https://*.public.blob.vercel-storage.com https://res.cloudinary.com;
     font-src 'self' data:;
     connect-src 'self' https://*.neon.tech https://*.vercel.app https://*.upstash.io;
     frame-ancestors 'none';

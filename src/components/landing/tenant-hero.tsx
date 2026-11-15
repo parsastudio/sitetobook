@@ -19,7 +19,7 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden px-3.5 pt-16 pb-20 sm:px-6 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20">
       <div className="absolute inset-0 -z-20">
         <Image
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80"
+          src="/images/hero-interior.jpg"
           alt={`${brand.name} luxury spotless home interior`}
           fill
           priority
@@ -28,8 +28,8 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
         />
       </div>
 
-      <div className="absolute inset-0 -z-10 bg-slate-950/50 backdrop-brightness-[0.92]" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-slate-950/40" />
+      <div className="absolute inset-0 -z-10 bg-slate-950/35 backdrop-brightness-[0.95]" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-slate-950/35" />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl flex flex-col items-center">
         <div className="w-full max-w-3xl rounded-2xl sm:rounded-4xl border border-white/60 bg-white/95 p-4 sm:p-10 lg:p-12 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] backdrop-blur-2xl flex flex-col items-center text-center gap-5 sm:gap-6">

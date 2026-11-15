@@ -81,18 +81,3 @@ Open `http://localhost:3000`. The platform automatically falls back to `src/data
 | `/checkout` | Self-Serve Onboarding & Stripe Checkout Flow | Test Card: `4242...` |
 | `/admin` | Master Multi-Outlet Gateway | Key: `AdminPristine2026!` |
 | `/api/health` | Runtime Latency, DB & Memory Telemetry | — |
-
----
-
-## Roadmap
-
-- [ ] **Live Stripe Billing & Webhooks**: Replace the sandbox checkout flow with real Stripe Checkout Sessions, customer portal subscriptions, and automatic tenant suspension/reactivation webhooks.
-- [ ] **Twilio SMS & Calendar Dispatch**: Two-way SMS booking confirmations and Google Calendar / crew route availability slots inside the quote calculator.
-- [ ] **Multi-Crew Team Roles**: Scoped sub-accounts for field supervisors with on-site checklist completion sign-offs.
-- [ ] **Automated Custom Domain Provisioning**: Programmatic Vercel Domains API integration for one-click DNS verification and SSL issuance directly from `/[tenant]/owner`.
-
----
-
-## License
-
-Released under the MIT License.

@@ -16,8 +16,8 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
     : "Liability Policy";
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden px-3.5 pt-16 pb-20 sm:px-6 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20">
-      <div className="absolute inset-0 -z-20">
+    <section className="relative isolate w-full min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 px-3.5 pt-16 pb-20 sm:px-6 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/images/hero-interior.jpg"
           alt={`${brand.name} luxury spotless home interior`}
@@ -28,8 +28,8 @@ export function TenantHero({ brand, trust }: TenantHeroProps) {
         />
       </div>
 
-      <div className="absolute inset-0 -z-10 bg-slate-950/35 backdrop-brightness-[0.95]" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-slate-950/35" />
+      <div className="absolute inset-0 z-0 pointer-events-none bg-slate-950/30" />
+      <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-slate-950/60" />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl flex flex-col items-center">
         <div className="w-full max-w-3xl rounded-2xl sm:rounded-4xl border border-white/60 bg-white/95 p-4 sm:p-10 lg:p-12 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] backdrop-blur-2xl flex flex-col items-center text-center gap-5 sm:gap-6">

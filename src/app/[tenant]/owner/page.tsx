@@ -21,13 +21,13 @@ async function OwnerPortalResolver({
   params: Promise<{ tenant: string }>;
 }) {
   const { tenant: slug } = await params;
+  const session = await getOwnerSession(slug);
   const tenant = await getTenantBySlug(slug);
 
   if (!tenant) {
     notFound();
   }
 
-  const session = await getOwnerSession(slug);
   const isAuthenticated = Boolean(session);
 
   return (

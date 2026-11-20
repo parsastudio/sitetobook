@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllTenants, getTenantBySlug } from "@/services/tenant.service";
+import { getAllTenants, getCachedTenantBySlug } from "@/services/tenant.service";
 import { env } from "@/env";
 
 export const instant = false;
@@ -23,7 +23,7 @@ export async function generateMetadata({
   params: Promise<{ tenant: string }>;
 }): Promise<Metadata> {
   const { tenant: slug } = await params;
-  const tenant = await getTenantBySlug(slug);
+  const tenant = await getCachedTenantBySlug(slug);
 
   if (!tenant) {
     return {
@@ -56,7 +56,7 @@ export default async function TenantLayout({
   params,
 }: TenantLayoutProps) {
   const { tenant: slug } = await params;
-  const tenant = await getTenantBySlug(slug);
+  const tenant = await getCachedTenantBySlug(slug);
 
   if (!tenant) {
     notFound();

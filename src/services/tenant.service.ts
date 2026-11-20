@@ -1,6 +1,7 @@
 import "server-only";
 import { promises as fs } from "fs";
 import path from "path";
+import { cacheLife, cacheTag } from "next/cache";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import {
@@ -149,6 +150,17 @@ export async function getTenantBySlug(slug: string): Promise<Tenant | null> {
 
   const fileStore = await readTenantsFile();
   return fileStore[normalizedSlug] ?? null;
+}
+
+export async function getCachedTenantBySlug(
+  slug: string
+): Promise<Tenant | null> {
+  "use cache";
+  const normalizedSlug = slug.toLowerCase().trim();
+  cacheLife("days");
+  cacheTag(`tenant-${normalizedSlug}`);
+
+  return getTenantBySlug(normalizedSlug);
 }
 
 export async function getAllTenants(): Promise<Tenant[]> {

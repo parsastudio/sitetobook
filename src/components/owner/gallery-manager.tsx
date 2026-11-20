@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useRef, useEffect } from "react";
+import { useState, useTransition, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { BeforeAfterItem } from "@/entities/tenant/schema";
 import {
@@ -15,7 +15,8 @@ interface GalleryManagerProps {
 }
 
 export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
-  const [items, setItems] = useState<BeforeAfterItem[]>(gallery);
+  const [addedItems, setAddedItems] = useState<BeforeAfterItem[]>([]);
+  const [deletedIds, setDeletedIds] = useState<string[]>([]);
   const [title, setTitle] = useState("");
   const [area, setArea] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -24,9 +25,12 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
   const [isUploading, startUploadTransition] = useTransition();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    setItems(gallery);
-  }, [gallery]);
+  const items = useMemo(() => {
+    const galleryIds = new Set(gallery.map((g) => g.id));
+    const unmergedAdditions = addedItems.filter((a) => !galleryIds.has(a.id));
+    const visibleFromProps = gallery.filter((g) => !deletedIds.includes(g.id));
+    return [...unmergedAdditions, ...visibleFromProps];
+  }, [gallery, addedItems, deletedIds]);
 
   useEffect(() => {
     return () => {
@@ -91,7 +95,7 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
         });
 
         if (res.success) {
-          setItems((prev) => [
+          setAddedItems((prev) => [
             {
               id: res.data.id,
               title: title.trim(),
@@ -123,7 +127,8 @@ export function GalleryManager({ slug, gallery }: GalleryManagerProps) {
     startUploadTransition(async () => {
       const res = await deleteGalleryPairAction(slug, id);
       if (res.success) {
-        setItems((prev) => prev.filter((item) => item.id !== id));
+        setAddedItems((prev) => prev.filter((item) => item.id !== id));
+        setDeletedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
       } else {
         setErrorMsg(res.error);
       }

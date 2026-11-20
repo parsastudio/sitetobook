@@ -178,10 +178,9 @@ export const PublicTenantSchema = TenantSchema.extend({
 export type PublicTenant = z.infer<typeof PublicTenantSchema>;
 
 export function sanitizeTenantForPublic(tenant: Tenant): PublicTenant {
-  const { ownerPinHash: _omitted, ...safeBrand } = tenant.brand;
   return {
     ...tenant,
-    brand: safeBrand,
+    brand: PublicBrandConfigSchema.parse(tenant.brand),
   };
 }
 

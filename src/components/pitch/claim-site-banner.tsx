@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { buildSmsHref, PublicTenant } from "@/entities/tenant/schema";
 import { submitClaimLeadAction } from "@/app/actions/lead.actions";
-import { SpeedIcon, MessageTextIcon, ShieldCheckIcon, SparkleIcon, ArrowUpRightIcon } from "@/components/ui/icons";
+import { SpeedIcon, MessageTextIcon, ShieldCheckIcon, ArrowUpRightIcon } from "@/components/ui/icons";
 import { env } from "@/env";
 
 interface ClaimSiteBannerProps {
